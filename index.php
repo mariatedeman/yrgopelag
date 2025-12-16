@@ -5,7 +5,8 @@ require __DIR__ . "/includes/header.php";
 
 
 
-$accountInfo = getAccountInfo('Maria', $key);
+
+$accountInfo = getAccountInfo('Rune', $key);
 var_dump($accountInfo);
 
 if ($accountInfo) {
@@ -13,4 +14,3 @@ if ($accountInfo) {
 } else {
     echo "Vi kunde inte hämta ditt saldo.";
 }
-

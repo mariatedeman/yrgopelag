@@ -9,7 +9,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->safeLoad();
 
 // DEFINE API KEY VARIABLE
-$key = $_ENV['API_KEY'];
+$key = $_ENV['TEST_KEY'];
 
 // REQUIRE FUNCTIONS
 require dirname(__DIR__) . "/app/functions.php";
