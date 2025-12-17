@@ -5,7 +5,7 @@ require dirname(dirname(__DIR__)) . "/includes/header.php";
 require dirname(dirname(__DIR__)) . "/app/functions.php";
 
 if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['checkOut'], $_POST['room_type'])) {
-    $name = htmlspecialchars(trim($_POST['name']));
+    $guestName = htmlspecialchars(trim($_POST['name']));
     $transferCode = htmlspecialchars(trim($_POST['transfer_code']));
     $checkIn = $_POST['checkIn'];
     $checkOut = $_POST['checkOut'];
@@ -18,16 +18,15 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
 
     // CHECK IF GUEST EXIST, OTHERWISE ADD
     $statement = $database->prepare('SELECT id FROM guests WHERE name = :name');
-    $statement->bindParam(':name', $name, PDO::PARAM_STR);
+    $statement->bindParam(':name', $guestName, PDO::PARAM_STR);
     $statement->execute();
     $existingGuest = $statement->fetch(PDO::FETCH_ASSOC);
 
-    // DEFINE GUEST ID
-    if ($existingGuest) {
+    if ($existingGuest) { // DEFINE GUEST ID
         $guestId = $existingGuest['id'];
     } else {
         $statement = $database->prepare('INSERT INTO guests (name) VALUES (:name)');
-        $statement->bindParam(':name', $name, PDO::PARAM_STR);
+        $statement->bindParam(':name', $guestName, PDO::PARAM_STR);
         $statement->execute();
 
         $guestId = $database->lastInsertId();
@@ -45,6 +44,10 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
         $statement->bindParam(':checkOut', $checkOut);
         $statement->execute();
         $count = $statement->fetchColumn();
+
+        if ($checkIn > $checkOut) {
+            echo "Date of arrival must be before date of departure.";
+        }
 
         if ($count > 0) {
             echo "Room is not available. Choose another date.";
@@ -73,8 +76,12 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
             // CONFIRM TRANSFER CODE WITH CENTRAL BANK
             // If trasferCode is valid -> insert booking
             if (isValidTransferCode($transferCode, $totalCost)) {
-                if (makeDeposit($transferCode)) {
 
+                $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost);
+
+                if ($receipt && isset($receipt['status']) && $receipt['status'] === 'success') {
+
+                    // SAVE BOOKING IN DATABASE
                     $statement = $database->prepare('INSERT INTO bookings (checkin, checkout, guest_id, room_id, is_paid) 
                                                 VALUES (:checkIn, :checkOut, :guest_id, :room_id, :is_paid)');
                     $statement->bindValue(':checkIn', $checkIn->format('Y-m-d'));
@@ -84,13 +91,34 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                     $statement->bindValue(':is_paid', true);
                     $statement->execute();
 
-                    echo "Booking complete!";
+
+                    if (makeDeposit($transferCode)) {
+
+                        $response = [
+                            'island' => 'Lyckholmen',
+                            'hotel' => 'Sjöboda B&B',
+                            'arrival_date' => $checkIn->format('Y-m-d'),
+                            'departure_date' => $checkOut->format('Y-m-d'),
+                            'total_cost' => $totalCost,
+                            'stars' => 3,
+                            'features' => [],
+                        ];
+                        header('Content-Type: application/json');
+                        echo json_encode($response);
+                        exit;
+                    } else {
+                        echo "Deposit failed.";
+                    }
                 } else {
-                    echo "Transaction failed. Make sure to use a valid code.";
+                    echo "Receipt not available.";
                 }
             } else {
-                echo "Transfer code is not valid or doesn't have enough credit.";
+                echo "Invalid transfer code.";
             }
         }
     }
 }
+
+?>
+
+<button onclick="history.back()">Back to booking</button>

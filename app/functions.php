@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+
 /////////////////////////////////////////////////
 
-// VALIDATE TRANSFER CODE
+
+// === VALIDATE TRANSFER CODE === //
+
 function isValidTransferCode(string $transferCode, int $totalCost): bool
 {
 
@@ -50,6 +53,8 @@ function isValidTransferCode(string $transferCode, int $totalCost): bool
 //////////////////////////////////////////////////
 
 
+// === MAKE DEPOSIT === //
+
 function makeDeposit(string $transferCode): bool
 {
 
@@ -94,7 +99,47 @@ function makeDeposit(string $transferCode): bool
 //////////////////////////////////////////////////
 
 
-// GET ACCOUNT INFO
+// === POST RECEIPT === //
+
+function postReceipt(string $key, string $guestName, string $checkIn, string $checkOut, int $totalCost): ?array
+{
+
+    $url = 'https://www.yrgopelag.se/centralbank/receipt';
+
+    $receiptInfo = [
+        "user" => "Maria",
+        "api_key" => $key,
+        "island_id" => 212,
+        "guest_name" => $guestName,
+        "arrival_date" => $checkIn,
+        "departure_date" => $checkOut,
+        "features_used" => [],
+        "star_rating" => 2
+    ];
+
+    // CREATE STREAM CONTEXT POST REQUEST
+    // Tells file_get_contents to act as POST client
+    $options = [
+        'http' => [
+            'method' => 'POST',
+            'header' => 'Content-Type: application/json',
+            'content' => json_encode($receiptInfo)
+        ]
+    ];
+    $context = stream_context_create($options);
+
+    // SEND REQUEST AND GET RESPONSE
+    $response = file_get_contents($url, false, $context);
+
+    return $response ? json_decode($response, true) : null;
+}
+
+
+//////////////////////////////////////////////////
+
+
+// === GET ACCOUNT INFO === //
+
 function getAccountInfo(string $user, string $apiKey): ?array
 {
     $url = 'https://www.yrgopelag.se/centralbank/accountInfo';
