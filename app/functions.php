@@ -8,16 +8,13 @@ declare(strict_types=1);
 
 // === VALIDATE TRANSFER CODE === //
 
-function isValidTransferCode(string $transferCode, int $totalCost): bool
+function isValidTransferCode(string $transferCode, int $totalCost, string &$message = ''): bool
 {
 
     $url = 'https://www.yrgopelag.se/centralbank/transferCode';
 
     // PREPARE DATA TO SEND
-    $data = [
-        'transferCode' => $transferCode,
-        'totalCost' => $totalCost
-    ];
+    $data = ['transferCode' => $transferCode, 'totalCost' => $totalCost];
 
     // CREATE STREAM CONTEXT POST REQUEST
     // Tells file_get_contents to act as POST client
@@ -36,6 +33,7 @@ function isValidTransferCode(string $transferCode, int $totalCost): bool
 
     // HANDLE RESPONSE
     if ($response === false) {
+        $message = "Could not connect to the Central bank.";
         return false;
     }
 
@@ -43,6 +41,7 @@ function isValidTransferCode(string $transferCode, int $totalCost): bool
     $result = json_decode($response, true);
 
     if (isset($result['error']) || !isset($result['transferCode'])) {
+        $message = $result['error'] ?? "Transfer code not valid.";
         return false;
     }
 
@@ -55,16 +54,13 @@ function isValidTransferCode(string $transferCode, int $totalCost): bool
 
 // === MAKE DEPOSIT === //
 
-function makeDeposit(string $transferCode): bool
+function makeDeposit(string $transferCode, string &$message = ''): bool
 {
 
     $url = 'https://www.yrgopelag.se/centralbank/deposit';
 
     // PREPARE DATA TO SEND
-    $paymentInfo = [
-        'user' => 'Maria',
-        'transferCode' => $transferCode,
-    ];
+    $paymentInfo = ['user' => 'Maria', 'transferCode' => $transferCode];
 
     // CREATE STREAM CONTEXT POST REQUEST
     // Tells file_get_contents to act as POST client
@@ -83,12 +79,14 @@ function makeDeposit(string $transferCode): bool
 
     // HANDLE RESPONSE
     if ($response === false) {
+        $message = "Could not connect during deposit.";
         return false;
     }
 
     $result = json_decode($response, true);
 
     if (isset($result['error'])) {
+        $message = $result['error'];
         return false;
     }
 
@@ -145,10 +143,7 @@ function getAccountInfo(string $user, string $apiKey): ?array
     $url = 'https://www.yrgopelag.se/centralbank/accountInfo';
 
     // PREPARE DATA TO SEND
-    $userInfo = [
-        'user' => $user,
-        'api_key' => $apiKey
-    ];
+    $userInfo = ['user' => $user, 'api_key' => $apiKey];
 
     // CREATE STREAM CONTEXT POST REQUEST
     // Tells file_get_contents to act as POST client
@@ -166,7 +161,6 @@ function getAccountInfo(string $user, string $apiKey): ?array
 
     // HANDLE RESPONSE
     if ($response === false) {
-        echo "ERROR";
         return null;
     }
 
@@ -174,7 +168,6 @@ function getAccountInfo(string $user, string $apiKey): ?array
     $data = json_decode($response, true);
 
     if ($data === null) {
-        echo "ERROR";
         return null;
     }
 

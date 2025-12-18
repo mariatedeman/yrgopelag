@@ -1,8 +1,10 @@
 <?php
 
 declare(strict_types=1);
-require dirname(dirname(__DIR__)) . "/includes/header.php";
-require dirname(dirname(__DIR__)) . "/app/functions.php";
+require dirname(__DIR__) . "/autoload.php";
+
+$errors = [];
+$bankError = "";
 
 if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['checkOut'], $_POST['room_type'])) {
     $guestName = htmlspecialchars(trim($_POST['name']));
@@ -45,12 +47,10 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
         $statement->execute();
         $count = $statement->fetchColumn();
 
-        if ($checkIn > $checkOut) {
-            echo "Date of arrival must be before date of departure.";
-        }
-
-        if ($count > 0) {
-            echo "Room is not available. Choose another date.";
+        if ($checkIn >= $checkOut) {
+            $errors[] = "Date of arrival must be before date of departure.";
+        } else if ($count > 0) {
+            $errors[] = "Room is not available. Choose another date.";
         } else {
 
             // FETCH PRICE PER NIGHT
@@ -75,7 +75,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
 
             // CONFIRM TRANSFER CODE WITH CENTRAL BANK
             // If trasferCode is valid -> insert booking
-            if (isValidTransferCode($transferCode, $totalCost)) {
+            if (isValidTransferCode($transferCode, $totalCost, $bankError)) {
 
                 $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost);
 
@@ -91,8 +91,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                     $statement->bindValue(':is_paid', true);
                     $statement->execute();
 
-
-                    if (makeDeposit($transferCode)) {
+                    if (makeDeposit($transferCode, $bankError)) {
 
                         $response = [
                             'island' => 'Lyckholmen',
@@ -107,18 +106,21 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                         echo json_encode($response);
                         exit;
                     } else {
-                        echo "Deposit failed.";
+                        $errors[] = "Deposit failed: $bankError";
                     }
                 } else {
-                    echo "Receipt not available.";
+                    $errors[] = "Receipt not available.";
                 }
             } else {
-                echo "Invalid transfer code.";
+                $errors[] = "Transfer code not valid: $bankError";
             }
         }
     }
 }
 
-?>
-
-<button onclick="history.back()">Back to booking</button>
+if (!empty($errors)) {
+    foreach ($errors as $error) {
+        echo htmlspecialchars(trim($error));
+    } ?>
+    <button onclick="history.back()">Back to booking</button>
+<?php }
