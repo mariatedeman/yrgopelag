@@ -77,7 +77,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
             // If trasferCode is valid -> insert booking
             if (isValidTransferCode($transferCode, $totalCost, $bankError)) {
 
-                $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost);
+                $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost, $hotelStars);
 
                 if ($receipt && isset($receipt['status']) && $receipt['status'] === 'success') {
 
