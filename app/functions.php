@@ -100,7 +100,7 @@ function makeDeposit(string $transferCode, string &$message = ''): bool
 //////////////////////////////////////////////////
 // === POST RECEIPT === //
 
-function postReceipt(string $key, string $guestName, string $checkIn, string $checkOut, int $totalCost, int $hotelStars): ?array
+function postReceipt(string $key, string $guestName, string $checkIn, string $checkOut, int $totalCost, int $hotelStars, array $features): ?array
 {
 
     $url = 'https://www.yrgopelag.se/centralbank/receipt';
@@ -108,11 +108,10 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
     $receiptInfo = [
         "user" => "Maria",
         "api_key" => $key,
-        "island_id" => 212,
         "guest_name" => $guestName,
         "arrival_date" => $checkIn,
         "departure_date" => $checkOut,
-        "features_used" => [],
+        "features_used" => $features,
         "star_rating" => $hotelStars
     ];
 
@@ -122,7 +121,8 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
         'http' => [
             'method' => 'POST',
             'header' => 'Content-Type: application/json',
-            'content' => json_encode($receiptInfo)
+            'content' => json_encode($receiptInfo),
+            'ignore_errors' => true
         ]
     ];
     $context = stream_context_create($options);

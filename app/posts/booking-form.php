@@ -5,6 +5,7 @@ require dirname(__DIR__) . "/autoload.php";
 
 $errors = [];
 $bankError = "";
+$totalCost = 0;
 
 if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['checkOut'], $_POST['room_type'])) {
     $guestName = htmlspecialchars(trim($_POST['name']));
@@ -17,6 +18,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
 
     // CONNECT TO DATABASE
     $database = new PDO('sqlite:' . dirname(dirname(__DIR__)) . '/app/database/yrgopelag.db');
+    $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // SHOW ERRORS
 
     // CHECK IF GUEST EXIST, OTHERWISE ADD
     $statement = $database->prepare('SELECT id FROM guests WHERE name = :name');
@@ -64,59 +66,86 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
             $checkIn = DateTime::createFromFormat('Y-m-d', $checkIn);
             $checkOut = DateTime::createFromFormat('Y-m-d', $checkOut);
 
-            if (!$checkIn || !$checkOut || $checkIn >= $checkOut) {
-                return 0;
-            }
+            if (!$checkIn || !$checkOut) {
+                $errors[] = "Invalid date format.";
+            } else {
 
-            $nights = $checkIn->diff($checkOut);
+                // CALCULATE TOTAL PRICE
+                $nights = $checkIn->diff($checkOut);
+                $totalCost = $price['price'] * ($nights->days);
 
-            // CALCULATE TOTAL PRICE
-            $totalCost = $price['price'] * ($nights->days);
 
-            // CONFIRM TRANSFER CODE WITH CENTRAL BANK
-            // If trasferCode is valid -> insert booking
-            if (isValidTransferCode($transferCode, $totalCost, $bankError)) {
+                // ADD SELECTED FEATURES TO ARRAY OR KEEP AS EMPTY ARRAY
+                $selectedFeatures = $_POST['features'] ?? [];
+                if (!is_array($selectedFeatures)) {
+                    $selectedFeatures = [];
+                }
 
-                $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost, $hotelStars);
+                $featuresCost = 0;
 
-                if ($receipt && isset($receipt['status']) && $receipt['status'] === 'success') {
+                foreach ($selectedFeatures as $selectedFeature) {
 
-                    // SAVE BOOKING IN DATABASE
-                    $statement = $database->prepare('INSERT INTO bookings (checkin, checkout, guest_id, room_id, is_paid) 
+                    // FETCH PRICE FROM DATABASE
+                    $getFeaturePrice = $database->prepare('SELECT price FROM features WHERE feature_name = :selected_feature COLLATE NOCASE');
+                    $getFeaturePrice->bindValue(':selected_feature', $selectedFeature, PDO::PARAM_STR);
+                    $getFeaturePrice->execute();
+
+                    $feature = $getFeaturePrice->fetch(PDO::FETCH_ASSOC);
+
+                    if ($feature) {
+                        $featuresCost += $feature['price'];
+                    }
+                }
+
+                $totalCost += $featuresCost;
+
+                // CONFIRM TRANSFER CODE WITH CENTRAL BANK
+                // If trasferCode is valid -> insert booking
+                if (isValidTransferCode($transferCode, $totalCost, $bankError)) {
+
+                    $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost, $hotelStars, $selectedFeatures);
+
+                    if ($receipt && isset($receipt['status']) && $receipt['status'] === 'success') {
+
+                        // SAVE BOOKING IN DATABASE
+                        $statement = $database->prepare('INSERT INTO bookings (checkin, checkout, guest_id, room_id, is_paid) 
                                                 VALUES (:checkIn, :checkOut, :guest_id, :room_id, :is_paid)');
-                    $statement->bindValue(':checkIn', $checkIn->format('Y-m-d'));
-                    $statement->bindValue(':checkOut', $checkOut->format('Y-m-d'));
-                    $statement->bindParam(':guest_id', $guestId, PDO::PARAM_INT);
-                    $statement->bindParam(':room_id', $roomType, PDO::PARAM_INT);
-                    $statement->bindValue(':is_paid', true);
-                    $statement->execute();
+                        $statement->bindValue(':checkIn', $checkIn->format('Y-m-d'));
+                        $statement->bindValue(':checkOut', $checkOut->format('Y-m-d'));
+                        $statement->bindParam(':guest_id', $guestId, PDO::PARAM_INT);
+                        $statement->bindParam(':room_id', $roomType, PDO::PARAM_INT);
+                        $statement->bindValue(':is_paid', true);
+                        $statement->execute();
 
-                    if (makeDeposit($transferCode, $bankError)) {
+                        if (makeDeposit($transferCode, $bankError)) {
 
-                        $response = [
-                            'island' => 'Lyckholmen',
-                            'hotel' => 'Sjöboda B&B',
-                            'arrival_date' => $checkIn->format('Y-m-d'),
-                            'departure_date' => $checkOut->format('Y-m-d'),
-                            'total_cost' => $totalCost,
-                            'stars' => 3,
-                            'features' => [],
-                        ];
-                        header('Content-Type: application/json');
-                        echo json_encode($response);
-                        exit;
+                            $response = [
+                                'island' => 'Lyckholmen',
+                                'hotel' => 'Sjöboda B&B',
+                                'arrival_date' => $checkIn->format('Y-m-d'),
+                                'departure_date' => $checkOut->format('Y-m-d'),
+                                'total_cost' => $totalCost,
+                                'stars' => $hotelStars,
+                                'features' => $selectedFeatures,
+                            ];
+                            header('Content-Type: application/json');
+                            echo json_encode($response);
+                            exit;
+                        } else {
+                            $errors[] = "Deposit failed: $bankError";
+                        }
                     } else {
-                        $errors[] = "Deposit failed: $bankError";
+                        $errors[] = "Receipt not available: " . $receipt['error'];
                     }
                 } else {
-                    $errors[] = "Receipt not available.";
+                    $errors[] = "Transfer code not valid: $bankError";
                 }
-            } else {
-                $errors[] = "Transfer code not valid: $bankError";
             }
         }
     }
 }
+
+echo $totalCost;
 
 if (!empty($errors)) {
     foreach ($errors as $error) {
