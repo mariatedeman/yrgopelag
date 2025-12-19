@@ -18,9 +18,7 @@
         <option value="3">Luxury</option>
     </select>
 
-    <?php $features = $features[0];
-
-    printFeatures($features, 'hotel-specific', 'Coastal Experiences');
+    <?php printFeatures($features, 'hotel-specific', 'Coastal Experiences');
     printFeatures($features, 'games', 'Games');
     printFeatures($features, 'water', 'Water');
     printFeatures($features, 'wheels', 'Wheels'); ?>
