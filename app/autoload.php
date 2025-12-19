@@ -13,3 +13,11 @@ $key = $_ENV['API_KEY'];
 
 // REQUIRE FUNCTIONS
 require __DIR__ . "/functions.php";
+
+// HOTEL DATA
+$islandInfo = getIslandFeatures($key);
+
+$islandName = htmlspecialchars(trim($islandInfo['island']['islandName']));
+$hotelName = htmlspecialchars(trim($islandInfo['island']['hotelName']));
+$hotelStars = (int)$islandInfo['island']['stars'];
+$features[] = $islandInfo['features'];

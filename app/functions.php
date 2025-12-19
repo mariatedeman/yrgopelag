@@ -2,12 +2,17 @@
 
 declare(strict_types=1);
 
+// === INCLUDES === //
+// 1. VALIDATE TRANSFER CODE
+// 2. MAKE DEPOSIT
+// 3. POST RECEIPT
+// 4. GET ACCOUNT INFO <----- Needed?
+// 5. GET FEATURES
+// 6. PRINT FEATURES
+
 
 /////////////////////////////////////////////////
-
-
 // === VALIDATE TRANSFER CODE === //
-
 function isValidTransferCode(string $transferCode, int $totalCost, string &$message = ''): bool
 {
 
@@ -50,8 +55,6 @@ function isValidTransferCode(string $transferCode, int $totalCost, string &$mess
 
 
 //////////////////////////////////////////////////
-
-
 // === MAKE DEPOSIT === //
 
 function makeDeposit(string $transferCode, string &$message = ''): bool
@@ -95,11 +98,9 @@ function makeDeposit(string $transferCode, string &$message = ''): bool
 
 
 //////////////////////////////////////////////////
-
-
 // === POST RECEIPT === //
 
-function postReceipt(string $key, string $guestName, string $checkIn, string $checkOut, int $totalCost): ?array
+function postReceipt(string $key, string $guestName, string $checkIn, string $checkOut, int $totalCost, int $hotelStars, array $features): ?array
 {
 
     $url = 'https://www.yrgopelag.se/centralbank/receipt';
@@ -107,12 +108,11 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
     $receiptInfo = [
         "user" => "Maria",
         "api_key" => $key,
-        "island_id" => 212,
         "guest_name" => $guestName,
         "arrival_date" => $checkIn,
         "departure_date" => $checkOut,
-        "features_used" => [],
-        "star_rating" => 2
+        "features_used" => $features,
+        "star_rating" => $hotelStars
     ];
 
     // CREATE STREAM CONTEXT POST REQUEST
@@ -121,7 +121,8 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
         'http' => [
             'method' => 'POST',
             'header' => 'Content-Type: application/json',
-            'content' => json_encode($receiptInfo)
+            'content' => json_encode($receiptInfo),
+            'ignore_errors' => true
         ]
     ];
     $context = stream_context_create($options);
@@ -134,8 +135,6 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
 
 
 //////////////////////////////////////////////////
-
-
 // === GET ACCOUNT INFO === //
 
 function getAccountInfo(string $user, string $apiKey): ?array
@@ -176,3 +175,60 @@ function getAccountInfo(string $user, string $apiKey): ?array
 
 
 /////////////////////////////////////////////////
+// === GET ISLAND FEATURES === //
+
+function getIslandFeatures(string $key): ?array
+{
+
+    $url = 'https://www.yrgopelag.se/centralbank/islandFeatures';
+
+    // PREPARE DATA TO SEND
+    $data = ['user' => 'Maria', 'api_key' => $key];
+
+    // CREATE STREAM CONTENT POST REQUEST
+    // Tells file_get_content to act as POST client
+    $options = [
+        'http' => [
+            'method' => 'POST',
+            'header' => 'Content-Type: application/json',
+            'content' => json_encode($data),
+        ]
+    ];
+    $context = stream_context_create($options);
+
+    // SEND REQUEST AND GET RESPONSE
+    $response = file_get_contents($url, false, $context);
+
+    // HANDLE RESPONSE
+    if ($response === false) {
+        return null;
+    }
+
+    // CONVERT RESPONSE TO ASSOC ARRAY
+    $features = json_decode($response, true);
+
+    if ($features === null) {
+        return null;
+    }
+
+    return $features;
+}
+
+
+//////////////////////////////////////
+
+// === PRINT FEATURES === //
+
+function printFeatures(array $features, string $activity, string $title,): void
+{ ?>
+    <p class="subheading"><?= htmlspecialchars(trim($title)) ?></p>
+
+    <?php foreach ($features as $feature) :
+        $name = htmlspecialchars(trim($feature['feature']));
+
+        if ($feature['activity'] === $activity) : ?>
+            <input type="checkbox" name="features[]" value="<?= $name ?>" id="<?= $name ?>">
+            <label for="<?= $name ?>"><?= $name ?></label>
+<?php endif;
+    endforeach;
+}
