@@ -82,18 +82,21 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                 }
 
                 $featuresCost = 0;
+                // FEATURE NAMES FOR RECEIPT
+                $featuresForReceipt = [];
 
-                foreach ($selectedFeatures as $selectedFeature) {
+                foreach ($selectedFeatures as $featureId) {
 
                     // FETCH PRICE FROM DATABASE
-                    $getFeaturePrice = $database->prepare('SELECT price FROM features WHERE feature_name = :selected_feature COLLATE NOCASE');
-                    $getFeaturePrice->bindValue(':selected_feature', $selectedFeature, PDO::PARAM_STR);
+                    $getFeaturePrice = $database->prepare('SELECT price, api_key FROM features WHERE id = :id');
+                    $getFeaturePrice->bindValue(':id', $featureId, PDO::PARAM_INT);
                     $getFeaturePrice->execute();
 
                     $feature = $getFeaturePrice->fetch(PDO::FETCH_ASSOC);
 
                     if ($feature) {
                         $featuresCost += $feature['price'];
+                        $featuresForReceipt[] = $feature['api_key'];
                     }
                 }
 
@@ -103,19 +106,43 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                 // If trasferCode is valid -> insert booking
                 if (isValidTransferCode($transferCode, $totalCost, $bankError)) {
 
-                    $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost, $hotelStars, $selectedFeatures);
+                    $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost, $hotelStars, $featuresForReceipt);
 
                     if ($receipt && isset($receipt['status']) && $receipt['status'] === 'success') {
 
                         // SAVE BOOKING IN DATABASE
-                        $statement = $database->prepare('INSERT INTO bookings (checkin, checkout, guest_id, room_id, is_paid) 
-                                                VALUES (:checkIn, :checkOut, :guest_id, :room_id, :is_paid)');
+                        $statement = $database->prepare('INSERT INTO bookings (checkin, checkout, guest_id, room_id, is_paid, total_cost) 
+                                                VALUES (:checkIn, :checkOut, :guest_id, :room_id, :is_paid, :total_cost)');
                         $statement->bindValue(':checkIn', $checkIn->format('Y-m-d'));
                         $statement->bindValue(':checkOut', $checkOut->format('Y-m-d'));
                         $statement->bindParam(':guest_id', $guestId, PDO::PARAM_INT);
                         $statement->bindParam(':room_id', $roomType, PDO::PARAM_INT);
                         $statement->bindValue(':is_paid', true);
+                        $statement->bindValue(':total_cost', $totalCost, PDO::PARAM_INT);
                         $statement->execute();
+
+                        $bookingId = $database->lastInsertId();
+
+                        if (!empty($selectedFeatures)) {
+                            $statement = $database->prepare('INSERT INTO bookings_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)');
+
+                            foreach ($selectedFeatures as $featureId) {
+                                $statement->bindParam(':booking_id', $bookingId, PDO::PARAM_INT);
+                                $statement->bindParam(':feature_id', $featureId, PDO::PARAM_INT);
+
+                                $statement->execute();
+                            }
+                        }
+
+                        if (isset($_POST['features']) && is_array($_POST['features'])) {
+                            $featureStatement = $database->prepare('INSERT INTO bookings_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)');
+
+                            foreach ($_POST['features'] as $id) {
+                                $featureStatement->bindParam(':booking_id', $bookingId, PDO::PARAM_INT);
+                                $featureStatement->bindParam(':feature_id', $id, PDO::PARAM_INT);
+                                $featureStatement->execute();
+                            }
+                        }
 
                         if (makeDeposit($transferCode, $bankError)) {
 
@@ -126,7 +153,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                                 'departure_date' => $checkOut->format('Y-m-d'),
                                 'total_cost' => $totalCost,
                                 'stars' => $hotelStars,
-                                'features' => $selectedFeatures,
+                                'features' => $featuresForReceipt,
                             ];
                             header('Content-Type: application/json');
                             echo json_encode($response);
@@ -144,8 +171,6 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
         }
     }
 }
-
-echo $totalCost;
 
 if (!empty($errors)) {
     foreach ($errors as $error) {
