@@ -1,0 +1,30 @@
+:root {
+    --boathousered: #6d3433;
+    --westcoastblue: #68979d;
+    --heatherpurple: #9f869d;
+    --bohuslanggrey: #ebe3e3;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    size: 16px;
+}
+
+main {
+    width: 70vw;
+}
+
+
+header {
+    background-color: var(--westcoastblue);
+    color: var(--bohuslanggrey);
+    height: 100px;
+    margin-bottom: 3rem;
+    align-content: center;
+    text-align: center;
+}
+
+p, a, form, button {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

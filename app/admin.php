@@ -57,6 +57,31 @@ $bookings = $statement->fetchAll(PDO::FETCH_ASSOC);
     <?php endforeach ?>
 </table>
 
+<form action="/app/posts/update-price.php" method="POST">
+    <label for="select-room">Select room</label>
+    <select name="select-room" id="select-room">
+        <option value="1">Budget</option>
+        <option value="2">Standard</option>
+        <option value="3">Luxury</option>
+    </select>
+    <label for="room-price">Type in new price</label>
+    <input type="number" name="room-price">
+    <button type="submit">Update room</button>
+</form>
+
+<form action="/app/posts/update-price.php" method="POST">
+    <label for="select-feature">Select feature category</label>
+    <select name="select-feature" id="select-feature">
+        <option value="Economy">Economy</option>
+        <option value="Basic">Basic</option>
+        <option value="Premium">Premium</option>
+        <option value="Superior">Superior</option>
+    </select>
+    <label for="feature-price">Type in new price</label>
+    <input type="number" name="feature-price">
+    <button type="submit">Update feature</button>
+</form>
+
 <!-- # ISLAND INFO
 #   {
 #     "id": 212,
