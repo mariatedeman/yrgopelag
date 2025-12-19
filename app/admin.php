@@ -1,26 +1,64 @@
 <?php
 
 declare(strict_types=1);
-
 require_once __DIR__ . "/autoload.php";
+require_once dirname(__DIR__) . "/includes/header.php";
 
+if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
+    header('Location: ' . __DIR__ . "/views/login.php");
+}
+
+
+// --- PRINT LIST OF HOTEL INFO
+?> <p class="subheading">Hotel info</p>
+<p>Island name: <?= $islandInfo['island']['islandName'] ?></p>
+<p>Hotel name: <?= $islandInfo['island']['hotelName'] ?></p>
+<p>Stars: <?= $islandInfo['island']['stars'] ?></p>
+
+
+<!-- PRINT LIST OF AVAILABLE FEATURES -->
+<p class="subheading">Available features</p>
+<p class="subheading">Coastal Experiences</p>
+<?php foreach ($features as $feature) : ?>
+<?php if ($feature['activity'] === 'hotel-specific') {
+        echo $feature['feature'];
+    }
+endforeach; ?>
+<p class="subheading">Water</p>
+<?php foreach ($features as $feature) : ?>
+<?php if ($feature['activity'] === 'water') {
+        echo $feature['feature'];
+    }
+endforeach; ?>
+<p class="subheading">Wheels</p>
+<?php foreach ($features as $feature) : ?>
+<?php if ($feature['activity'] === 'wheels') {
+        echo $feature['feature'];
+    }
+endforeach; ?>
+<p class="subheading">Games</p>
+<?php foreach ($features as $feature) : ?>
+<?php if ($feature['activity'] === 'games') {
+        echo $feature['feature'];
+    }
+endforeach;
+
+
+// --- FETCH INFO FROM DATABASE TO PRESENT IN TABLE
 $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
 $statement = $database->prepare(
-    'SELECT bookings.checkin, bookings.checkout, rooms.name AS room_name, guests.name, 
-    bookings.is_paid, bookings.total_cost FROM bookings
+    'SELECT bookings.id, bookings.checkin, bookings.checkout, rooms.name AS room_name, guests.name, bookings.is_paid, bookings.total_cost FROM bookings
 
-    INNER JOIN guests ON guests.id = bookings.guest_id
-    INNER JOIN rooms ON rooms.id = bookings.room_id
-    LEFT JOIN bookings_features ON bookings.id = bookings_features.feature_id
-    LEFT JOIN features ON features.id = bookings_features.feature_id
+INNER JOIN guests ON guests.id = bookings.guest_id
+INNER JOIN rooms ON rooms.id = bookings.room_id
+LEFT JOIN bookings_features ON bookings.id = bookings_features.feature_id
+LEFT JOIN features ON features.id = bookings_features.feature_id
 
-    GROUP BY bookings.id'
+GROUP BY bookings.id'
 );
-
 $statement->execute();
-$bookings = $statement->fetchAll(PDO::FETCH_ASSOC);
+$bookings = $statement->fetchAll(PDO::FETCH_ASSOC); ?>
 
-?>
 <table>
     <tr>
         <th>Arrival</th>
@@ -46,10 +84,10 @@ $bookings = $statement->fetchAll(PDO::FETCH_ASSOC);
                 } ?>
             </td>
         </tr>
-
     <?php endforeach ?>
 </table>
 
+<!-- PRICE UPDATE FOR ROOMS AND FEATURES -->
 <form action="/app/posts/update-price.php" method="POST">
     <label for="select-room">Select room</label>
     <select name="select-room" id="select-room">
@@ -74,14 +112,3 @@ $bookings = $statement->fetchAll(PDO::FETCH_ASSOC);
     <input type="number" name="feature-price">
     <button type="submit">Update feature</button>
 </form>
-
-<!-- # ISLAND INFO
-#   {
-#     "id": 212,
-#     "islandName": "Lyckholmen",
-#     "hotelName": "Sjöboda B&amp;amp;B",
-#     "url": "https://made-by-met.se/yrgopelag/",
-#     "stars": 2,
-#     "owner": 19,
-#     "hotel_specific_name": "coastal experiences"
-#   }, -->

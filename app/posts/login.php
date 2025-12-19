@@ -12,6 +12,7 @@ if (isset($_POST['username'], $_POST['api_key'])) {
     if ($username !== 'Maria' || $password !== $key) {
         echo $errors[] = "Wrong username or password";
     } else {
+        $_SESSION['authenticated'] = true;
         header('Location: /app/admin.php');
     }
 }

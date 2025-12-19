@@ -10,7 +10,7 @@
 </head>
 
 <header>
-    <p>Sjöboda B&B</p>
+    <a href="/">Sjöboda B&B</a>
 </header>
 
 <body>

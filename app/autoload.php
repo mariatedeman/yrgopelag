@@ -11,6 +11,9 @@ $dotenv->safeLoad();
 // DEFINE API KEY VARIABLE
 $key = $_ENV['API_KEY'];
 
+// START SESSION
+session_start();
+
 // REQUIRE FUNCTIONS
 require __DIR__ . "/functions.php";
 
