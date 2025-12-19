@@ -145,8 +145,6 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
     }
 }
 
-echo $totalCost;
-
 if (!empty($errors)) {
     foreach ($errors as $error) {
         echo htmlspecialchars(trim($error));
