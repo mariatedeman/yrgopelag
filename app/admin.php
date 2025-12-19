@@ -7,14 +7,7 @@ require_once __DIR__ . "/autoload.php";
 $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
 $statement = $database->prepare(
     'SELECT bookings.checkin, bookings.checkout, rooms.name AS room_name, guests.name, 
-    bookings.is_paid,
-
-    -- CALCULATE PRICE / NIGHT
-    ((rooms.price * (julianday(bookings.checkout) - julianday(bookings.checkin))
-    -- ADD FEATURES OR 0 OR NONE EXIST
-    + IFNULL(SUM(features.price), 0))) AS total_cost 
-    
-    FROM bookings
+    bookings.is_paid, bookings.total_cost FROM bookings
 
     INNER JOIN guests ON guests.id = bookings.guest_id
     INNER JOIN rooms ON rooms.id = bookings.room_id

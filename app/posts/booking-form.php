@@ -111,13 +111,14 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                     if ($receipt && isset($receipt['status']) && $receipt['status'] === 'success') {
 
                         // SAVE BOOKING IN DATABASE
-                        $statement = $database->prepare('INSERT INTO bookings (checkin, checkout, guest_id, room_id, is_paid) 
-                                                VALUES (:checkIn, :checkOut, :guest_id, :room_id, :is_paid)');
+                        $statement = $database->prepare('INSERT INTO bookings (checkin, checkout, guest_id, room_id, is_paid, total_cost) 
+                                                VALUES (:checkIn, :checkOut, :guest_id, :room_id, :is_paid, :total_cost)');
                         $statement->bindValue(':checkIn', $checkIn->format('Y-m-d'));
                         $statement->bindValue(':checkOut', $checkOut->format('Y-m-d'));
                         $statement->bindParam(':guest_id', $guestId, PDO::PARAM_INT);
                         $statement->bindParam(':room_id', $roomType, PDO::PARAM_INT);
                         $statement->bindValue(':is_paid', true);
+                        $statement->bindValue(':total_cost', $totalCost, PDO::PARAM_INT);
                         $statement->execute();
 
                         $bookingId = $database->lastInsertId();
