@@ -31,6 +31,9 @@ require __DIR__ . "/includes/header.php"; ?>
     </span>
 </section>
 
+<section class="booking-form">
+    <?php require __DIR__ . "/app/views/booking-form.php"; ?>
+</section>
 
-<?php require __DIR__ . "/app/views/booking-form.php";
-require __DIR__ . "/includes/footer.php"; ?>
+
+<?php require __DIR__ . "/includes/footer.php"; ?>

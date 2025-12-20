@@ -223,13 +223,14 @@ function getIslandFeatures(string $key): ?array
 function printFeatures(array $features, string $activity, string $title,): void
 { ?>
     <p class="subheading"><?= htmlspecialchars(trim($title)) ?></p>
+    <div>
+        <?php foreach ($features as $feature) :
+            $name = htmlspecialchars(trim($feature['feature']));
 
-    <?php foreach ($features as $feature) :
-        $name = htmlspecialchars(trim($feature['feature']));
-
-        if ($feature['activity'] === $activity) : ?>
-            <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $name ?>">
-            <label for="<?= $name ?>"><?= $name ?></label>
-<?php endif;
-    endforeach;
-}
+            if ($feature['activity'] === $activity) : ?>
+                <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $name ?>">
+                <label for="<?= $name ?>"><?= $name ?></label>
+        <?php endif;
+        endforeach; ?>
+    </div> <?php
+        }

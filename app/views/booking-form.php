@@ -18,10 +18,20 @@
         <option value="3">Luxury</option>
     </select>
 
-    <?php printFeatures($features, 'hotel-specific', 'Coastal Experiences');
-    printFeatures($features, 'games', 'Games');
-    printFeatures($features, 'water', 'Water');
-    printFeatures($features, 'wheels', 'Wheels'); ?>
+    <div class="features-container">
+        <div>
+            <?php printFeatures($features, 'hotel-specific', 'Coastal Experiences'); ?>
+        </div>
+        <div>
+            <?php printFeatures($features, 'games', 'Games'); ?>
+        </div>
+        <div>
+            <?php printFeatures($features, 'water', 'Water'); ?>
+        </div>
+        <div>
+            <?php printFeatures($features, 'wheels', 'Wheels'); ?>
+        </div>
+    </div>
 
     <button type="submit">Make reservation</button>
 </form>
