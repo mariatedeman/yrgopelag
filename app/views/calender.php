@@ -5,9 +5,42 @@ $firstDayOfMonth = date('N', mktime(0, 0, 0, 1, 1, 2026));
 $lastDayOfMonth = date('N', mktime(0, 0, 0, 1, 31, 2026));
 $daysInMonth = date('t', mktime(0, 0, 0, 1, 1, 2026));
 $dayInWeek = date('l', mktime(0, 0, 0, 1, 1, 2026));
+
+$database = new PDO('sqlite:' . dirname(__DIR__) . '/database/yrgopelag.db');
+
+$statment = $database->prepare('SELECT checkin, checkout, room_id FROM bookings');
+$statment->execute();
+
+$dates = $statment->fetchAll(PDO::FETCH_ASSOC);
+
+// ARRAYS FOR BOOKED ROOMS
+$bookedDatesRoomOne = [];
+$bookedDatesRoomTwo = [];
+$bookedDatesRoomThree = [];
+
+// LOOP THROUGH TO FIND THE OCCUPIED DATES
+foreach ($dates as $date) {
+    $checkin = date('j', strtotime($date['checkin']));
+    $checkout = date('j', strtotime($date['checkout']));
+
+    for ($booked = $checkin; $booked < $checkout; $booked++) {
+        // ADD TO CORRECT ARRAY
+        if ($date['room_id'] == 1) {
+            $bookedDatesRoomOne[] = $booked;
+        } else if ($date['room_id'] == 2) {
+            $bookedDatesRoomTwo[] = $booked;
+        } else if ($date['room_id'] == 3) {
+            $bookedDatesRoomThree[] = $booked;
+        }
+    }
+}
+
 ?>
 
-<table class="calender">
+<!-- CREATE CALENDERS -->
+
+<!-- ROOM ONE -->
+<table class="calender room-one">
     <caption>January 2026</caption>
 
     <tr>
@@ -21,78 +54,123 @@ $dayInWeek = date('l', mktime(0, 0, 0, 1, 1, 2026));
     </tr>
 
     <tr>
+        <!-- EMPTY SLOTS FOR DAYS IN PREVIOUS MONTH -->
         <?php for ($i = 1; $i < $firstDayOfMonth; $i++) : ?>
             <td class="day"></td>
-        <?php endfor;
+            <?php endfor;
 
-        for ($i = 1; $i <= $daysInMonth; $i++) : ?>
-            <td class="day"><?= $i ?></td>
+        // CHECK IF DATE IS BOOKES AND ADD TO CALENDER
+        for ($i = 1; $i <= $daysInMonth; $i++) :
+            if (in_array($i, $bookedDatesRoomOne)) { ?>
+                <td class="day booked"><?= $i ?></td>
+            <?php } else { ?>
+                <td class="day"><?= $i ?></td>
+            <?php }
 
-            <?php if (($i + $firstDayOfMonth - 1) % 7 === 0) : ?>
+            // NEW ROW ON MONDAY
+            if (($i + $firstDayOfMonth - 1) % 7 === 0) : ?>
     </tr>
     <tr>
     <?php endif;
         endfor;
-
+        // CHECK IF LAST DAY IS A SUNDAY, IF NOT ADD EMPTY SLOTS
         if ($lastDayOfMonth !== 7) :
             for ($lastDayOfMonth; $lastDayOfMonth < 7; $lastDayOfMonth++) : ?>
         <td class="day"></td>
 
 <?php endfor;
         endif;
-
 ?>
+    </tr>
+</table>
 
+<!-- ROOM TWO -->
+<table class="calender room-two">
+    <caption>January 2026</caption>
 
-
+    <tr>
+        <th>M</th>
+        <th>T</th>
+        <th>W</th>
+        <th>T</th>
+        <th>F</th>
+        <th>S</th>
+        <th>S</th>
     </tr>
 
+    <tr>
+        <!-- EMPTY SLOTS FOR DAYS IN PREVIOUS MONTH -->
+        <?php for ($i = 1; $i < $firstDayOfMonth; $i++) : ?>
+            <td class="day"></td>
+            <?php endfor;
 
+        // CHECK IF DATE IS BOOKES AND ADD TO CALENDER
+        for ($i = 1; $i <= $daysInMonth; $i++) :
+            if (in_array($i, $bookedDatesRoomTwo)) { ?>
+                <td class="day booked"><?= $i ?></td>
+            <?php } else { ?>
+                <td class="day"><?= $i ?></td>
+            <?php }
+
+            // NEW ROW ON MONDAY
+            if (($i + $firstDayOfMonth - 1) % 7 === 0) : ?>
+    </tr>
+    <tr>
+    <?php endif;
+        endfor;
+        // CHECK IF LAST DAY IS A SUNDAY, IF NOT ADD EMPTY SLOTS
+        if ($lastDayOfMonth !== 7) :
+            for ($lastDayOfMonth; $lastDayOfMonth < 7; $lastDayOfMonth++) : ?>
+        <td class="day"></td>
+
+<?php endfor;
+        endif;
+?>
+    </tr>
 </table>
 
 
+<!-- ROOM THREE -->
+<table class="calender room-three">
+    <caption>January 2026</caption>
 
+    <tr>
+        <th>M</th>
+        <th>T</th>
+        <th>W</th>
+        <th>T</th>
+        <th>F</th>
+        <th>S</th>
+        <th>S</th>
+    </tr>
 
-<!-- 
-<div class="month">
-    <ul>
-        <li class="prev"><</li>
-        <li class="next">></li>
-        <li>January 2026</li>
-    </ul>
-</div>
+    <tr>
+        <!-- EMPTY SLOTS FOR DAYS IN PREVIOUS MONTH -->
+        <?php for ($i = 1; $i < $firstDayOfMonth; $i++) : ?>
+            <td class="day"></td>
+            <?php endfor;
 
-<ul class="weekdays">
-    <li>M</li>
-    <li>T</li>
-    <li>W</li>
-    <li>T</li>
-    <li>F</li>
-    <li>L</li>
-    <li>S</li>
-</ul>
+        // CHECK IF DATE IS BOOKES AND ADD TO CALENDER
+        for ($i = 1; $i <= $daysInMonth; $i++) :
+            if (in_array($i, $bookedDatesRoomThree)) { ?>
+                <td class="day booked"><?= $i ?></td>
+            <?php } else { ?>
+                <td class="day"><?= $i ?></td>
+            <?php }
 
-<ul class="days">
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-    <li>6</li>
-    <li>7</li>
-    <li>8</li>
-    <li>9</li>
-    <li>10</li>
-    <li>11</li>
-    <li>12</li>
-    <li>13</li>
-    <li>14</li>
-    <li>15</li>
-    <li>16</li>
-    <li>17</li>
-    <li>18</li>
-    <li>19</li>
-    <li>20</li>
-    <li>21</li>
-    <li>22</li>
-</ul> -->
+            // NEW ROW ON MONDAY
+            if (($i + $firstDayOfMonth - 1) % 7 === 0) : ?>
+    </tr>
+    <tr>
+    <?php endif;
+        endfor;
+        // CHECK IF LAST DAY IS A SUNDAY, IF NOT ADD EMPTY SLOTS
+        if ($lastDayOfMonth !== 7) :
+            for ($lastDayOfMonth; $lastDayOfMonth < 7; $lastDayOfMonth++) : ?>
+        <td class="day"></td>
+
+<?php endfor;
+        endif;
+?>
+    </tr>
+</table>

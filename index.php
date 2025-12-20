@@ -11,6 +11,14 @@ require __DIR__ . "/includes/header.php"; ?>
 </section>
 <section>
     <h2>Våra rum</h2>
+    <form action="/" method="get">
+        <label for="show-room-info">Room type</label>
+        <select name="show-room-info" id="show-room-info">
+            <option value="1">Budget</option>
+            <option value="2">Standard</option>
+            <option value="3">Luxury</option>
+        </select>
+    </form>
 </section>
 <!-- ROOM AND CALENDER PRESETATION -->
 <section class="room-calender">

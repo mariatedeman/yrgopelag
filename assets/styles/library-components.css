@@ -39,6 +39,11 @@ header {
     height: 40vh;
 }
 
+#show-room-info {
+    justify-self: center;
+    margin-bottom: 20px;
+}
+
 .room-calender {
     height: 400px;
     display: flex;
@@ -55,26 +60,6 @@ header {
     padding: 20px;
     align-content: center;
     justify-items: center;
-}
-
-.calender-container {
-    font-family: var(--paragraph-font);
-}
-
-caption {
-    font-size: 1.5rem;
-    width: 100%;
-    font-family: var(--heading-font);
-}
-
-.day {
-    height: 3rem;
-    width: 3rem;
-    background-color: #ebe3e3;
-    border-radius: 3px;
-    
-    text-align: center;
-
 }
 
 #booking-form {
