@@ -39,7 +39,7 @@ header {
     height: 40vh;
 }
 
-#show-room-info {
+.show-room-info {
     justify-self: center;
     margin-bottom: 20px;
 }

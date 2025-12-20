@@ -18,7 +18,7 @@ select.addEventListener ('change', function(event) {
         calenderRoomThree.style.display = 'none';
     }
 
-    if (selectValue == 2) {
+    if (selectValue == 3) {
         calenderRoomOne.style.display = 'none';
         calenderRoomTwo.style.display = 'none';
         calenderRoomThree.style.display = 'block';

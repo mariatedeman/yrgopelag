@@ -88,7 +88,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                 foreach ($selectedFeatures as $featureId) {
 
                     // FETCH PRICE FROM DATABASE
-                    $getFeaturePrice = $database->prepare('SELECT price, api_key FROM features WHERE id = :id');
+                    $getFeaturePrice = $database->prepare('SELECT price, activity_category, price_category, api_key FROM features WHERE id = :id');
                     $getFeaturePrice->bindValue(':id', $featureId, PDO::PARAM_INT);
                     $getFeaturePrice->execute();
 
@@ -96,7 +96,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
 
                     if ($feature) {
                         $featuresCost += $feature['price'];
-                        $featuresForReceipt[] = $feature['api_key'];
+                        $featuresForReceipt[] = ['activity' => strtolower($feature['activity_category']), 'tier' => strtolower($feature['price_category'])];
                     }
                 }
 
@@ -131,16 +131,6 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                                 $statement->bindParam(':feature_id', $featureId, PDO::PARAM_INT);
 
                                 $statement->execute();
-                            }
-                        }
-
-                        if (isset($_POST['features']) && is_array($_POST['features'])) {
-                            $featureStatement = $database->prepare('INSERT INTO bookings_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)');
-
-                            foreach ($_POST['features'] as $id) {
-                                $featureStatement->bindParam(':booking_id', $bookingId, PDO::PARAM_INT);
-                                $featureStatement->bindParam(':feature_id', $id, PDO::PARAM_INT);
-                                $featureStatement->execute();
                             }
                         }
 
