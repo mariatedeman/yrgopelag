@@ -2,7 +2,9 @@
     --boathousered: #6d3433;
     --westcoastblue: #68979d;
     --heatherpurple: #9f869d;
-    --bohuslanggrey: #ebe3e3;
+    --bohuslangrey: #ebe3e3;
+    --paragraph-font: Poppins, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --heading-font: 'La Belle Aurore';
 }
 
 * {
@@ -11,20 +13,55 @@
     size: 16px;
 }
 
-main {
-    width: 70vw;
+p, a, form, button {
+    font-family: var(--paragraph-font);
 }
 
+h2 {
+    font-family: var(--paragraph-font);
+    font-size: 2rem;
+    text-align: center;
+    padding: 20px;
+}
 
 header {
     background-color: var(--westcoastblue);
-    color: var(--bohuslanggrey);
+    color: var(--bohuslangrey);
     height: 100px;
-    margin-bottom: 3rem;
+
     align-content: center;
     text-align: center;
+    font-family: var(--heading-font);
 }
 
-p, a, form, button {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.hero-img {
+    background-color: grey;
+    height: 40vh;
+}
+
+#show-room-info {
+    justify-self: center;
+    margin-bottom: 20px;
+}
+
+.room-calender {
+    height: 400px;
+    display: flex;
+}
+
+.room-calender span:first-child{
+    background-color: #ebe3e3;
+    width: 50vw;
+}
+
+.room-calender span:nth-child(2){
+    background-color: #b0aaaa;
+    width: 50vw;
+    padding: 20px;
+    align-content: center;
+    justify-items: center;
+}
+
+#booking-form {
+    margin-top: 3rem;
 }
