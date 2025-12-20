@@ -1,5 +1,3 @@
-<!-- <link rel="stylesheet" href="/assets/styles/library-components.css"> -->
-
 <?php
 $firstDayOfMonth = date('N', mktime(0, 0, 0, 1, 1, 2026));
 $lastDayOfMonth = date('N', mktime(0, 0, 0, 1, 31, 2026));

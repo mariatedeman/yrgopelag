@@ -62,6 +62,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
 
             $price = $getPrice->fetch(PDO::FETCH_ASSOC);
 
+
             // CALCULATE NUMBER OF NIGHTS
             $checkIn = DateTime::createFromFormat('Y-m-d', $checkIn);
             $checkOut = DateTime::createFromFormat('Y-m-d', $checkOut);
