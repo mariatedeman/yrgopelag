@@ -75,7 +75,7 @@ foreach ($dates as $date) {
         endfor;
         // CHECK IF LAST DAY IS A SUNDAY, IF NOT ADD EMPTY SLOTS
         if ($lastDayOfMonth !== 7) :
-            for ($lastDayOfMonth; $lastDayOfMonth < 7; $lastDayOfMonth++) : ?>
+            for ($i = $lastDayOfMonth; $i < 7; $i++) : ?>
         <td class="day"></td>
 
 <?php endfor;
@@ -120,7 +120,7 @@ foreach ($dates as $date) {
         endfor;
         // CHECK IF LAST DAY IS A SUNDAY, IF NOT ADD EMPTY SLOTS
         if ($lastDayOfMonth !== 7) :
-            for ($lastDayOfMonth; $lastDayOfMonth < 7; $lastDayOfMonth++) : ?>
+            for ($i = $lastDayOfMonth; $i < 7; $i++) : ?>
         <td class="day"></td>
 
 <?php endfor;
@@ -166,7 +166,7 @@ foreach ($dates as $date) {
         endfor;
         // CHECK IF LAST DAY IS A SUNDAY, IF NOT ADD EMPTY SLOTS
         if ($lastDayOfMonth !== 7) :
-            for ($lastDayOfMonth; $lastDayOfMonth < 7; $lastDayOfMonth++) : ?>
+            for ($i = $lastDayOfMonth; $i < 7; $i++) : ?>
         <td class="day"></td>
 
 <?php endfor;

@@ -108,6 +108,7 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
     $receiptInfo = [
         "user" => "Maria",
         "api_key" => $key,
+        "island_id" => 212,
         "guest_name" => $guestName,
         "arrival_date" => $checkIn,
         "departure_date" => $checkOut,

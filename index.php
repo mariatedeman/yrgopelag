@@ -11,7 +11,7 @@ require __DIR__ . "/includes/header.php"; ?>
 </section>
 <section>
     <h2>Våra rum</h2>
-    <form action="/" method="get">
+    <form action="/" method="get" class="show-room-info">
         <label for="show-room-info">Room type</label>
         <select name="show-room-info" id="show-room-info">
             <option value="1">Budget</option>
