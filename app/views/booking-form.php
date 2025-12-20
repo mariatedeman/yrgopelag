@@ -1,4 +1,4 @@
-<form action="app/posts/booking-form.php" method="post">
+<form action="app/posts/booking-form.php" method="post" id="booking-form">
     <label for="text">Your name</label>
     <input type="text" name="name" placeholder="Type your name">
 
