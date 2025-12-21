@@ -119,7 +119,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                     if (isValidTransferCode($transferCode, $totalCost, $bankError)) {
 
                         // ADD DISCOUNTED FEATURE TO RECEIPT
-                        if ($giveDiscount) {
+                        if ($giveDiscount && !in_array($discountFeature, $selectedFeatures)) {
                             $featuresForReceipt[] = ['activity' => 'water', 'tier' => 'basic'];
                         }
 
@@ -161,10 +161,12 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                                 $statement->execute();
 
                                 // CONNECT DISCOUNTED FEATURE TO BOOKING IN DB
-                                $statement = $database->prepare('INSERT INTO bookings_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)');
-                                $statement->bindValue(':booking_id', $bookingId, PDO::PARAM_INT);
-                                $statement->bindValue(':feature_id', $discountFeature, PDO::PARAM_INT);
-                                $statement->execute();
+                                if (in_array($discountFeature, $selectedFeatures)) {
+                                    $statement = $database->prepare('INSERT INTO bookings_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)');
+                                    $statement->bindValue(':booking_id', $bookingId, PDO::PARAM_INT);
+                                    $statement->bindValue(':feature_id', $discountFeature, PDO::PARAM_INT);
+                                    $statement->execute();
+                                }
                             }
 
                             if (makeDeposit($transferCode, $bankError)) {
