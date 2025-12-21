@@ -3,6 +3,24 @@
     font-family: var(--paragraph-font);
 }
 
+.calender {
+    background-color: var(--light);
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.calender tr:first-child {
+    background-color: var(--seaweedgreen);
+    color: var(--dark);
+    border-radius: 5px;
+}
+
+tr th {
+    height: 2.5rem;
+    border-radius: 3px;
+}
+
 caption {
     font-size: 1.5rem;
     width: 100%;
@@ -10,7 +28,7 @@ caption {
 }
 
 .room-one {
-    display: auto;
+    display: block;
 }
 
 .room-two {
@@ -24,7 +42,7 @@ caption {
 .day {
     height: 3rem;
     width: 3rem;
-    background-color: #ebe3e3;
+    background-color: white;
     border-radius: 3px;
     
     text-align: center;

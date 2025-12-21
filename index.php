@@ -9,10 +9,9 @@ require __DIR__ . "/includes/header.php";
 
 
 <section class="hero-img">
-
 </section>
 <section>
-    <h2>Våra rum</h2>
+    <h2>Our room types</h2>
     <form action="/" method="get" class="show-room-info">
         <label for="show-room-info">Room type</label>
         <select name="show-room-info" id="show-room-info">
