@@ -193,6 +193,7 @@ function getIslandFeatures(string $key): ?array
             'method' => 'POST',
             'header' => 'Content-Type: application/json',
             'content' => json_encode($data),
+            'ignore_errors' => true,
         ]
     ];
     $context = stream_context_create($options);
