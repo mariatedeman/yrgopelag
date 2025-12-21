@@ -229,8 +229,10 @@ function printFeatures(array $features, string $activity, string $title,): void
             $name = htmlspecialchars(trim($feature['feature']));
 
             if ($feature['activity'] === $activity) : ?>
-                <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $name ?>">
-                <label for="<?= $name ?>"><?= ucfirst($name) ?></label>
+                <div class="feature-choice">
+                    <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $name ?>">
+                    <label for="<?= $name ?>"><?= ucfirst($name) ?></label>
+                </div>
         <?php endif;
         endforeach; ?>
     </div> <?php

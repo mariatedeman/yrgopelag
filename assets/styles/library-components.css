@@ -2,8 +2,9 @@
     --boathousered: #6d3433;
     --dark-red: #401f1e;
     --westcoastblue: #638496;
+    --oceanblue: #102835;
     --seaweedgreen: #6d726b;
-    --granitegrey: #beb1a8;
+    --granitegrey: #a8a19b;
     --light: #e6e5ea;
     --dark: #27241f;
     --paragraph-font: Poppins, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -36,6 +37,20 @@ h2 {
     font-weight: 600
 }
 
+/* === LINKS AND BUTTONS === */
+button {
+    width: 200px;
+    padding: 1rem;
+    margin-top: 2rem;
+    align-self: center;
+
+    background-color: var(--boathousered);
+    color: var(--light);
+    border: none;
+
+    cursor: pointer;
+}
+
 header {
     background-color: var(--westcoastblue);
     color: var(--light);
@@ -48,6 +63,7 @@ header {
     font-family: var(--heading-font);
 
     position: fixed;
+    z-index: 99;
 }
 
 header img {
@@ -55,10 +71,21 @@ header img {
 }
 
 .hero-img {
-    
-    background-image: url('/assets/images/Gemini_Generated_Image_7wj0c27wj0c27wj0.jpg');
+    background-image: linear-gradient(to bottom, #000000b5, #27241f78), url('/assets/images/Gemini_Generated_Image_7wj0c27wj0c27wj0.jpg');
     background-size: cover;
-    height: 40vh;
+    background-position: center;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+}
+
+.hero-img img {
+    max-height: 40%;
 }
 
 .show-room-info {
@@ -72,7 +99,7 @@ header img {
 }
 
 .room-calender span:first-child{
-    background-color: var(--seaweedgreen);
+    background-color: var(--oceanblue);
     width: 50vw;
 }
 
@@ -89,15 +116,15 @@ header img {
 #booking-form {
     margin-top: 3rem;
     justify-self: center;
-    width: 80vw;
+    min-width: 50vw;
 
     display: flex;
     flex-direction: column;
     gap: 1rem;
-}
 
-#booking-form label {
-    display: block;
+    padding: 50px;
+    border: 5px double var(--westcoastblue);
+    border-radius: 15px;
 }
 
 #booking-form span {
@@ -106,8 +133,14 @@ header img {
     gap: 2rem;
 }
 
+#booking-form span div {
+    display: flex;
+    flex-direction: column;
+}
+
 input, select {
     font-family: var(--paragraph-font);
+    cursor: pointer;
 }
 
 input[type="text"], input[type="date"], select {
@@ -119,10 +152,28 @@ input[type="checkbox"] {
     height: 1rem;
     width: 1rem;
     accent-color: var(--westcoastblue);
+    cursor: pointer;
 }
 
+.feature-choice {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.features-container {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+
+/* === FOOTER === */
+
 footer {
-    background-color: var(--boathousered);
+    background-color: var(--oceanblue);
     color: var(--light);
     height: 30vh;
     margin-top: 3rem;

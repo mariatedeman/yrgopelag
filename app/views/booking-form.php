@@ -14,15 +14,15 @@
         </div>
 
         <div>
-            <label for="checkIn">Chose arrival date</label>
+            <label for="checkIn">Arrival date</label>
             <input type="date" name="checkIn" min="2026-01-01" max="2026-01-31">
 
-            <label for="checkOut">Chose departure date</label>
+            <label for="checkOut">Departure date</label>
             <input type="date" name="checkOut" min="2026-01-01" max="2026-01-31">
         </div>
         <div>
 
-            <label for="room_type">Chose type of room</label>
+            <label for="room_type">Room type</label>
             <select name="room_type" id="room_type" required>
                 <option value="">Choose room</option>
                 <option value="1">Budget</option>

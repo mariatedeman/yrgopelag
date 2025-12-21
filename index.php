@@ -9,6 +9,8 @@ require __DIR__ . "/includes/header.php";
 
 
 <section class="hero-img">
+    <img src="/assets/images/sjoboda_logo_white.svg" alt="">
+    <button href="#booking-form">Book your stay</button>
 </section>
 <section>
     <h2>Our room types</h2>
@@ -33,7 +35,7 @@ require __DIR__ . "/includes/header.php";
     </span>
 </section>
 
-<section class="booking-form">
+<section>
     <?php require __DIR__ . "/app/views/booking-form.php"; ?>
 </section>
 
