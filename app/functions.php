@@ -230,7 +230,7 @@ function printFeatures(array $features, string $activity, string $title,): void
 
             if ($feature['activity'] === $activity) : ?>
                 <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $name ?>">
-                <label for="<?= $name ?>"><?= $name ?></label>
+                <label for="<?= $name ?>"><?= ucfirst($name) ?></label>
         <?php endif;
         endforeach; ?>
     </div> <?php

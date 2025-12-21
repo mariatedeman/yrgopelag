@@ -97,7 +97,6 @@ header img {
 }
 
 #booking-form label {
-    text-transform: capitalize;
     display: block;
 }
 
@@ -119,7 +118,7 @@ input[type="text"], input[type="date"], select {
 input[type="checkbox"] {
     height: 1rem;
     width: 1rem;
-    accent-color: var(--seaweedgreen);
+    accent-color: var(--westcoastblue);
 }
 
 footer {
