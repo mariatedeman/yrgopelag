@@ -108,6 +108,7 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
     $receiptInfo = [
         "user" => "Maria",
         "api_key" => $key,
+        "island_id" => 212,
         "guest_name" => $guestName,
         "arrival_date" => $checkIn,
         "departure_date" => $checkOut,
@@ -192,6 +193,7 @@ function getIslandFeatures(string $key): ?array
             'method' => 'POST',
             'header' => 'Content-Type: application/json',
             'content' => json_encode($data),
+            'ignore_errors' => true,
         ]
     ];
     $context = stream_context_create($options);
@@ -222,13 +224,14 @@ function getIslandFeatures(string $key): ?array
 function printFeatures(array $features, string $activity, string $title,): void
 { ?>
     <p class="subheading"><?= htmlspecialchars(trim($title)) ?></p>
+    <div>
+        <?php foreach ($features as $feature) :
+            $name = htmlspecialchars(trim($feature['feature']));
 
-    <?php foreach ($features as $feature) :
-        $name = htmlspecialchars(trim($feature['feature']));
-
-        if ($feature['activity'] === $activity) : ?>
-            <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $name ?>">
-            <label for="<?= $name ?>"><?= $name ?></label>
-<?php endif;
-    endforeach;
-}
+            if ($feature['activity'] === $activity) : ?>
+                <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $name ?>">
+                <label for="<?= $name ?>"><?= $name ?></label>
+        <?php endif;
+        endforeach; ?>
+    </div> <?php
+        }

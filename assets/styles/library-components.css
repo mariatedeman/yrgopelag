@@ -13,6 +13,7 @@
     size: 16px;
 }
 
+/* === FONTS === */
 p, a, form, button {
     font-family: var(--paragraph-font);
 }
@@ -22,6 +23,10 @@ h2 {
     font-size: 2rem;
     text-align: center;
     padding: 20px;
+}
+
+.subheading {
+    font-weight: 600
 }
 
 header {
@@ -39,7 +44,7 @@ header {
     height: 40vh;
 }
 
-#show-room-info {
+.show-room-info {
     justify-self: center;
     margin-bottom: 20px;
 }
@@ -62,6 +67,46 @@ header {
     justify-items: center;
 }
 
-#booking-form {
+/* === FORMS === */
+
+.booking-form {
     margin-top: 3rem;
+    justify-self: center;
+    width: 80vw;
+}
+
+label {
+    text-transform: capitalize;
+}
+
+input, select {
+    font-family: var(--paragraph-font);
+}
+
+select {
+    height: 26px;
+}
+
+footer {
+    background-color: var(--boathousered);
+    color: var(--bohuslangrey);
+    height: 30vh;
+    margin-top: 3rem;
+    padding: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer img {
+    max-height: 100px;
+    width: fit-content;
 }

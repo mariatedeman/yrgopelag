@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 require __DIR__ . "/app/autoload.php";
-require __DIR__ . "/includes/header.php"; ?>
+require __DIR__ . "/includes/header.php";
+
+?>
 
 
 <section class="hero-img">
@@ -11,7 +13,7 @@ require __DIR__ . "/includes/header.php"; ?>
 </section>
 <section>
     <h2>Våra rum</h2>
-    <form action="/" method="get">
+    <form action="/" method="get" class="show-room-info">
         <label for="show-room-info">Room type</label>
         <select name="show-room-info" id="show-room-info">
             <option value="1">Budget</option>
@@ -31,6 +33,9 @@ require __DIR__ . "/includes/header.php"; ?>
     </span>
 </section>
 
+<section class="booking-form">
+    <?php require __DIR__ . "/app/views/booking-form.php"; ?>
+</section>
 
-<?php require __DIR__ . "/app/views/booking-form.php";
-require __DIR__ . "/includes/footer.php"; ?>
+
+<?php require __DIR__ . "/includes/footer.php"; ?>
