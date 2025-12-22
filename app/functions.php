@@ -3,12 +3,58 @@
 declare(strict_types=1);
 
 // === INCLUDES === //
-// 1. VALIDATE TRANSFER CODE
-// 2. MAKE DEPOSIT
-// 3. POST RECEIPT
-// 4. GET ACCOUNT INFO <----- Needed?
-// 5. GET FEATURES
-// 6. PRINT FEATURES
+// 1. GET TRANSFER CODE
+// 2. VALIDATE TRANSFER CODE
+// 3. MAKE DEPOSIT
+// 4. POST RECEIPT
+// 5. GET ACCOUNT INFO <----- Needed?
+// 6. GET FEATURES
+// 7. PRINT FEATURES
+
+
+//////////////////////////////////////
+
+// === GET TRASFER CODE === //
+
+function getTransferCode(string $guestName, string $guestApi, int $amount, string &$message = ""): ?array
+{
+
+    $url = 'https://www.yrgopelag.se/centralbank/withdraw';
+
+    // PREPARE DATA TO SEND
+    $data = ['user' => $guestName, 'api_key' => $guestApi, 'amount' => $amount];
+
+    // CREATE STREAM CONTENT POST REQUEST
+    // Tells file_get_content to act as POST client
+    $options = [
+        'http' => [
+            'method' => 'POST',
+            'header' => 'Content-Type: application/json',
+            'content' => json_encode($data),
+            'ignore_errors' => true,
+        ]
+    ];
+
+    $context = stream_context_create($options);
+
+    // SEND REQUEST AND GET RESPONSE
+    $response = file_get_contents($url, false, $context);
+
+    // HANDLE RESPONSE
+    if ($response === false) {
+        return null;
+    }
+
+    // CONVERT RESPONSE TO ASSOC ARRAY
+    $transferCode = json_decode($response, true);
+
+    if (isset($transferCode['error'])) {
+        $message = $transferCode['error'];
+    }
+
+    return $transferCode;
+}
+
 
 
 /////////////////////////////////////////////////
