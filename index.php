@@ -11,6 +11,9 @@ require __DIR__ . "/includes/header.php";
 <section class="hero-img">
     <img src="/assets/images/sjoboda_logo_white.svg" alt="">
     <button href="#booking-form">Book your stay</button>
+    <div class="offer">
+        
+    </div>
 </section>
 <section>
     <h2>Our room types</h2>

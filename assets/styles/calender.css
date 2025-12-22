@@ -17,7 +17,7 @@ caption {
 }
 
 .calender tr:first-child {
-    background-color: var(--boathousered);
+    background-color: var(--sunsetyellow);
     color: var(--light);
     border-radius: 5px;
 }
@@ -49,6 +49,6 @@ tr th {
 }
 
 .booked {
-    background-color: #a07877;
+    background-color: #ccb3b2;
     color: #401f1e;
 }
