@@ -19,7 +19,7 @@ if (isset($_POST['name'], $_POST['guest_api'], $_POST['amount'])) {
     }
 
     if ($transferCode) {
-        $_SESSION['success'] = "Your transfercode: " . $transferCode['transferCode'];
+        $_SESSION['success'] = $transferCode['transferCode'];
         header('Location: /');
         exit;
     }

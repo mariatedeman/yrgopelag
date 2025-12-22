@@ -1,36 +1,36 @@
-<form action="/app/posts/get-transfer-code.php" method="post" id="get-transfer-code">
-    <label for="name"></label>
-    <input type="text" name="name" id="name" placeholder="Your name">
+<section class="get-transfercode-container">
+    <?php if (!isset($_SESSION['success'])) : ?>
+        <button id="show-transfercode-form">Fetch transfercode</button>
+    <?php endif ?>
+    <section class="form-container" id="transfercode-form">
+        <form action="/app/posts/get-transfer-code.php" method="post">
+            <label for="name"></label>
+            <input type="text" name="name" id="name" placeholder="Your name">
 
-    <label for="guest_api"></label>
-    <input type="text" name="guest_api" id="guest_api" placeholder="Your api key">
+            <label for="guest_api"></label>
+            <input type="text" name="guest_api" id="guest_api" placeholder="Your api key">
 
-    <label for="amount"></label>
-    <input type="number" name="amount" id="amount" placeholder="0">
+            <label for="amount"></label>
+            <input type="number" name="amount" id="amount" placeholder="0">
 
-    <button type="submit">Fetch transfercode</button>
-</form>
+            <button type="submit">></button>
+        </form>
+    </section>
 
-<?php if (isset($_SESSION['error'])) { ?>
-    <p><?= htmlspecialchars($_SESSION['error']) ?></p>
-<?php unset($_SESSION['error']);
-} else if (isset($_SESSION['success'])) {
-    echo $_SESSION['success'];
-} ?>
+    <!-- RESPONSE -->
+    <section class="transfercode-response">
 
-<div class="transfercode-container">
-    <div class="button">
-        <button class="open-button">Open</button>
-    </div>
-    <div class="popup">
-        <div class="popup-overlay">
-            <div class="main-popup">
-                <div class="popup-content">
-                    <span class="close-button">&times;</span>
-                    <p>Get transfer code</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos et, cupiditate voluptas natus, tempore voluptatum veritatis incidunt voluptates inventore consectetur placeat quod, reiciendis odit nisi itaque commodi unde? Sed, ullam.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <?php if (isset($_SESSION['error'])) { ?>
+            <p><?= htmlspecialchars($_SESSION['error']) ?></p>
+        <?php unset($_SESSION['error']);
+        } else if (isset($_SESSION['success'])) { ?>
+            <label for="transfercode">Your transfercode</label>
+            <input type="text" value="<?= $_SESSION['success'] ?>" id="transfercode">
+            <button onclick="copytext()" class="copy-text">Copy</button>
+        <?php unset($_SESSION['success']);
+        } ?>
+
+    </section>
+
+
+</section>

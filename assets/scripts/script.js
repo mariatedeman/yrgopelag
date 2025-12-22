@@ -5,8 +5,11 @@ const calenderRoomThree = document.querySelector('.room-three');
 const offer = document.getElementById('offer');
 const offerRoom = document.getElementById('room_type');
 const offerFeature = document.getElementById('seafood cruise with live music');
+const showTransfercodeForm = document.getElementById('show-transfercode-form');
+const getTransfercodeForm = document.getElementById('transfercode-form');
 
-// SHOW IMGS AND CALENDAR FOR CHOSEN ROOM
+
+// === SHOW IMGS AND CALENDAR FOR CHOSEN ROOM === 
 select.addEventListener ('change', function(event) {
     const selectValue = select.value;
 
@@ -29,7 +32,7 @@ select.addEventListener ('change', function(event) {
     }
 });
 
-// BEGINNING OF YEAR OFFER
+// === BEGINNING OF YEAR OFFER CHECKBOX ===
 offer.addEventListener ('change', function (event) {
     if (offer.checked) {
         offerFeature.checked = true;
@@ -39,3 +42,22 @@ offer.addEventListener ('change', function (event) {
         offerRoom.value = '';
     }
 })
+
+// === SHOW FORM TO FETCH TRANSFER CODE ===
+showTransfercodeForm.addEventListener ('click', function (event) {
+    getTransfercodeForm.style.display = 'flex';
+    showTransfercodeForm.style.display = 'none';
+
+})
+
+// === COPY TRANSFER CODE ===
+function copytext() {
+    const copyText = document.getElementById('transfercode');
+    const button = document.querySelector('.copy-text');
+
+    copyText.select();
+    navigator.clipboard.writeText(copyText.value);
+
+    button.style.background = '#6d726b';
+    button.textContent = 'Copied!';
+}

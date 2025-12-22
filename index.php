@@ -12,7 +12,7 @@ require __DIR__ . "/includes/header.php";
     <img src="/assets/images/sjoboda_logo_white.svg" alt="">
     <button href="#booking-form">Book your stay</button>
     <div class="offer">
-        
+
     </div>
 </section>
 <section>
@@ -39,7 +39,8 @@ require __DIR__ . "/includes/header.php";
 </section>
 
 <section>
-    <?php require __DIR__ . "/app/views/booking-form.php"; ?>
+    <?php require __DIR__ . "/app/views/get-transfercode.php";
+    require __DIR__ . "/app/views/booking-form.php"; ?>
 </section>
 
 

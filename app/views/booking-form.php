@@ -1,23 +1,3 @@
-<form action="/app/posts/get-transfer-code.php" method="post" id="get-transfer-code">
-    <label for="name"></label>
-    <input type="text" name="name" id="name" placeholder="Your name">
-
-    <label for="guest_api"></label>
-    <input type="text" name="guest_api" id="guest_api" placeholder="Your api key">
-
-    <label for="amount"></label>
-    <input type="number" name="amount" id="amount" placeholder="0">
-
-    <button type="submit">Fetch transfercode</button>
-</form>
-
-<?php if (isset($_SESSION['error'])) { ?>
-    <p><?= htmlspecialchars($_SESSION['error']) ?></p>
-<?php unset($_SESSION['error']);
-} else if (isset($_SESSION['success'])) {
-    echo $_SESSION['success'];
-} ?>
-
 <form action="app/posts/booking-form.php" method="post" id="booking-form">
     <div>
         <label for="offer">Beginning of year offer!</label>

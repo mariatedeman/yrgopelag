@@ -120,65 +120,6 @@ header img {
     justify-items: center;
 }
 
-/* === FORMS === */
-
-#booking-form {
-    margin-top: 3rem;
-    justify-self: center;
-    min-width: 50vw;
-
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    padding: 50px;
-    /* border: 5px double var(--westcoastblue);
-    border-radius: 15px; */
-}
-
-#booking-form span {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-#booking-form span div {
-    display: flex;
-    flex-direction: column;
-}
-
-input, select {
-    font-family: var(--paragraph-font);
-    cursor: pointer;
-}
-
-input[type="text"], input[type="date"], select {
-    height: 2.5rem;
-    width: 200px;
-}
-
-input[type="checkbox"] {
-    height: 1rem;
-    width: 1rem;
-    accent-color: var(--sunsetyellow);
-    cursor: pointer;
-}
-
-.feature-choice {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.features-container {
-    margin-top: 3rem;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
-
 /* === FOOTER === */
 
 footer {
