@@ -7,7 +7,7 @@
             <a href="/app/posts/logout.php">Log out</a>
         <?php } ?>
     </nav>
-    <img src="/assets/images/sjoboda_logo_white.png" alt="sjoboda-logo">
+    <img src="/assets/images/sjoboda_logo_bohuslangrey.svg" alt="sjoboda-logo">
 </footer>
 
 </body>

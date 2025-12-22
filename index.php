@@ -9,13 +9,18 @@ require __DIR__ . "/includes/header.php";
 
 
 <section class="hero-img">
-
+    <img src="/assets/images/sjoboda_logo_white.svg" alt="">
+    <button href="#booking-form">Book your stay</button>
+    <div class="offer">
+        
+    </div>
 </section>
 <section>
-    <h2>Våra rum</h2>
+    <h2>Our room types</h2>
     <form action="/" method="get" class="show-room-info">
-        <label for="show-room-info">Room type</label>
+        <!-- <label for="show-room-info">Room type</label> -->
         <select name="show-room-info" id="show-room-info">
+            <option value="">Choose room</option>
             <option value="1">Budget</option>
             <option value="2">Standard</option>
             <option value="3">Luxury</option>
@@ -33,7 +38,7 @@ require __DIR__ . "/includes/header.php";
     </span>
 </section>
 
-<section class="booking-form">
+<section>
     <?php require __DIR__ . "/app/views/booking-form.php"; ?>
 </section>
 

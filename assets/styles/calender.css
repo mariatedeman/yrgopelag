@@ -9,8 +9,26 @@ caption {
     font-family: var(--heading-font);
 }
 
+.calender {
+    background-color: var(--light);
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.calender tr:first-child {
+    background-color: var(--sunsetyellow);
+    color: var(--light);
+    border-radius: 5px;
+}
+
+tr th {
+    height: 2.5rem;
+    border-radius: 3px;
+}
+
 .room-one {
-    display: auto;
+    display: block;
 }
 
 .room-two {
@@ -24,13 +42,13 @@ caption {
 .day {
     height: 3rem;
     width: 3rem;
-    background-color: #ebe3e3;
+    background-color: white;
     border-radius: 3px;
     
     text-align: center;
 }
 
 .booked {
-    background-color: var(--boathousered);
+    background-color: #ccb3b2;
     color: #401f1e;
 }

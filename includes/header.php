@@ -16,5 +16,5 @@
 
 <body>
     <header>
-        <a href="/">Sjöboda B&B</a>
+        <a href="/"><img src="/assets/images/sjoboda_logo_bohuslangrey.svg" alt=""></a>
     </header>
