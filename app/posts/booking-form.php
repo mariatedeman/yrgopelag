@@ -39,7 +39,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
     }
 
     // VARIABLE TO CHECK IF DISCOUNT SHOULD BE ADDED
-    $giveDiscount = ($existingGuest && $existingGuest['loyal_discount_used'] == false);
+    $giveDiscount = ($existingGuest && $existingGuest['total_nights'] != 0 && $existingGuest['loyal_discount_used'] == false);
 
     // CHECK IF ROOM IS AVAILABLE CHOSEN DATES
     if ($guestId) {
@@ -128,48 +128,48 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
 
                         if ($receipt && isset($receipt['status']) && $receipt['status'] === 'success') {
 
-                            // SAVE BOOKING IN DATABASE
-                            $statement = $database->prepare('INSERT INTO bookings (checkin, checkout, guest_id, room_id, is_paid, total_cost) 
+                            if (makeDeposit($transferCode, $bankError)) {
+
+                                // SAVE BOOKING IN DATABASE
+                                $statement = $database->prepare('INSERT INTO bookings (checkin, checkout, guest_id, room_id, is_paid, total_cost) 
                                                 VALUES (:checkIn, :checkOut, :guest_id, :room_id, :is_paid, :total_cost)');
-                            $statement->bindValue(':checkIn', $checkIn->format('Y-m-d'));
-                            $statement->bindValue(':checkOut', $checkOut->format('Y-m-d'));
-                            $statement->bindParam(':guest_id', $guestId, PDO::PARAM_INT);
-                            $statement->bindParam(':room_id', $roomType, PDO::PARAM_INT);
-                            $statement->bindValue(':is_paid', true);
-                            $statement->bindValue(':total_cost', $totalCost, PDO::PARAM_INT);
-                            $statement->execute();
-
-                            $bookingId = $database->lastInsertId();
-
-                            if (!empty($selectedFeatures)) {
-                                $statement = $database->prepare('INSERT INTO bookings_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)');
-
-                                foreach ($selectedFeatures as $featureId) {
-                                    $statement->bindParam(':booking_id', $bookingId, PDO::PARAM_INT);
-                                    $statement->bindParam(':feature_id', $featureId, PDO::PARAM_INT);
-
-                                    $statement->execute();
-                                }
-                            }
-
-                            // IF EXISTING GUEST, ADD SCUBA DIVING FOR FREE
-                            if ($giveDiscount) {
-
-                                // UPDATE DB TO DISCOUNT USED
-                                $statement = $database->prepare('UPDATE guests SET loyal_discount_used = true WHERE id = :id');
-                                $statement->bindValue(':id', $guestId, PDO::PARAM_INT);
+                                $statement->bindValue(':checkIn', $checkIn->format('Y-m-d'));
+                                $statement->bindValue(':checkOut', $checkOut->format('Y-m-d'));
+                                $statement->bindParam(':guest_id', $guestId, PDO::PARAM_INT);
+                                $statement->bindParam(':room_id', $roomType, PDO::PARAM_INT);
+                                $statement->bindValue(':is_paid', true);
+                                $statement->bindValue(':total_cost', $totalCost, PDO::PARAM_INT);
                                 $statement->execute();
 
-                                // CONNECT DISCOUNTED FEATURE TO BOOKING IN DB
-                                if (in_array($discountFeature, $selectedFeatures)) {
-                                    $statement = $database->prepare('INSERT INTO bookings_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)');
-                                    $statement->bindValue(':booking_id', $bookingId, PDO::PARAM_INT);
-                                    $statement->bindValue(':feature_id', $discountFeature, PDO::PARAM_INT);
-                                    $statement->execute();
-                                }
-                            }
+                                $bookingId = $database->lastInsertId();
 
-                            if (makeDeposit($transferCode, $bankError)) {
+                                if (!empty($selectedFeatures)) {
+                                    $statement = $database->prepare('INSERT INTO bookings_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)');
+
+                                    foreach ($selectedFeatures as $featureId) {
+                                        $statement->bindParam(':booking_id', $bookingId, PDO::PARAM_INT);
+                                        $statement->bindParam(':feature_id', $featureId, PDO::PARAM_INT);
+
+                                        $statement->execute();
+                                    }
+                                }
+
+                                // IF EXISTING GUEST, ADD SCUBA DIVING FOR FREE
+                                if ($giveDiscount) {
+
+                                    // UPDATE DB TO DISCOUNT USED
+                                    $statement = $database->prepare('UPDATE guests SET loyal_discount_used = true WHERE id = :id');
+                                    $statement->bindValue(':id', $guestId, PDO::PARAM_INT);
+                                    $statement->execute();
+
+                                    // CONNECT DISCOUNTED FEATURE TO BOOKING IN DB
+                                    if (in_array($discountFeature, $selectedFeatures)) {
+                                        $statement = $database->prepare('INSERT INTO bookings_features (booking_id, feature_id) VALUES (:booking_id, :feature_id)');
+                                        $statement->bindValue(':booking_id', $bookingId, PDO::PARAM_INT);
+                                        $statement->bindValue(':feature_id', $discountFeature, PDO::PARAM_INT);
+                                        $statement->execute();
+                                    }
+                                }
 
                                 $response = [
                                     'island' => 'Lyckholmen',

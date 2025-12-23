@@ -1,4 +1,4 @@
-<form action="app/posts/booking-form.php" method="post" id="booking-form">
+<form action="/app/posts/booking-form.php" method="post" id="booking-form">
     <div>
         <label for="offer">Beginning of year offer!</label>
         <input type="checkbox" name="offer" id="offer">
@@ -7,18 +7,18 @@
 
         <div>
             <label for="name">Your name</label>
-            <input type="text" name="name" placeholder="Type your name">
+            <input type="text" name="name" id="name" placeholder="Type your name">
 
             <label for="transfer_code">Transfer code</label>
-            <input type="text" name="transfer_code" placeholder="Type your transfer code">
+            <input type="text" name="transfer_code" id="transfer_code" placeholder="Type your transfer code">
         </div>
 
         <div>
             <label for="checkIn">Arrival date</label>
-            <input type="date" name="checkIn" min="2026-01-01" max="2026-01-31">
+            <input type="date" name="checkIn" id="checkIn" min="2026-01-01" max="2026-01-31">
 
             <label for="checkOut">Departure date</label>
-            <input type="date" name="checkOut" min="2026-01-01" max="2026-01-31">
+            <input type="date" name="checkOut" id="checkOut" min="2026-01-01" max="2026-01-31">
         </div>
         <div>
 

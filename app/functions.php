@@ -32,7 +32,11 @@ function getTransferCode(string $guestName, string $guestApi, int $amount, strin
             'header' => 'Content-Type: application/json',
             'content' => json_encode($data),
             'ignore_errors' => true,
-        ]
+        ],
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
     ];
 
     $context = stream_context_create($options);
@@ -75,7 +79,11 @@ function isValidTransferCode(string $transferCode, int $totalCost, string &$mess
             'header' => 'Content-Type: application/json',
             'content' => json_encode($data),
             'ignore_errors' => true
-        ]
+        ],
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
     ];
     $context = stream_context_create($options);
 
@@ -119,7 +127,11 @@ function makeDeposit(string $transferCode, string &$message = ''): bool
             'header' => 'Content-Type: application/json',
             'content' => json_encode($paymentInfo),
             'ignore_errors' => true
-        ]
+        ],
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
     ];
     $context = stream_context_create($options);
 
@@ -170,7 +182,11 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
             'header' => 'Content-Type: application/json',
             'content' => json_encode($receiptInfo),
             'ignore_errors' => true
-        ]
+        ],
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
     ];
     $context = stream_context_create($options);
 
@@ -198,7 +214,11 @@ function getAccountInfo(string $user, string $apiKey): ?array
             'method' => 'POST',
             'header' => 'Content-Type: application/json',
             'content' => json_encode($userInfo),
-        ]
+        ],
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
     ];
     $context = stream_context_create($options);
 
@@ -240,7 +260,11 @@ function getIslandFeatures(string $key): ?array
             'header' => 'Content-Type: application/json',
             'content' => json_encode($data),
             'ignore_errors' => true,
-        ]
+        ],
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ],
     ];
     $context = stream_context_create($options);
 
@@ -270,14 +294,23 @@ function getIslandFeatures(string $key): ?array
 function printFeatures(array $features, string $activity, string $title,): void
 { ?>
     <p class="subheading"><?= htmlspecialchars(trim($title)) ?></p>
+
     <div>
         <?php foreach ($features as $feature) :
+
+            $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
+            $statement = $database->prepare('SELECT price FROM features WHERE id = :feature_id');
+            $statement->bindValue(':feature_id', $feature['id']);
+            $statement->execute();
+
+            $price = $statement->fetch(PDO::FETCH_ASSOC);
+
             $name = htmlspecialchars(trim($feature['feature']));
 
             if ($feature['activity'] === $activity) : ?>
                 <div class="feature-choice">
                     <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $name ?>">
-                    <label for="<?= $name ?>"><?= ucfirst($name) ?></label>
+                    <label for="<?= $name ?>"><?= ucfirst($name) . ", " . $price['price'] . ":-" ?></label>
                 </div>
         <?php endif;
         endforeach; ?>
