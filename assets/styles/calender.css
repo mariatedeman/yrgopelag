@@ -14,6 +14,7 @@ caption {
     padding: 10px;
     margin: 20px;
     border-radius: 5px;
+    flex-direction: column;
 }
 
 .calender tr:first-child {
@@ -25,18 +26,6 @@ caption {
 tr th {
     height: 2.5rem;
     border-radius: 3px;
-}
-
-.room-one {
-    display: block;
-}
-
-.room-two {
-    display: none;
-}
-
-.room-three {
-    display: none;
 }
 
 .day {

@@ -1,10 +1,12 @@
 const select = document.getElementById('show-room-info');
-const calenderRoomOne = document.querySelector('.room-one');
-const calenderRoomTwo = document.querySelector('.room-two');
-const calenderRoomThree = document.querySelector('.room-three');
+const budgetElements = document.querySelectorAll('.budget')
+const standardElements = document.querySelectorAll('.standard')
+const luxuryElements = document.querySelectorAll('.luxury')
+
 const offer = document.getElementById('offer');
 const offerRoom = document.getElementById('room_type');
 const offerFeature = document.getElementById('seafood cruise with live music');
+
 const showTransfercodeForm = document.getElementById('show-transfercode-form');
 const getTransfercodeForm = document.getElementById('transfercode-form');
 
@@ -14,21 +16,45 @@ select.addEventListener ('change', function(event) {
     const selectValue = select.value;
 
     if (selectValue == 1) {
-        calenderRoomOne.style.display = 'block';
-        calenderRoomTwo.style.display = 'none';
-        calenderRoomThree.style.display = 'none';
+        budgetElements.forEach(element => {
+            element.style.display = 'flex';
+        });
+
+        standardElements.forEach(element => {
+            element.style.display = 'none';
+        })
+
+        luxuryElements.forEach(element => {
+            element.style.display = 'none';
+        })
     }
 
     if (selectValue == 2) {
-        calenderRoomOne.style.display = 'none';
-        calenderRoomTwo.style.display = 'block';
-        calenderRoomThree.style.display = 'none';
+        budgetElements.forEach(element => {
+            element.style.display = 'none';
+        });
+
+        standardElements.forEach(element => {
+            element.style.display = 'flex';
+        })
+
+        luxuryElements.forEach(element => {
+            element.style.display = 'none';
+        })
     }
 
     if (selectValue == 3) {
-        calenderRoomOne.style.display = 'none';
-        calenderRoomTwo.style.display = 'none';
-        calenderRoomThree.style.display = 'block';
+        budgetElements.forEach(element => {
+            element.style.display = 'none';
+        });
+
+        standardElements.forEach(element => {
+            element.style.display = 'none';
+        })
+
+        luxuryElements.forEach(element => {
+            element.style.display = 'flex';
+        })
     }
 });
 
@@ -61,3 +87,40 @@ function copytext() {
     button.style.background = '#6d726b';
     button.textContent = 'Copied!';
 }
+
+
+let slideIndex = 1;
+    showSlides(slideIndex);
+
+    // NEXT / PREV
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName('slides');
+        let dots = document.getElementsByClassName('dot');
+
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className = " active";
+    }
