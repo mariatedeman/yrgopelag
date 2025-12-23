@@ -53,6 +53,7 @@ button {
     margin-top: 2rem;
     align-self: center;
 
+    font-size: 1rem;
     background-color: var(--sunsetyellow);
     color: var(--light);
     border: none;

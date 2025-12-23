@@ -23,13 +23,14 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
     $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // SHOW ERRORS
 
     // CHECK IF GUEST EXIST, OTHERWISE ADD
-    $statement = $database->prepare('SELECT id, loyal_discount_used FROM guests WHERE name = :name');
+    $statement = $database->prepare('SELECT id, total_nights, loyal_discount_used FROM guests WHERE name = :name');
     $statement->bindParam(':name', $guestName, PDO::PARAM_STR);
     $statement->execute();
     $existingGuest = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($existingGuest) { // DEFINE GUEST ID
         $guestId = $existingGuest['id'];
+        $total_nights = $existingGuest['total_nights'];
     } else {
         $statement = $database->prepare('INSERT INTO guests (name) VALUES (:name)');
         $statement->bindParam(':name', $guestName, PDO::PARAM_STR);
@@ -39,7 +40,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
     }
 
     // VARIABLE TO CHECK IF DISCOUNT SHOULD BE ADDED
-    $giveDiscount = ($existingGuest && $existingGuest['total_nights'] != 0 && $existingGuest['loyal_discount_used'] == false);
+    $giveDiscount = ($existingGuest && $total_nights > 0 && $existingGuest['loyal_discount_used'] == false);
 
     // CHECK IF ROOM IS AVAILABLE CHOSEN DATES
     if ($guestId) {
