@@ -1,19 +1,28 @@
+// SHOW ROOM INFO
 const select = document.getElementById('show-room-info');
 const budgetElements = document.querySelectorAll('.budget')
 const standardElements = document.querySelectorAll('.standard')
 const luxuryElements = document.querySelectorAll('.luxury')
+const hiddenRoomInput = document.getElementById('hidden-room-id');
 
+// INCLUDED IN OFFER
 const offer = document.getElementById('offer');
 const offerRoom = document.getElementById('room_type');
 const offerFeature = document.getElementById('seafood cruise with live music');
 
+// TRANSFER CODE FORM
 const showTransfercodeForm = document.getElementById('show-transfercode-form');
 const getTransfercodeForm = document.getElementById('transfercode-form');
 
 
-// === SHOW IMGS AND CALENDAR FOR CHOSEN ROOM === 
-select.addEventListener ('change', function(event) {
+function showRoomInfo() {
+    if (!select) return;
+
     const selectValue = select.value;
+
+    if (hiddenRoomInput) {
+        hiddenRoomInput.value = select.value;
+    }
 
     if (selectValue == 1) {
         budgetElements.forEach(element => {
@@ -56,25 +65,35 @@ select.addEventListener ('change', function(event) {
             element.style.display = 'flex';
         })
     }
-});
+}
+
+// === SHOW IMGS AND CALENDAR FOR CHOSEN ROOM === 
+if (select) {
+    select.addEventListener ('change', showRoomInfo);
+    showRoomInfo();
+}
+
 
 // === BEGINNING OF YEAR OFFER CHECKBOX ===
-offer.addEventListener ('change', function (event) {
-    if (offer.checked) {
-        offerFeature.checked = true;
-        offerRoom.value = 3;
-    } else if (!offer.checked) {
-        offerFeature.checked = false;
-        offerRoom.value = '';
-    }
-})
+if (offer) {
+    offer.addEventListener ('change', function (event) {
+        if (offer.checked) {
+            offerFeature.checked = true;
+            offerRoom.value = 3;
+        } else if (!offer.checked) {
+            offerFeature.checked = false;
+            offerRoom.value = '';
+        }
+    })
+}
 
 // === SHOW FORM TO FETCH TRANSFER CODE ===
-showTransfercodeForm.addEventListener ('click', function (event) {
-    getTransfercodeForm.style.display = 'flex';
-    showTransfercodeForm.style.display = 'none';
-
-})
+if (showTransfercodeForm) {
+    showTransfercodeForm.addEventListener ('click', function (event) {
+        showTransfercodeForm.style.display = 'none';
+        getTransfercodeForm.style.display = 'flex';       
+    })
+}
 
 // === COPY TRANSFER CODE ===
 function copytext() {
@@ -88,7 +107,7 @@ function copytext() {
     button.textContent = 'Copied!';
 }
 
-
+// === IMG SLIDESHOW === //
 let slideIndex = 1;
     showSlides(slideIndex);
 
@@ -117,10 +136,5 @@ let slideIndex = 1;
             slides[i].style.display = "none";
         }
 
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-
         slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className = " active";
     }

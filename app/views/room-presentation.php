@@ -1,19 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
+// FETCH INFO FROM DB
 $database = new PDO('sqlite:' . dirname(__DIR__) . '/database/yrgopelag.db');
 $statement = $database->query('SELECT * FROM rooms');
 $roomInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$currentRoom = $_GET['room'] ?? 1;
 
 ?>
 
 <!-- SELECT ROOM -->
 <section>
     <h2>Our room types</h2>
-    <form action="/" method="get" class="show-room-info">
-        <select name="show-room-info" id="show-room-info">
-            <option value="1">Budget</option>
-            <option value="2">Standard</option>
-            <option value="3">Luxury</option>
+    <form action="/" class="show-room-info">
+        <select name="room" id="show-room-info">
+            <option value="1" <?= $currentRoom == 1 ? 'selected' : '' ?>>Budget</option>
+            <option value="2" <?= $currentRoom == 2 ? 'selected' : '' ?>>Standard</option>
+            <option value="3" <?= $currentRoom == 3 ? 'selected' : '' ?>>Luxury</option>
         </select>
     </form>
 
@@ -48,7 +53,7 @@ $roomInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <div class="slides fade">
                     <div class="img-container">
                         <img class="budget" src="/assets/images/room_budget_1.jpg" alt="Old wooden boat in calm waters">
-                        <img class="standard" src="/assets/images/Gemini_Generated_Image_7wj0c27wj0c27wj0.jpg" alt="Old wooden boat in calm waters">
+                        <img class="standard" src="/assets/images/room_standard_1.jpg" alt="Row of red boat houses by calm waters">
                         <img class="luxury" src="/assets/images/room_budget_1.jpg" alt="Old wooden boat in calm waters">
                     </div>
                 </div>
@@ -56,7 +61,7 @@ $roomInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <div class="slides fade">
                     <div class="img-container">
                         <img class="budget" src="/assets/images/room_budget_2.jpg" alt="Simple and cozy bed inside wooden boat">
-                        <img class="standard" src="/assets/images/room_budget_2.jpg" alt="Simple and cozy bed inside wooden boat">
+                        <img class="standard" src="/assets/images/room_standard_2.jpg" alt="Simple and cozy bed inside wooden boat">
                         <img class="luxury" src="/assets/images/room_budget_2.jpg" alt="Simple and cozy bed inside wooden boat">
                     </div>
                 </div>

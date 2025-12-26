@@ -1,9 +1,11 @@
-<section class="get-transfercode-container">
+<section class="get-transfercode-container" id="transfercode-section">
     <?php if (!isset($_SESSION['success'])) : ?>
         <button id="show-transfercode-form">Fetch transfercode</button>
     <?php endif ?>
     <section class="form-container" id="transfercode-form">
         <form action="/app/posts/get-transfer-code.php" method="post">
+            <input type="hidden" name="current-room-id" id="hidden-room-id" value="<?= $currentRoom ?>">
+
             <label for="name"></label>
             <input type="text" name="name" id="name" placeholder="Your name">
 
