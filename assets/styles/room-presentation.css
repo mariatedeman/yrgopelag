@@ -1,4 +1,8 @@
 /* === ROOM PRESENTATION AND CALENDER BLOCK === */
+.choose-room {
+    padding: 5rem;
+}
+
 .room-info {
     flex-direction: column;
     align-items: center;

@@ -13,14 +13,16 @@ $currentRoom = $_GET['room'] ?? 1;
 
 <!-- SELECT ROOM -->
 <section>
-    <h2>Our room types</h2>
-    <form action="/" class="show-room-info">
-        <select name="room" id="show-room-info">
-            <option value="1" <?= $currentRoom == 1 ? 'selected' : '' ?>>Budget</option>
-            <option value="2" <?= $currentRoom == 2 ? 'selected' : '' ?>>Standard</option>
-            <option value="3" <?= $currentRoom == 3 ? 'selected' : '' ?>>Luxury</option>
-        </select>
-    </form>
+    <span class="choose-room">
+        <h2>Our room types</h2>
+        <form action="/" class="show-room-info">
+            <select name="room" id="show-room-info">
+                <option value="1" <?= $currentRoom == 1 ? 'selected' : '' ?>>Budget</option>
+                <option value="2" <?= $currentRoom == 2 ? 'selected' : '' ?>>Standard</option>
+                <option value="3" <?= $currentRoom == 3 ? 'selected' : '' ?>>Luxury</option>
+            </select>
+        </form>
+    </span>
 
     <!-- SHOW SELECTED ROOM INFO -->
     <div class="room-info budget">

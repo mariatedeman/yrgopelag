@@ -39,11 +39,11 @@ h2 {
     font-family: var(--paragraph-font);
     font-size: 2rem;
     text-align: center;
-    padding: 20px;
+    padding: 1rem;
 }
 
 .subheading {
-    font-weight: 600
+    font-weight: 600;
 }
 
 /* === LINKS AND BUTTONS === */
