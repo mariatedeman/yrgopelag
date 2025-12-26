@@ -24,6 +24,7 @@
     margin: 0;
     box-sizing: border-box;
     size: 16px;
+    /* overflow-x: hidden; */
 }
 
 body {
@@ -31,7 +32,7 @@ body {
 }
 
 /* === FONTS === */
-p, a, form, button {
+p, h6, a, form, button {
     font-family: var(--paragraph-font);
 }
 
@@ -42,13 +43,12 @@ h2 {
     padding: 1rem;
 }
 
-.subheading {
+.subheading, h6 {
     font-weight: 600;
 }
 
 /* === LINKS AND BUTTONS === */
-button {
-    width: 200px;
+button, .button {
     padding: 1rem;
     margin-top: 2rem;
     align-self: center;
@@ -63,7 +63,13 @@ button {
     transition: all 0.5s;
 }
 
-button:hover {
+a {
+    text-decoration: none;
+    text-align: center;
+}
+
+button:hover, 
+.button:hover {
     background-color: var(--buttercupyellow);
     color: #92621e;
     transform: scale(1.02);

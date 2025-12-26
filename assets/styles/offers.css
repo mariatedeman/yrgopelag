@@ -1,0 +1,68 @@
+
+
+/* === OFFER OPEN === */
+/* .offer {
+    display: block;
+    position: fixed;
+    right: 0;
+    max-width: 40px;
+
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 2rem;
+    box-shadow: 0 0 10px 2px #0000003d;
+} */
+
+.offer h6 {
+    font-size: 1rem;
+    writing-mode: sideways-lr;
+}
+
+.offer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    position: fixed;
+    right: -350px;
+    max-width: 400px;
+    height: 100px;
+    
+    background-color: var(--boathousered-light);
+    color: var(--light);
+    padding: 2rem 2rem 2rem 1rem;
+    box-shadow: 0 0 10px 2px #0000003d;
+
+    transition: all 0.3s;
+}
+
+.offer:hover {
+    background-color: var(--light);
+    color: var(--dark);
+    right: 0;
+    height: auto;
+}
+
+.offer span {
+    display: flex;
+    justify-content: space-between;
+}
+
+.offer .subheading {
+    color: var(--boathousered-light);
+}
+
+.offer p:nth-child(2) {
+    margin-bottom: 2rem;
+}
+
+.offer .button {
+    padding: 0.7rem;
+    background-color: var(--boathousered-light);
+    color: var(--light);
+}
+
+.offer .button:hover {
+    background-color: var(--boathousered-dark);
+}
+
