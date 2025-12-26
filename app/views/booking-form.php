@@ -1,6 +1,8 @@
 <form action="/app/posts/booking-form.php" method="post" id="booking-form">
-    <div>
-        <label for="offer">Beginning of year offer!</label>
+    <div class="offer-container">
+        <p class="subheading">Beginning of year offer</p>
+        <p>Free seafood cruise with livemusic when you book our Premium Sea View Suite!</p>
+        <label for="offer" class="subheading">Book offer</label>
         <input type="checkbox" name="offer" id="offer">
     </div>
     <span>

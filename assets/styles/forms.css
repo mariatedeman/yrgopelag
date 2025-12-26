@@ -65,8 +65,23 @@
 
 /* === BOOKING FORM === */
 
+.offer-container {
+    background-color: var(--boathousered-dark);
+    color: var(--light);
+    padding: 2rem;
+    border-radius: 3px;
+}
+
+.offer-container .subheading:first-child {
+    font-size: 1.3rem;
+
+}
+
+.offer-container p:nth-child(2) {
+    margin-bottom: 1rem;
+}
+
 #booking-form {
-    margin-top: 3rem;
     justify-self: center;
     min-width: 50vw;
 

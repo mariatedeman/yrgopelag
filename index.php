@@ -8,13 +8,20 @@ require __DIR__ . "/includes/header.php";
 ?>
 
 <!-- HERO IMG -->
-<section class="hero-img">
-    <img src="/assets/images/sjoboda_logo_white.svg" alt="">
-    <button href="#booking-form">Book your stay</button>
-    <div class="offer">
+<section class="hero-video-container">
+    <span class="on-video-content">
+        <img src="/assets/images/sjoboda_logo_white.svg" alt="">
+        <a href="#transfercode-section" class="button"><button>Book your stay</button></a>
+        <div class="offer">
 
-    </div>
+        </div>
+    </span>
+
+    <video autoplay muted loop id="background-video">
+        <source src="/assets/images/hero-video.mp4" type="video/mp4">
+    </video>
 </section>
+
 <section>
     <!-- ROOM PRESENTATION -->
     <?php require_once __DIR__ . "/app/views/room-presentation.php"; ?>

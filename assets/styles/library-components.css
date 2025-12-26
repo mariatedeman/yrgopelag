@@ -4,7 +4,7 @@
     --westcoastblue: #3d6880;
     --summerskyblue: #a2b8c8;
 
-    --baothousered-dark: #401f1e;
+    --boathousered-dark: #401f1e;
     --boathousered-light: #6d3433;
     
     --sunsetyellow: #d09541;
@@ -57,8 +57,16 @@ button {
     background-color: var(--sunsetyellow);
     color: var(--light);
     border: none;
+    border-radius: 3px;
 
     cursor: pointer;
+    transition: all 0.5s;
+}
+
+button:hover {
+    background-color: var(--buttercupyellow);
+    color: #92621e;
+    transform: scale(1.02);
 }
 
 header {
@@ -80,7 +88,30 @@ header img {
     max-height: 90%;
 }
 
-.hero-img {
+.hero-video-container {
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.on-video-content {
+    display: flex;
+    flex-direction: column;
+    justify-self: anchor-center;
+    align-self: center;
+    align-items: center;
+    position: absolute;
+    z-index: 98;
+}
+
+#background-video {
+    min-width: 100%;
+    object-fit: cover;
+    opacity: 50%;
+}
+
+/* .hero-img {
     background-image: linear-gradient(to bottom, #000000b5, #27241f78), url('/assets/images/Gemini_Generated_Image_7wj0c27wj0c27wj0.jpg');
     background-size: cover;
     background-position: center;
@@ -92,9 +123,9 @@ header img {
     justify-content: center;
 
     color: white;
-}
+} */
 
-.hero-img img {
+.hero-video-container img {
     max-height: 40%;
 }
 
@@ -107,7 +138,7 @@ header img {
 /* === FOOTER === */
 
 footer {
-    background-color: var(--baothousered-dark);
+    background-color: var(--boathousered-dark);
     color: var(--light);
     height: 30vh;
     margin-top: 3rem;
