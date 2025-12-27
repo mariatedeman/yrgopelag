@@ -119,6 +119,7 @@ input, select {
 input[type="text"], input[type="date"], select {
     height: 2.5rem;
     width: 200px;
+    margin-top: 2rem;
 }
 
 input[type="checkbox"] {

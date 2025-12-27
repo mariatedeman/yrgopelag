@@ -18,6 +18,6 @@
 </head>
 
 <body>
-    <header>
-        <a href="/"><img src="/assets/images/sjoboda_logo_bohuslangrey.svg" alt=""></a>
+    <header id="header">
+        <a href="/"><img src="/assets/images/sjoboda-logo-text-granitegrey.svg" alt=""></a>
     </header>

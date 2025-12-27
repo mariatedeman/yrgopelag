@@ -14,6 +14,21 @@ const offerFeature = document.getElementById('seafood cruise with live music');
 const showTransfercodeForm = document.getElementById('show-transfercode-form');
 const getTransfercodeForm = document.getElementById('transfercode-form');
 
+window.addEventListener ('scroll', scrollFunction);
+
+function scrollFunction() {
+
+    const scrollAmount = window.scrollY || document.documentElement.scrollTop;
+    const header = document.getElementById('header');
+
+    if(header) {
+        if (scrollAmount > 20) {
+        header.style.top = "0";
+    } else {
+        header.style.top = "-100px";
+    }
+}
+}
 
 function showRoomInfo() {
     if (!select) return;

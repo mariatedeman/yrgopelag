@@ -13,8 +13,18 @@
     justify-content: center;
 }
 
+.room-information-wrapper p {
+    width: 80%;
+    text-align: center;
+    justify-self: center;
+}
+
 .choose-room-wrapper {
     background-color: var(--granitegrey);
+}
+
+.choose-room-wrapper h2 {
+    margin-top: 0;
 }
 
 .availability-wrapper {
@@ -38,8 +48,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    width: 80%;
 }
 
 .budget {

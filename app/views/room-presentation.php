@@ -11,13 +11,13 @@ $currentRoom = $_GET['room'] ?? 1;
 
 ?>
 
-
 <section class="room-information-grid">
     <section class="room-information-row">
         <!-- CHOOSE ROOM -->
         <section class="room-information-wrapper choose-room-wrapper">
             <span>
                 <h2>Our room types</h2>
+                <p>Whether you seek rustic charm or refined luxury, we offer an experience for every soul. We offer rooms in every price range, all right at the water’s edge. Surrounded by the majestic beauty of the archipelago, our retreat invites you to reconnect with nature’s elements. Discover your perfect waterfront escape and let the rhythm of the waves define your stay.</p>
                 <form action="/" class="show-room-info">
                     <select name="room" id="show-room-info">
                         <option value="1" <?= $currentRoom == 1 ? 'selected' : '' ?>>Budget</option>
