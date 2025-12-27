@@ -1,0 +1,43 @@
+.calender-container {
+    font-family: var(--paragraph-font);
+}
+
+caption {
+    font-size: 1rem;
+    font-weight: 600;
+    width: 100%;
+    margin: 1rem;
+}
+
+.calender {
+    background-color: var(--light);
+    padding: 10px;
+    margin-top: 1rem;
+    border-radius: 5px;
+    flex-direction: column;
+}
+
+.calender tr:first-child {
+    background-color: var(--sunsetyellow);
+    color: var(--light);
+    border-radius: 5px;
+}
+
+tr th {
+    height: 2.5rem;
+    border-radius: 3px;
+}
+
+.day {
+    height: 3rem;
+    width: 4.5rem;
+    background-color: white;
+    border-radius: 3px;
+    
+    text-align: center;
+}
+
+.booked {
+    background-color: #ccb3b2;
+    color: #401f1e;
+}

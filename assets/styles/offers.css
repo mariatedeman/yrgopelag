@@ -1,0 +1,60 @@
+/* === OFFER  === */
+.offer h6 {
+    font-size: 1rem;
+    writing-mode: sideways-lr;
+}
+
+.offer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    position: fixed;
+    right: -350px;
+    max-width: 400px;
+    height: 100px;
+    
+    background-color: var(--summerskyblue);
+    color: var(--deepoceanblue);
+    padding: 2rem 2rem 2rem 1rem;
+    box-shadow: 0 0 10px 2px #0000003d;
+    overflow: hidden;
+
+    transition: all 0.3s;
+}
+
+.offer:hover {
+    background-color: var(--light);
+    color: var(--dark);
+    right: 0;
+    height: auto;
+}
+
+.offer div {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.offer:hover div {
+    opacity: 100%;
+    transition: opacity 0.4s 0.1s;
+}
+
+.offer .subheading {
+    color: var(--deepoceanblue);
+}
+
+.offer p:nth-child(2) {
+    margin-bottom: 2rem;
+}
+
+.offer .button {
+    padding: 0.7rem;
+    background-color: var(--westcoastblue);
+    color: var(--light);
+}
+
+.offer .button:hover {
+    background-color: var(--deepoceanblue);
+}
+
