@@ -115,6 +115,7 @@ header {
 
     position: fixed;
     z-index: 99;
+    display: none;
 }
 
 header img {
