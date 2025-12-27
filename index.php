@@ -10,7 +10,7 @@ require __DIR__ . "/includes/header.php";
 <!-- HERO IMG -->
 <section class="hero-video-container">
     <span class="on-video-content">
-        <img src="/assets/images/sjoboda_logo_white.svg" alt="">
+        <img src="/assets/images/sjoboda_logo_bohuslangrey.svg" alt="">
         <a href="#transfercode-section" class="button">Book your stay</a>
         <div class="offer">
             <h6>Offer</h6>

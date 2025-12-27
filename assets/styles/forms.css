@@ -33,12 +33,21 @@
     position: absolute;
     right: 0;
     
+    border: 1px solid #767676;
+    border-left: 0;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    border: 1px solid #767676;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
     background-color: var(--oceanblue);
     width: 40px;
     height: 40px;
+}
+
+#transfercode-form button:hover {
+    background-color: var(--deepoceanblue);
+    color: var(--summerskyblue);
 }
 
 .transfercode-response {

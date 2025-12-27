@@ -54,17 +54,33 @@ $currentRoom = $_GET['room'] ?? 1;
             <section class="slideshow-container">
                 <div class="slides fade">
                     <div class="img-container">
-                        <img class="budget" src="/assets/images/room_budget_1.jpg" alt="Old wooden boat in calm waters">
-                        <img class="standard" src="/assets/images/room_standard_1.jpg" alt="Row of red boat houses by calm waters">
-                        <img class="luxury" src="/assets/images/room_budget_1.jpg" alt="Old wooden boat in calm waters">
+                        <img class="budget" src="/assets/images/room_budget_exterior.jpg" alt="Old wooden boat in calm waters">
+                        <img class="standard" src="/assets/images/room_standard_exterior.jpg" alt="Row of red boat houses by calm waters">
+                        <img class="luxury" src="/assets/images/room_luxury_exterior.jpg" alt="Old wooden boat in calm waters">
                     </div>
                 </div>
 
                 <div class="slides fade">
                     <div class="img-container">
-                        <img class="budget" src="/assets/images/room_budget_2.jpg" alt="Simple and cozy bed inside wooden boat">
-                        <img class="standard" src="/assets/images/room_standard_2.jpg" alt="Simple and cozy bed inside wooden boat">
-                        <img class="luxury" src="/assets/images/room_budget_2.jpg" alt="Simple and cozy bed inside wooden boat">
+                        <img class="budget" src="/assets/images/room_budget_bed.jpg" alt="Simple and cozy bed inside wooden boat">
+                        <img class="standard" src="/assets/images/room_standard_bed.jpg" alt="Simple and cozy bed inside wooden boat">
+                        <img class="luxury" src="/assets/images/room_luxury_bed.jpg" alt="Simple and cozy bed inside wooden boat">
+                    </div>
+                </div>
+
+                <div class="slides fade">
+                    <div class="img-container">
+                        <img class="budget" src="/assets/images/room_budget_mood-2.jpg" alt="Simple and cozy bed inside wooden boat">
+                        <img class="standard" src="/assets/images/room_standard_bathroom.jpg" alt="Simple and cozy bed inside wooden boat">
+                        <img class="luxury" src="/assets/images/room_luxury_bathroom.jpg" alt="Simple and cozy bed inside wooden boat">
+                    </div>
+                </div>
+
+                <div class="slides fade">
+                    <div class="img-container">
+                        <img class="budget" src="/assets/images/room_budget_mood.jpg" alt="Simple and cozy bed inside wooden boat">
+                        <img class="standard" src="/assets/images/room_standard_mood.jpg" alt="Simple and cozy bed inside wooden boat">
+                        <img class="luxury" src="/assets/images/room_luxury_mood.jpg" alt="Simple and cozy bed inside wooden boat">
                     </div>
                 </div>
 

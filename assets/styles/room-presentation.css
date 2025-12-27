@@ -17,7 +17,7 @@
 }
 
 .room-info p {
-    max-width: 45%;
+    max-width: 50%;
 }
 
 .budget {
@@ -35,6 +35,7 @@
 
 .room-calender span:first-child{
     width: 50vw;
+    padding: 20px;
     background-color: var(--granitegrey);
     display: flex;
     flex-direction: column;
@@ -42,15 +43,15 @@
 }
 
 .room-calender span:nth-child(2){
-    background-color: var(--sandygrey);
     width: 50vw;
     padding: 20px;
+    background-color: var(--sandygrey);
     align-content: center;
     justify-items: center;
 }
 
 .room-presentation {
-    margin: 50px;
+    margin-top: 1rem;
     max-width: 700px;
     position: relative;
 }
@@ -75,7 +76,7 @@
     .next {
         cursor: pointer;
         position: absolute;
-        top: 40%;
+        top: 50%;
         width: auto;
         margin-top: -22px;
         padding: 1rem;
