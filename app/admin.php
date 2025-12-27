@@ -1,20 +1,18 @@
 <?php
 
 declare(strict_types=1);
-require_once __DIR__ . "/autoload.php";
-require_once dirname(__DIR__) . "/includes/header.php";
+require __DIR__ . "/autoload.php";
+require dirname(__DIR__) . "/includes/header.php";
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     header('Location: ' . __DIR__ . "/views/login.php");
 }
-
 
 // --- PRINT LIST OF HOTEL INFO
 ?> <p class="subheading">Hotel info</p>
 <p>Island name: <?= $islandInfo['island']['islandName'] ?></p>
 <p>Hotel name: <?= $islandInfo['island']['hotelName'] ?></p>
 <p>Stars: <?= $islandInfo['island']['stars'] ?></p>
-
 
 <!-- PRINT LIST OF AVAILABLE FEATURES -->
 <p class="subheading">Available features</p>

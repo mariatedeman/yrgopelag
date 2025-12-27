@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/assets/styles/room-presentation.css">
     <link rel="stylesheet" href="/assets/styles/calender.css">
     <link rel="stylesheet" href="/assets/styles/offers.css">
+    <link rel="stylesheet" href="/assets/styles/login.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

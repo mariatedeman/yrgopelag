@@ -1,0 +1,41 @@
+.body-login {
+    background-color: var(--boathousered-dark);
+}
+
+.login-section {
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--light);
+    align-items: center;
+}
+
+.login-section h2 {
+    margin-top: 0;
+}
+
+.login-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-section form div {
+    display: flex;
+    gap: 2rem;
+}
+
+.login-section span {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-section input {
+    height: 40px;
+    width: 200px;
+    margin-bottom: 2rem;
+}
+
+.body-login footer {
+    margin-top: 0;
+}
