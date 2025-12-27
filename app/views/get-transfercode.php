@@ -1,6 +1,6 @@
 <section class="get-transfercode-container" id="transfercode-section">
     <?php if (!isset($_SESSION['success'])) : ?>
-        <button id="show-transfercode-form">Fetch transfercode</button>
+        <button class="button-small" id="show-transfercode-form">Fetch transfercode</button>
     <?php endif ?>
     <section class="form-container" id="transfercode-form">
         <form action="/app/posts/get-transfer-code.php" method="post">

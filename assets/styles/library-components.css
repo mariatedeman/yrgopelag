@@ -24,7 +24,7 @@
     margin: 0;
     box-sizing: border-box;
     size: 16px;
-    /* overflow-x: hidden; */
+    scroll-behavior: smooth;
 }
 
 body {
@@ -32,15 +32,21 @@ body {
 }
 
 /* === FONTS === */
-p, h3, h6, a, form, button {
+p, h2, h3, h6, a, form, button {
     font-family: var(--paragraph-font);
 }
 
+h1 {
+    font-family: var(--heading-font), var(--paragraph-font);
+    color: var(--light);
+    font-size: 3.5rem;
+}
+
 h2 {
-    font-family: var(--paragraph-font);
     font-size: 2rem;
     text-align: center;
     padding: 1rem;
+    margin-top: 3rem;
 }
 
 h3 {
@@ -56,7 +62,22 @@ h3 {
 /* === LINKS AND BUTTONS === */
 button, .button {
     padding: 1rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    align-self: center;
+
+    font-size: 1rem;
+    background-color: var(--sunsetyellow);
+    color: var(--light);
+    border: none;
+    border-radius: 3px;
+
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.button-small {
+    padding: 0.7rem;
+    margin-top: 0;
     align-self: center;
 
     font-size: 1rem;
@@ -137,15 +158,14 @@ header img {
     color: white;
 } */
 
-.hero-video-container img {
-    max-height: 40%;
+.on-video-content img {
+    max-height: 250px;
 }
 
 .show-room-info {
     justify-self: center;
     margin-bottom: 20px;
 }
-
 
 /* === FOOTER === */
 

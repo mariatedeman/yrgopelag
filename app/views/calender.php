@@ -35,7 +35,7 @@ foreach ($dates as $date) {
 <!-- CREATE CALENDERS -->
 <!-- ROOM ONE -->
 <table class="calender budget">
-    <caption>January 2026</caption>
+    <caption>January 2026 (Budget)</caption>
 
     <tr>
         <th>M</th>
@@ -80,7 +80,7 @@ foreach ($dates as $date) {
 
 <!-- ROOM TWO -->
 <table class="calender standard">
-    <caption>January 2026</caption>
+    <caption>January 2026 (Standard)</caption>
 
     <tr>
         <th>M</th>
@@ -126,7 +126,7 @@ foreach ($dates as $date) {
 
 <!-- ROOM THREE -->
 <table class="calender luxury">
-    <caption>January 2026</caption>
+    <caption>January 2026 (Luxury)</caption>
 
     <tr>
         <th>M</th>

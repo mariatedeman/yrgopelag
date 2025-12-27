@@ -11,6 +11,7 @@ require __DIR__ . "/includes/header.php";
 <section class="hero-video-container">
     <span class="on-video-content">
         <img src="/assets/images/sjoboda_logo_bohuslangrey.svg" alt="">
+        <h1>Your authentic west coast escape</h1>
         <a href="#transfercode-section" class="button">Book your stay</a>
         <div class="offer">
             <h6>Offer</h6>
@@ -37,7 +38,8 @@ require __DIR__ . "/includes/header.php";
     <?php require_once __DIR__ . "/app/views/room-presentation.php"; ?>
 </section>
 
-<section>
+<section class="booking-section">
+    <h2>Booking</h2>
     <!-- GET TRANSFER CODE AND BOOKING -->
     <?php require __DIR__ . "/app/views/get-transfercode.php";
     require __DIR__ . "/app/views/booking-form.php"; ?>
