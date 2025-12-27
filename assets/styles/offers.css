@@ -1,18 +1,6 @@
 
 
-/* === OFFER OPEN === */
-/* .offer {
-    display: block;
-    position: fixed;
-    right: 0;
-    max-width: 40px;
-
-    background-color: var(--light);
-    color: var(--dark);
-    padding: 2rem;
-    box-shadow: 0 0 10px 2px #0000003d;
-} */
-
+/* === OFFER  === */
 .offer h6 {
     font-size: 1rem;
     writing-mode: sideways-lr;
@@ -32,6 +20,7 @@
     color: var(--light);
     padding: 2rem 2rem 2rem 1rem;
     box-shadow: 0 0 10px 2px #0000003d;
+    overflow: hidden;
 
     transition: all 0.3s;
 }
@@ -43,9 +32,14 @@
     height: auto;
 }
 
-.offer span {
-    display: flex;
-    justify-content: space-between;
+.offer div {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.offer:hover div {
+    opacity: 100%;
+    transition: opacity 0.4s 0.1s;
 }
 
 .offer .subheading {
