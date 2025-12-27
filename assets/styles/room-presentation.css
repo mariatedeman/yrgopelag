@@ -27,10 +27,6 @@
     background-color: var(--granitegrey);
 }
 
-.room-information-wrapper h2 {
-    margin-top: 0;
-}
-
 .choose-room-wrapper select {
     margin-top: 2rem;
 }
