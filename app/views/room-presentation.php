@@ -87,17 +87,17 @@ $currentRoom = $_GET['room'] ?? 1;
         <section class="room-information-wrapper room-description-wrapper">
             <!-- SHOW SELECTED ROOM INFO -->
             <div class="room-description budget">
-                <p class="subheading"><?= $roomInfo[0]['room_name'] ?></p>
+                <h2><?= $roomInfo[0]['room_name'] ?></h2>
                 <p><?= $roomInfo[0]['description'] ?></p>
             </div>
 
             <div class="room-description standard">
-                <p class="subheading"><?= $roomInfo[1]['room_name'] ?></p>
+                <h2><?= $roomInfo[1]['room_name'] ?></h2>
                 <p><?= $roomInfo[1]['description'] ?></p>
             </div>
 
             <div class="room-description luxury">
-                <p class="subheading"><?= $roomInfo[2]['room_name'] ?></p>
+                <h2><?= $roomInfo[2]['room_name'] ?></h2>
                 <p><?= $roomInfo[2]['description'] ?></p>
             </div>
         </section>

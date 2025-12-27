@@ -32,6 +32,17 @@ require __DIR__ . "/includes/header.php";
     </video>
 </section>
 
+<section class="intro">
+    <span>
+        <h2>Experience Bohuslän at Sjöboda B&B</h2>
+        <p>Discover the serene beauty of Lyckholmen.
+            From cozy traditional wooden boats to premium
+            suites with private jetties, we offer a unique
+            waterfront escape where the sea is your closest neighbor.
+            Experience the best that Bohuslän has to offer.</p>
+    </span>
+</section>
+
 <section>
     <!-- ROOM PRESENTATION -->
     <?php require_once __DIR__ . "/app/views/room-presentation.php"; ?>

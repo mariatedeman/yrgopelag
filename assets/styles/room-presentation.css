@@ -1,4 +1,8 @@
 /* === ROOM PRESENTATION AND CALENDER BLOCK === */
+.room-information-grid {
+    border-bottom: 5px solid var(--oceanblue);
+}
+
 .room-information-row {
     display: flex;
 }
@@ -23,8 +27,12 @@
     background-color: var(--granitegrey);
 }
 
-.choose-room-wrapper h2 {
+.room-information-wrapper h2 {
     margin-top: 0;
+}
+
+.choose-room-wrapper select {
+    margin-top: 2rem;
 }
 
 .availability-wrapper {

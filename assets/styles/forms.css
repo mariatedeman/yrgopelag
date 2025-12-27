@@ -74,10 +74,11 @@
 /* === BOOKING FORM === */
 
 .offer-container {
-    background-color: var(--boathousered-dark);
+    background-color: var(--deepoceanblue);
     color: var(--light);
     padding: 2rem;
     border-radius: 3px;
+    margin-bottom: 3rem;
 }
 
 .offer-container .subheading:first-child {
@@ -119,7 +120,6 @@ input, select {
 input[type="text"], input[type="date"], select {
     height: 2.5rem;
     width: 200px;
-    margin-top: 2rem;
 }
 
 input[type="checkbox"] {

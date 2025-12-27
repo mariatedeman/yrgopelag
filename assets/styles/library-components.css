@@ -25,6 +25,7 @@
     box-sizing: border-box;
     size: 16px;
     scroll-behavior: smooth;
+    overscroll-behavior: none;
 }
 
 body {
@@ -115,7 +116,7 @@ header {
 
     position: fixed;
     top: -100px;
-    transition: 0.3s;
+    transition: 0.7s;
     z-index: 99;
 }
 
@@ -168,6 +169,13 @@ header img {
 .show-room-info {
     justify-self: center;
     margin-bottom: 20px;
+}
+
+.intro {
+    max-width: 50%;
+    justify-self: center;
+    text-align: center;
+    margin: 3rem;
 }
 
 /* === FOOTER === */
