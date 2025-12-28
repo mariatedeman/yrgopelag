@@ -61,9 +61,9 @@ require __DIR__ . "/includes/header.php";
     require __DIR__ . "/app/views/booking-form.php"; ?>
 </section>
 
-<!-- <section class="features-presentation"> -->
-<?php require __DIR__ . "/includes/features-presentation.php"; ?>
-<!-- </section> -->
+<section class="features-presentation">
+    <?php require __DIR__ . "/includes/features-presentation.php"; ?>
+</section>
 
 <!-- FOOTER -->
 <?php require __DIR__ . "/includes/footer.php"; ?>

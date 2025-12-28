@@ -190,7 +190,6 @@ footer {
     background-color: var(--boathousered-dark);
     color: var(--light);
     height: 30vh;
-    margin-top: 3rem;
     padding: 3rem;
 
     display: flex;

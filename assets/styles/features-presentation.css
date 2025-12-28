@@ -1,6 +1,6 @@
 .features-presentation {
     background-color: var(--granitegrey);
-    padding: 3rem;
+    padding: 3rem 5rem 3rem
 }
 
 .features-grid-container {
@@ -27,12 +27,12 @@
     border-top-right-radius: 1rem;
 }
 
-.features-presentation-text {
-    padding: 1rem;
+.feature-presentation-text p {
+    margin: 0.5rem;
 }
 
-.features-presentation-text h4 {
-    margin-bottom: 1rem;
+.feature-presentation-text h4 {
+    margin: 0.5rem;
 }
 
 
