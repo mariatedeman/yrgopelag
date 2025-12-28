@@ -14,18 +14,30 @@ const offerFeature = document.getElementById('seafood cruise with live music');
 const showTransfercodeForm = document.getElementById('show-transfercode-form');
 const getTransfercodeForm = document.getElementById('transfercode-form');
 
+// SHOW HEADER ON SCROLL
+scrollFunction();
 window.addEventListener ('scroll', scrollFunction);
 
 function scrollFunction() {
-
-    const scrollAmount = window.scrollY || document.documentElement.scrollTop;
     const header = document.getElementById('header');
-
-    if(header) {
-        if (scrollAmount > 20) {
-        header.style.top = "0";
+    if (!header) return;
+    
+    const totalPageHeight = document.documentElement.scrollHeight;
+    const viewportHeight = window.innerHeight;
+    
+    // SHOW HEADER RIGHT AWAY ON SMALL PAGES 
+    if (totalPageHeight <= viewportHeight) {
+        header.style.top = "0"
+        header.style.position = "sticky";
     } else {
-        header.style.top = "-100px";
+        const scrollAmount = window.scrollY || document.documentElement.scrollTop;
+        
+        if (header) {
+            if (scrollAmount > 20) {
+            header.style.top = "0";
+        } else {
+            header.style.top = "-100px";
+        }
     }
 }
 }
