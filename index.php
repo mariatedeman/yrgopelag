@@ -62,7 +62,7 @@ require __DIR__ . "/includes/header.php";
 </section>
 
 <section class="features-presentation">
-    <?php require __DIR__ . "/app/views/features-presentation.php"; ?>
+    <?php require __DIR__ . "/includes/features-presentation.php"; ?>
 </section>
 
 <!-- FOOTER -->
