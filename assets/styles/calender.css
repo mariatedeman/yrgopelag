@@ -1,36 +1,43 @@
-
 .calender-container {
     font-family: var(--paragraph-font);
 }
 
 caption {
-    font-size: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
     width: 100%;
-    font-family: var(--heading-font);
+    margin: 1rem;
 }
 
-.room-one {
-    display: auto;
+.calender {
+    background-color: var(--light);
+    padding: 10px;
+    margin-top: 1rem;
+    border-radius: 5px;
+    flex-direction: column;
 }
 
-.room-two {
-    display: none;
+.calender tr:first-child {
+    background-color: var(--boathousered-light);
+    color: var(--light);
+    border-radius: 5px;
 }
 
-.room-three {
-    display: none;
+tr th {
+    height: 2.5rem;
+    border-radius: 3px;
 }
 
 .day {
     height: 3rem;
-    width: 3rem;
-    background-color: #ebe3e3;
+    width: 4.5rem;
+    background-color: white;
     border-radius: 3px;
     
     text-align: center;
 }
 
 .booked {
-    background-color: var(--boathousered);
+    background-color: #ccb3b2;
     color: #401f1e;
 }

@@ -1,0 +1,167 @@
+/* LOGIN PAGE */
+.body-login {
+    background-color: var(--boathousered-dark);
+}
+
+.login-section {
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--light);
+    align-items: center; 
+}
+
+.login-section h2 {
+    margin-top: 0;
+}
+
+.login-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-section form div {
+    display: flex;
+    gap: 2rem;
+}
+
+.login-section span {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-section input {
+    height: 40px;
+    width: 200px;
+    margin-bottom: 2rem;
+}
+
+.body-login footer {
+    margin-top: 0;
+}
+
+/* ADMIN PAGE */
+.admin-hero-img {
+    height: 50vh;
+    background-image: linear-gradient(to bottom, #000000a1, #000000c9), url("/assets/images/Gemini_Generated_Image_7wj0c27wj0c27wj0.jpg");
+    background-size: cover;
+    background-position: center;
+    color: var(--light);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-hero-img h2 {
+    font-size: 3rem;
+}
+
+.admin-hero-img p {
+    font-size: 1.2rem;
+}
+
+.admin-info-container {
+    margin: 3rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+
+    font-family: var(--paragraph-font);
+}
+
+.info-wrapper {
+    padding: 1rem;
+    background-color: var(--vanilla);
+    border-radius: 5px;
+    box-shadow: 0 0 5px 1px #c6c6c6;
+}
+
+.hotel-info {
+    grid-column: 1 / 5;
+
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--deepoceanblue);
+    color: var(--light);
+}
+
+.bookings {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+
+    display: flex;
+    justify-content: center;
+}
+
+.features-info {
+    grid-column: 3 / 5;
+    grid-row: 2 / 3;
+}
+
+.features-info,
+.bookings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.features-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.update-room-price {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+}
+
+.update-feature-price {
+    grid-column: 3 / 5;
+    grid-row: 3 / 4;
+}
+
+
+/* TABLES */
+.features-info table,
+.bookings table {
+    border: 2px solid var(--sandygrey);
+    border-collapse: collapse;
+    padding: 1rem;
+    width: 100%;
+}
+
+.features-info table th,
+.bookings table th {
+    border-bottom: 2px;
+}
+
+.features-info table td, th,
+.bookings table td, th {
+    border: 1px solid var(--sandygrey);
+    padding: 0.5rem;
+}
+
+/* PRICE UPDATE */
+.update-feature-price div,
+.update-room-price div {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-feature-price form,
+.update-room-price form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-items: flex-end;
+}
+
+.update-feature-price input, select,
+.update-room-price input, select {
+    height: 40px;
+    width: 180px;
+}

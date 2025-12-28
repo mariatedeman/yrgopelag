@@ -1,5 +1,4 @@
-<?php
-$firstDayOfMonth = date('N', mktime(0, 0, 0, 1, 1, 2026));
+<?php $firstDayOfMonth = date('N', mktime(0, 0, 0, 1, 1, 2026));
 $lastDayOfMonth = date('N', mktime(0, 0, 0, 1, 31, 2026));
 $daysInMonth = date('t', mktime(0, 0, 0, 1, 1, 2026));
 $dayInWeek = date('l', mktime(0, 0, 0, 1, 1, 2026));
@@ -31,15 +30,12 @@ foreach ($dates as $date) {
             $bookedDatesRoomThree[] = $booked;
         }
     }
-}
-
-?>
+} ?>
 
 <!-- CREATE CALENDERS -->
-
 <!-- ROOM ONE -->
-<table class="calender room-one">
-    <caption>January 2026</caption>
+<table class="calender budget">
+    <caption>January 2026 (Budget)</caption>
 
     <tr>
         <th>M</th>
@@ -83,8 +79,8 @@ foreach ($dates as $date) {
 </table>
 
 <!-- ROOM TWO -->
-<table class="calender room-two">
-    <caption>January 2026</caption>
+<table class="calender standard">
+    <caption>January 2026 (Standard)</caption>
 
     <tr>
         <th>M</th>
@@ -129,8 +125,8 @@ foreach ($dates as $date) {
 
 
 <!-- ROOM THREE -->
-<table class="calender room-three">
-    <caption>January 2026</caption>
+<table class="calender luxury">
+    <caption>January 2026 (Luxury)</caption>
 
     <tr>
         <th>M</th>
