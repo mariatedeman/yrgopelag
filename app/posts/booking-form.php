@@ -181,8 +181,10 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                                     'stars' => $hotelStars,
                                     'features' => $featuresForReceipt,
                                 ];
-                                header('Content-Type: application/json');
-                                echo json_encode($response);
+
+                                $_SESSION['receipt'] = $response;
+
+                                header('Location: ../views/receipt.php');
                                 exit;
                             } else {
                                 $errors[] = "Deposit failed: $bankError";

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/assets/styles/calender.css">
     <link rel="stylesheet" href="/assets/styles/offers.css">
     <link rel="stylesheet" href="/assets/styles/login-admin.css">
-    <link rel="stylesheet" href="/assets/styles/errors.css">
+    <link rel="stylesheet" href="/assets/styles/messages.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

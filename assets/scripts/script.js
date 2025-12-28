@@ -14,7 +14,7 @@ const offerFeature = document.getElementById('seafood cruise with live music');
 const showTransfercodeForm = document.getElementById('show-transfercode-form');
 const getTransfercodeForm = document.getElementById('transfercode-form');
 
-// SHOW HEADER ON SCROLL
+// === SHOW HEADER ON SCROLL ===
 scrollFunction();
 window.addEventListener ('scroll', scrollFunction);
 
@@ -43,6 +43,7 @@ function scrollFunction() {
 }
 }
 
+// === ROOM PRESENTATION ===
 function showRoomInfo() {
     if (!select) return;
 
@@ -124,15 +125,22 @@ if (showTransfercodeForm) {
 }
 
 // === COPY TRANSFER CODE ===
-function copytext() {
-    const copyText = document.getElementById('transfercode');
+function copytext(id) {
+    const element = document.getElementById(id);
     const button = document.querySelector('.copy-text');
+    let textCopy = "";
 
-    copyText.select();
-    navigator.clipboard.writeText(copyText.value);
+    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+        element.select();
+        textCopy = element.value;
+    } else {
+        textCopy = element.textContent;
+    }
 
-    button.style.background = '#6d726b';
-    button.textContent = 'Copied!';
+    navigator.clipboard.writeText(textCopy).then(() => {
+        button.style.background = '#6d726b';
+        button.textContent = 'Copied!';
+    })
 }
 
 // === IMG SLIDESHOW === //

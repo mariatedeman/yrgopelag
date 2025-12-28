@@ -28,11 +28,9 @@
         } else if (isset($_SESSION['success'])) { ?>
             <label for="transfercode">Your transfercode</label>
             <input type="text" value="<?= $_SESSION['success'] ?>" id="transfercode">
-            <button onclick="copytext()" class="copy-text">Copy</button>
+            <button onclick="copytext('transfercode')" class="copy-text">Copy</button>
         <?php unset($_SESSION['success']);
         } ?>
 
     </section>
-
-
 </section>
