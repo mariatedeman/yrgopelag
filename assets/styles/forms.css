@@ -44,7 +44,7 @@
     border-bottom-left-radius: 0;
 
     background-color: var(--oceanblue);
-    width: 40px;
+    min-width: 40px;
     height: 40px;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .copy-text {
-    width: auto;
+    min-width: auto;
     height: 40px;
 
     padding: 0.5rem;
@@ -73,6 +73,11 @@
 
     border-radius: 2px;
     background-color: var(--oceanblue);
+}
+
+.copy-text:hover {
+    background-color: var(--deepoceanblue);
+    color: var(--light);
 }
 
 /* === BOOKING FORM === */
@@ -140,6 +145,7 @@ input[type="checkbox"] {
 
 .features-container {
     margin-top: 3rem;
+    margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

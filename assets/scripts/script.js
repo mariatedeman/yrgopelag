@@ -20,6 +20,7 @@ window.addEventListener ('scroll', scrollFunction);
 
 function scrollFunction() {
     const header = document.getElementById('header');
+
     if (!header) return;
     
     const totalPageHeight = document.documentElement.scrollHeight;

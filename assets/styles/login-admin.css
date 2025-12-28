@@ -9,7 +9,7 @@
     flex-direction: column;
     justify-content: center;
     background-color: var(--light);
-    align-items: center;
+    align-items: center; 
 }
 
 .login-section h2 {

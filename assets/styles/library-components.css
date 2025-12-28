@@ -33,7 +33,7 @@ body {
 }
 
 /* === FONTS === */
-p, h2, h3, h4, h5 h6, a, form, button {
+p, h2, h3, h4, h5, h6, a, form, button {
     font-family: var(--paragraph-font);
 }
 

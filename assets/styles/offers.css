@@ -1,4 +1,4 @@
-/* === OFFER  === */
+/* === JANUARY OFFER === */
 .offer h6 {
     font-size: 1rem;
     writing-mode: sideways-lr;
@@ -58,3 +58,11 @@
     background-color: var(--deepoceanblue);
 }
 
+
+/* === LOYALTY OFFER === */
+.loyalty-offer {
+    background-color: var(--boathousered-light);
+    color: var(--light);
+    padding: 1rem;
+    text-align: center;
+}
