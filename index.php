@@ -66,4 +66,6 @@ require __DIR__ . "/includes/header.php";
 </section>
 
 <!-- FOOTER -->
-<?php require __DIR__ . "/includes/footer.php"; ?>
+<section class="footer-container">
+    <?php require __DIR__ . "/includes/footer.php"; ?>
+</section>
