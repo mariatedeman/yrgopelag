@@ -1,0 +1,39 @@
+.features-presentation {
+    background-color: var(--granitegrey);
+    padding: 3rem 5rem 3rem
+}
+
+.features-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    justify-content: center;
+    column-gap: 2rem;
+    row-gap: 3rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.features-presentation div {
+    background-color: white;
+    max-width: 300px;
+    box-shadow: 0 0 10px 2px grey;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.features-presentation img {
+    max-width: 100%;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+
+.feature-presentation-text p {
+    margin: 0.5rem;
+}
+
+.feature-presentation-text h4 {
+    margin: 0.5rem;
+}
+
+
+

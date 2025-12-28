@@ -1,0 +1,148 @@
+<?php
+
+declare(strict_types=1);
+require __DIR__ . "/autoload.php";
+require dirname(__DIR__) . "/includes/header.php";
+
+if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
+    header('Location: ' . __DIR__ . "/views/login.php");
+} ?>
+
+<section>
+    <div class="admin-hero-img">
+        <h2>Welcome <?= $_SESSION['username'] ?></h2>
+        <p>Hotel administration dashboard</p>
+    </div>
+</section>
+
+<section class="admin-info-container">
+    <!--- PRINT LIST OF HOTEL INFO -->
+    <section class="info-wrapper hotel-info">
+        <p><strong>Island name: </strong><?= $islandName ?></p>
+        <p><strong>Hotel name: </strong><?= $hotelName ?></p>
+        <p><strong>Stars: </strong><?= $islandInfo['island']['stars'] ?></p>
+    </section>
+
+    <!-- PRINT LIST OF AVAILABLE FEATURES -->
+    <section class="info-wrapper features-info">
+
+        <?php
+        $filteredFeatures[] = $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific');
+        $filteredFeatures[] = $waterFeatures = getFeaturesByCategory($features, 'water');
+        $filteredFeatures[] = $wheelsFeatures = getFeaturesByCategory($features, 'wheels');
+        $filteredFeatures[] = $gamesFeatures = getFeaturesByCategory($features, 'games');
+        ?>
+
+        <h4>Available features</h4>
+        <section class="features-list">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Price category</th>
+                </tr>
+                <?php foreach ($filteredFeatures as $feature) :
+                    foreach ($feature as $feature_info) : ?>
+                        <tr>
+                            <td><?= ucfirst($feature_info['name']) ?></td>
+                            <td><?= ucfirst($feature_info['activity_category']) ?></td>
+                            <td><?= $feature_info['price'] ?></td>
+                            <td><?= ucfirst($feature_info['price_category']) ?></td>
+                        </tr>
+                <?php endforeach;
+                endforeach ?>
+            </table>
+        </section>
+    </section>
+
+
+    <?php
+    // --- FETCH INFO FROM DATABASE TO PRESENT IN TABLE
+    $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
+    $statement = $database->prepare('SELECT bookings.id, bookings.checkin, bookings.checkout, rooms.room_category AS room_category, guests.name, bookings.is_paid, bookings.total_cost FROM bookings
+
+    INNER JOIN guests ON guests.id = bookings.guest_id
+    INNER JOIN rooms ON rooms.id = bookings.room_id
+    LEFT JOIN bookings_features ON bookings.id = bookings_features.feature_id
+    LEFT JOIN features ON features.id = bookings_features.feature_id
+
+    GROUP BY bookings.id');
+
+    $statement->execute();
+    $bookings = $statement->fetchAll(PDO::FETCH_ASSOC); ?>
+
+    <!-- LIST OF BOOKINGS -->
+    <section class="info-wrapper bookings">
+        <h4>Bookings january 2026</h4>
+        <table>
+            <tr>
+                <th>Arrival</th>
+                <th>Departure</th>
+                <th>Room</th>
+                <th>Guest</th>
+                <th>Cost</th>
+                <th>Paid</th>
+            </tr>
+            <?php foreach ($bookings as $booking) : ?>
+                <tr>
+                    <td><?= $booking['checkin'] ?></td>
+                    <td><?= $booking['checkout'] ?></td>
+                    <td><?= ucfirst($booking['room_category']) ?>
+                    </td>
+                    <td><?= ucfirst($booking['name']) ?></td>
+                    <td><?= $booking['total_cost'] ?></td>
+                    <td>
+                        <?php if ($booking['is_paid']) {
+                            echo "True";
+                        } else {
+                            echo "False";
+                        } ?>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        </table>
+    </section>
+
+    <!-- PRICE UPDATE FOR ROOMS AND FEATURES -->
+    <section class="info-wrapper update-room-price">
+        <h4>Update room price</h4>
+        <form action="/app/posts/update-price.php" method="POST">
+            <div>
+                <label for="select-room">Select room</label>
+                <select name="select-room" id="select-room">
+                    <option value="1">Budget</option>
+                    <option value="2">Standard</option>
+                    <option value="3">Luxury</option>
+                </select>
+            </div>
+            <div>
+                <label for="room-price">Type in new price</label>
+                <input type="number" name="room-price">
+            </div>
+            <button type="submit">Update</button>
+        </form>
+    </section>
+
+    <section class="info-wrapper update-feature-price">
+        <h4>Update feature price</h4>
+        <form action="/app/posts/update-price.php" method="POST">
+            <div>
+                <label for="select-feature">Select feature category</label>
+                <select name="select-feature" id="select-feature">
+                    <option value="Economy">Economy</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Premium">Premium</option>
+                    <option value="Superior">Superior</option>
+                </select>
+            </div>
+            <div>
+                <label for="feature-price">Type in new price</label>
+                <input type="number" name="feature-price">
+            </div>
+            <button type="submit">Update</button>
+        </form>
+    </section>
+</section>
+
+<?php require dirname(__DIR__) . "/includes/footer.php";

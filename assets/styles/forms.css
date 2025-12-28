@@ -1,0 +1,159 @@
+/* === GET TRANSFER CODE === */
+.booking-section {
+    margin-top: 2rem;
+}
+
+#transfercode-section {
+    scroll-margin-top: 14rem;
+}
+
+.get-transfercode-container {
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#transfercode-form {
+    display: none;
+    justify-content: center;
+}
+
+#transfercode-form form {
+    position: relative;
+}
+
+#transfercode-form input,
+#transfercode-form input[type='number'] {
+    height: 40px;
+    width: 150px;
+}
+
+#transfercode-form button {
+    margin-top: 0;
+    padding: 0.5rem;
+    position: absolute;
+    right: 0;
+    
+    border: 1px solid #767676;
+    border-left: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    background-color: var(--oceanblue);
+    min-width: 40px;
+    height: 40px;
+}
+
+#transfercode-form button:hover {
+    background-color: var(--deepoceanblue);
+    color: var(--summerskyblue);
+}
+
+.transfercode-response {
+    margin-top: 2rem;
+    font-family: var(--paragraph-font);
+    position: relative;
+}
+
+.transfercode-response label {
+    display: block;
+    font-weight: 600;
+}
+
+.copy-text {
+    min-width: auto;
+    height: 40px;
+
+    padding: 0.5rem;
+    margin-top: 0;
+
+    border-radius: 2px;
+    background-color: var(--oceanblue);
+}
+
+.copy-text:hover {
+    background-color: var(--deepoceanblue);
+    color: var(--light);
+}
+
+/* === BOOKING FORM === */
+
+.offer-container {
+    background-color: var(--deepoceanblue);
+    color: var(--light);
+    padding: 2rem;
+    border-radius: 3px;
+    margin-bottom: 3rem;
+}
+
+.offer-container .subheading:first-child {
+    font-size: 1.3rem;
+
+}
+
+.offer-container p:nth-child(2) {
+    margin-bottom: 1rem;
+}
+
+#booking-form {
+    justify-self: center;
+    min-width: 50vw;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding: 2rem 3rem 3rem 3rem;
+}
+
+#booking-form span {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+#booking-form span div {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select {
+    font-family: var(--paragraph-font);
+    cursor: pointer;
+}
+
+input[type="text"], input[type="date"], select {
+    height: 2.5rem;
+    width: 200px;
+}
+
+input[type="checkbox"] {
+    height: 1rem;
+    width: 1rem;
+    accent-color: var(--sunsetyellow);
+    cursor: pointer;
+}
+
+.features-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.features-container {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.feature-choice {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}

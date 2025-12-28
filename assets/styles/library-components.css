@@ -1,0 +1,215 @@
+:root {
+    --deepoceanblue: #102835;
+    --oceanblue: #1f4357;
+    --westcoastblue: #3d6880;
+    --summerskyblue: #a2b8c8;
+
+    --boathousered-dark: #401f1e;
+    --boathousered-light: #6d3433;
+    
+    --sunsetyellow: #d09541;
+    --buttercupyellow: #e9c687;
+
+    --sandygrey: #a8a19b;
+    --granitegrey: #d8d2cd;
+    --vanilla: #ebe7e4;
+
+    --light: #e7e5ea;
+    --dark: #220201;
+    --paragraph-font: Poppins, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --heading-font: 'La Belle Aurore';
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    size: 16px;
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+}
+
+body {
+    background-color: var(--light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === FONTS === */
+p, h2, h3, h4, h5, h6, a, form, button {
+    font-family: var(--paragraph-font);
+}
+
+h1 {
+    font-family: var(--heading-font), var(--paragraph-font);
+    color: var(--light);
+    font-size: 3.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+h3 {
+    text-align: center;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+h4 {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.subheading, h6 {
+    font-weight: 600;
+}
+
+/* === LINKS AND BUTTONS === */
+button, .button {
+    padding: 1rem;
+    margin-top: 1rem;
+    align-self: center;
+    min-width: 150px;
+
+    font-size: 1rem;
+    background-color: var(--sunsetyellow);
+    color: var(--light);
+    border: none;
+    border-radius: 3px;
+
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.button-small {
+    padding: 0.7rem;
+    margin-top: 0;
+    align-self: center;
+
+    font-size: 1rem;
+    background-color: var(--sunsetyellow);
+    color: var(--light);
+    border: none;
+    border-radius: 3px;
+
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+a {
+    text-decoration: none;
+    text-align: center;
+}
+
+button:hover, 
+.button:hover {
+    background-color: var(--buttercupyellow);
+    color: #92621e;
+    transform: scale(1.02);
+}
+
+header {
+    background-color: var(--westcoastblue);
+    color: var(--light);
+    height: 100px;
+    width: 100%;
+    padding: 10px;
+
+    align-content: center;
+    text-align: left;
+    font-family: var(--heading-font);
+
+    position: fixed;
+    top: -100px;
+    transition: 0.7s;
+    z-index: 99;
+}
+
+header img {
+    max-height: 70%;
+    margin: 1rem;
+}
+
+.hero-video-container {
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.on-video-content {
+    display: flex;
+    flex-direction: column;
+    justify-self: anchor-center;
+    align-self: center;
+    align-items: center;
+    position: absolute;
+    z-index: 98;
+}
+
+#background-video {
+    min-width: 100%;
+    object-fit: cover;
+    opacity: 50%;
+}
+
+/* .hero-img {
+    background-image: linear-gradient(to bottom, #000000b5, #27241f78), url('/assets/images/Gemini_Generated_Image_7wj0c27wj0c27wj0.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+} */
+
+.on-video-content img {
+    max-height: 250px;
+}
+
+.show-room-info {
+    justify-self: center;
+    margin-bottom: 20px;
+}
+
+.intro {
+    max-width: 50%;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    margin: 3rem;
+}
+
+/* === FOOTER === */
+
+footer {
+    background-color: var(--boathousered-dark);
+    color: var(--light);
+    height: 30vh;
+    padding: 3rem;
+    margin-top: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+footer a {
+    color: var(--light);
+    text-decoration: none;
+}
+
+footer img {
+    max-height: 100px;
+    width: fit-content;
+}
