@@ -201,9 +201,21 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
     }
 }
 
-if (!empty($errors)) {
-    foreach ($errors as $error) {
-        echo htmlspecialchars(trim($error));
-    } ?>
-    <button onclick="history.back()">Back to booking</button>
-<?php }
+// DISPLAY ON SCREEN
+require dirname(dirname(__DIR__)) . "/includes/header.php"; ?>
+
+<section class="error-section">
+    <h2>ERROR</h2>
+    <div>
+        <?php if (!empty($errors)) :
+            foreach ($errors as $error) : ?>
+                <p><?= htmlspecialchars(trim($error)) ?></p>
+            <?php endforeach; ?>
+            <button onclick="history.back()">Back to booking</button>
+        <?php endif; ?>
+    </div>
+</section>
+
+<?php require dirname(dirname(__DIR__)) . "/includes/footer.php";
+
+?>

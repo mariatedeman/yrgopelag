@@ -106,6 +106,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 
     <!-- PRICE UPDATE FOR ROOMS AND FEATURES -->
     <section class="info-wrapper update-room-price">
+        <h4>Update room price</h4>
         <form action="/app/posts/update-price.php" method="POST">
             <div>
                 <label for="select-room">Select room</label>
@@ -124,6 +125,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     </section>
 
     <section class="info-wrapper update-feature-price">
+        <h4>Update feature price</h4>
         <form action="/app/posts/update-price.php" method="POST">
             <div>
                 <label for="select-feature">Select feature category</label>

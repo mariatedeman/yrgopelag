@@ -1,14 +1,9 @@
 /* LOGIN PAGE */
-.body-login {
-    background-color: var(--boathousered-dark);
-}
-
 .login-section {
     height: 55vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: var(--light);
     align-items: center; 
 }
 
@@ -43,7 +38,7 @@
 
 /* ADMIN PAGE */
 .admin-hero-img {
-    height: 50vh;
+    height: 70vh;
     background-image: linear-gradient(to bottom, #000000a1, #000000c9), url("/assets/images/Gemini_Generated_Image_7wj0c27wj0c27wj0.jpg");
     background-size: cover;
     background-position: center;
