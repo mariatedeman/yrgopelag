@@ -1,15 +1,10 @@
 /* LOGIN PAGE */
-.body-login {
-    background-color: var(--boathousered-dark);
-}
-
 .login-section {
     height: 55vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: var(--light);
-    align-items: center;
+    align-items: center; 
 }
 
 .login-section h2 {

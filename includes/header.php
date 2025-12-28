@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="/assets/styles/library-components.css">
     <link rel="stylesheet" href="/assets/styles/forms.css">
     <link rel="stylesheet" href="/assets/styles/room-presentation.css">
+    <link rel="stylesheet" href="/assets/styles/features-presentation.css">
     <link rel="stylesheet" href="/assets/styles/calender.css">
     <link rel="stylesheet" href="/assets/styles/offers.css">
     <link rel="stylesheet" href="/assets/styles/login-admin.css">
+    <link rel="stylesheet" href="/assets/styles/errors.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

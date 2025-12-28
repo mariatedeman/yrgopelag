@@ -31,7 +31,7 @@ $currentRoom = $_GET['room'] ?? 1;
         <section class="room-information-wrapper availability-wrapper">
             <span>
                 <div class="calender-container">
-                    <?php require __DIR__ . "/calender.php"; ?>
+                    <?php require dirname(dirname(__DIR__)) . "/includes/calender.php"; ?>
             </span>
         </section>
     </section>

@@ -15,7 +15,7 @@ require __DIR__ . "/includes/header.php";
         <div class="offer">
             <h6>Offer</h6>
             <div>
-                <p class="subheading">Januray offer</p>
+                <p class="subheading">January offer</p>
                 <p>Elevate your winter escape with our exclusive January offer.
                     Book a stay in our Premium Sea View Suites this month and enjoy a
                     complimentary gourmet seafood cruise through our stunning archipelago.
@@ -32,6 +32,12 @@ require __DIR__ . "/includes/header.php";
     </video>
 </section>
 
+<section class="loyalty-offer">
+    <div>
+        <p><strong>Returning guest offer:</strong> Free scuba diving during your stay! Automatically added to your booking at checkout.</p>
+    </div>
+</section>
+
 <section class="intro">
     <span>
         <h2>Experience Bohuslän at Sjöboda B&B</h2>
@@ -45,7 +51,7 @@ require __DIR__ . "/includes/header.php";
 
 <section>
     <!-- ROOM PRESENTATION -->
-    <?php require_once __DIR__ . "/app/views/room-presentation.php"; ?>
+    <?php require __DIR__ . "/app/views/room-presentation.php"; ?>
 </section>
 
 <section class="booking-section">
@@ -55,5 +61,11 @@ require __DIR__ . "/includes/header.php";
     require __DIR__ . "/app/views/booking-form.php"; ?>
 </section>
 
+<section class="features-presentation">
+    <?php require __DIR__ . "/includes/features-presentation.php"; ?>
+</section>
+
 <!-- FOOTER -->
-<?php require __DIR__ . "/includes/footer.php"; ?>
+<section class="footer-container">
+    <?php require __DIR__ . "/includes/footer.php"; ?>
+</section>

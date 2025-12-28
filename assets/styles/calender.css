@@ -18,7 +18,7 @@ caption {
 }
 
 .calender tr:first-child {
-    background-color: var(--sunsetyellow);
+    background-color: var(--boathousered-light);
     color: var(--light);
     border-radius: 5px;
 }
