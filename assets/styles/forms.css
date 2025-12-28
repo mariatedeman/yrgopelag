@@ -1,4 +1,8 @@
 /* === GET TRANSFER CODE === */
+.booking-section {
+    margin-top: 2rem;
+}
+
 #transfercode-section {
     scroll-margin-top: 14rem;
 }
@@ -98,7 +102,7 @@
     flex-direction: column;
     gap: 1rem;
 
-    padding: 50px;
+    padding: 2rem 3rem 3rem 3rem;
 }
 
 #booking-form span {

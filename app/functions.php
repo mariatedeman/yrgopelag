@@ -296,19 +296,21 @@ function getFeaturesByCategory(array $features, string $activity): array
     $filteredFeatures = [];
 
     $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
-    $statement = $database->prepare('SELECT price FROM features WHERE id = :feature_id');
+    $statement = $database->prepare('SELECT * FROM features WHERE id = :feature_id');
 
     foreach ($features as $feature) {
         if ($feature['activity'] == $activity) {
             $statement->bindValue(':feature_id', $feature['id']);
             $statement->execute();
 
-            $priceData = $statement->fetch(PDO::FETCH_ASSOC);
+            $featureData = $statement->fetch(PDO::FETCH_ASSOC);
 
             $filteredFeatures[] = [
                 'id' => $feature['id'],
                 'name' => htmlspecialchars(trim($feature['feature'])),
-                'price' => $priceData['price'] ?? 0,
+                'activity_category' => $featureData['activity_category'],
+                'price' => $featureData['price'] ?? 0,
+                'price_category' => $featureData['price_category'],
             ];
         }
     }

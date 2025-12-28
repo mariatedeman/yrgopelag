@@ -6,21 +6,20 @@ require dirname(__DIR__) . "/includes/header.php";
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     header('Location: ' . __DIR__ . "/views/login.php");
-}
-
-?>
+} ?>
 
 <section>
     <div class="admin-hero-img">
-        <h2>Hotel administration</h2>
+        <h2>Welcome <?= $_SESSION['username'] ?></h2>
+        <p>Hotel administration dashboard</p>
     </div>
 </section>
 
 <section class="admin-info-container">
     <!--- PRINT LIST OF HOTEL INFO -->
     <section class="info-wrapper hotel-info">
-        <p><strong>Island name: </strong><?= ucfirst($islandInfo['island']['islandName']) ?></p>
-        <p><strong>Hotel name: </strong><?= ucfirst($islandInfo['island']['hotelName']) ?></p>
+        <p><strong>Island name: </strong><?= $islandName ?></p>
+        <p><strong>Hotel name: </strong><?= $hotelName ?></p>
         <p><strong>Stars: </strong><?= $islandInfo['island']['stars'] ?></p>
     </section>
 
@@ -28,43 +27,35 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     <section class="info-wrapper features-info">
 
         <?php
-        $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific');
-        $waterFeatures = getFeaturesByCategory($features, 'water');
-        $wheelsFeatures = getFeaturesByCategory($features, 'wheels');
-        $gamesFeatures = getFeaturesByCategory($features, 'games');
+        $filteredFeatures[] = $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific');
+        $filteredFeatures[] = $waterFeatures = getFeaturesByCategory($features, 'water');
+        $filteredFeatures[] = $wheelsFeatures = getFeaturesByCategory($features, 'wheels');
+        $filteredFeatures[] = $gamesFeatures = getFeaturesByCategory($features, 'games');
         ?>
 
         <h4>Available features</h4>
         <section class="features-list">
-            <div>
-                <p class="subheading">Coastal Experiences</p>
-                <?php foreach ($hotelSpecificFeatures as $feature) : ?>
-                    <p><?= ucfirst($feature['name']) . ", " . $feature['price'] . ":-" ?></p>
-                <?php endforeach; ?>
-            </div>
-
-            <div>
-                <p class="subheading">Water</p>
-                <?php foreach ($waterFeatures as $feature) : ?>
-                    <p><?= ucfirst($feature['name']) . ", " . $feature['price'] . ":-" ?></p>
-                <?php endforeach; ?>
-            </div>
-
-            <div>
-                <p class="subheading">Wheels</p>
-                <?php foreach ($wheelsFeatures as $feature) : ?>
-                    <p><?= ucfirst($feature['name']) . ", " . $feature['price'] . ":-" ?></p>
-                <?php endforeach; ?>
-            </div>
-
-            <div>
-                <p class="subheading">Games</p>
-                <?php foreach ($gamesFeatures as $feature) : ?>
-                    <p><?= ucfirst($feature['name']) . ", " . $feature['price'] . ":-" ?></p>
-                <?php endforeach; ?>
-            </div>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Price category</th>
+                </tr>
+                <?php foreach ($filteredFeatures as $feature) :
+                    foreach ($feature as $feature_info) : ?>
+                        <tr>
+                            <td><?= ucfirst($feature_info['name']) ?></td>
+                            <td><?= ucfirst($feature_info['activity_category']) ?></td>
+                            <td><?= $feature_info['price'] ?></td>
+                            <td><?= ucfirst($feature_info['price_category']) ?></td>
+                        </tr>
+                <?php endforeach;
+                endforeach ?>
+            </table>
         </section>
     </section>
+
 
     <?php
     // --- FETCH INFO FROM DATABASE TO PRESENT IN TABLE
@@ -83,6 +74,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 
     <!-- LIST OF BOOKINGS -->
     <section class="info-wrapper bookings">
+        <h4>Bookings january 2026</h4>
         <table>
             <tr>
                 <th>Arrival</th>
@@ -115,30 +107,38 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     <!-- PRICE UPDATE FOR ROOMS AND FEATURES -->
     <section class="info-wrapper update-room-price">
         <form action="/app/posts/update-price.php" method="POST">
-            <label for="select-room">Select room</label>
-            <select name="select-room" id="select-room">
-                <option value="1">Budget</option>
-                <option value="2">Standard</option>
-                <option value="3">Luxury</option>
-            </select>
-            <label for="room-price">Type in new price</label>
-            <input type="number" name="room-price">
-            <button type="submit">Update room price</button>
+            <div>
+                <label for="select-room">Select room</label>
+                <select name="select-room" id="select-room">
+                    <option value="1">Budget</option>
+                    <option value="2">Standard</option>
+                    <option value="3">Luxury</option>
+                </select>
+            </div>
+            <div>
+                <label for="room-price">Type in new price</label>
+                <input type="number" name="room-price">
+            </div>
+            <button type="submit">Update</button>
         </form>
     </section>
 
     <section class="info-wrapper update-feature-price">
         <form action="/app/posts/update-price.php" method="POST">
-            <label for="select-feature">Select feature category</label>
-            <select name="select-feature" id="select-feature">
-                <option value="Economy">Economy</option>
-                <option value="Basic">Basic</option>
-                <option value="Premium">Premium</option>
-                <option value="Superior">Superior</option>
-            </select>
-            <label for="feature-price">Type in new price</label>
-            <input type="number" name="feature-price">
-            <button type="submit">Update feature price</button>
+            <div>
+                <label for="select-feature">Select feature category</label>
+                <select name="select-feature" id="select-feature">
+                    <option value="Economy">Economy</option>
+                    <option value="Basic">Basic</option>
+                    <option value="Premium">Premium</option>
+                    <option value="Superior">Superior</option>
+                </select>
+            </div>
+            <div>
+                <label for="feature-price">Type in new price</label>
+                <input type="number" name="feature-price">
+            </div>
+            <button type="submit">Update</button>
         </form>
     </section>
 </section>

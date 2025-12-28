@@ -18,26 +18,4 @@ session_start();
 require __DIR__ . "/functions.php";
 
 // HOTEL DATA
-$islandInfo = getIslandFeatures($key);
-
-$database = new PDO('sqlite:' . __DIR__ . "/database/yrgopelag.db");
-$statement = $database->query('SELECT * FROM features');
-$dbFeatures = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-$allFeatures = $islandInfo['features'];
-
-if ($allFeatures && $dbFeatures) {
-    foreach ($allFeatures as &$apiFeature) {
-        foreach ($dbFeatures as $dbFeature) {
-            if ($apiFeature['feature'] === $dbFeature['api_key']) {
-                $apiFeature['id'] = $dbFeature['id'];
-            }
-        }
-    }
-    unset($apiFeature);
-}
-
-$islandName = htmlspecialchars(trim($islandInfo['island']['islandName']));
-$hotelName = htmlspecialchars(trim($islandInfo['island']['hotelName']));
-$hotelStars = (int)$islandInfo['island']['stars'];
-$features = $allFeatures;
+require __DIR__ . "/database/hotel-data.php";

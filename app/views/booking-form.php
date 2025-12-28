@@ -14,7 +14,6 @@
             <label for="transfer_code">Transfer code</label>
             <input type="text" name="transfer_code" id="transfer_code" placeholder="Type your transfer code">
         </div>
-
         <div>
             <label for="checkIn">Arrival date</label>
             <input type="date" name="checkIn" id="checkIn" min="2026-01-01" max="2026-01-31">

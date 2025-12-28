@@ -50,8 +50,17 @@
     color: var(--light);
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.admin-hero-img h2 {
+    font-size: 3rem;
+}
+
+.admin-hero-img p {
+    font-size: 1.2rem;
 }
 
 .admin-info-container {
@@ -65,10 +74,9 @@
 
 .info-wrapper {
     padding: 1rem;
-
     background-color: var(--vanilla);
-    border: 2px solid var(--sandygrey);
     border-radius: 5px;
+    box-shadow: 0 0 5px 1px #c6c6c6;
 }
 
 .hotel-info {
@@ -76,6 +84,8 @@
 
     display: flex;
     justify-content: space-evenly;
+    background-color: var(--deepoceanblue);
+    color: var(--light);
 }
 
 .bookings {
@@ -91,6 +101,14 @@
     grid-row: 2 / 3;
 }
 
+.features-info,
+.bookings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .features-list {
     display: flex;
     justify-content: space-between;
@@ -104,4 +122,46 @@
 .update-feature-price {
     grid-column: 3 / 5;
     grid-row: 3 / 4;
+}
+
+
+/* TABLES */
+.features-info table,
+.bookings table {
+    border: 2px solid var(--sandygrey);
+    border-collapse: collapse;
+    padding: 1rem;
+    width: 100%;
+}
+
+.features-info table th,
+.bookings table th {
+    border-bottom: 2px;
+}
+
+.features-info table td, th,
+.bookings table td, th {
+    border: 1px solid var(--sandygrey);
+    padding: 0.5rem;
+}
+
+/* PRICE UPDATE */
+.update-feature-price div,
+.update-room-price div {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-feature-price form,
+.update-room-price form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-items: flex-end;
+}
+
+.update-feature-price input, select,
+.update-room-price input, select {
+    height: 40px;
+    width: 180px;
 }
