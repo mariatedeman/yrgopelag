@@ -129,10 +129,9 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-.feature-choice {
+.features-wrapper {
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column;
 }
 
 .features-container {
@@ -141,4 +140,10 @@ input[type="checkbox"] {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 2rem;
+}
+
+.feature-choice {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }

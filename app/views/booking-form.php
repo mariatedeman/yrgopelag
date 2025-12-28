@@ -34,20 +34,52 @@
         </div>
     </span>
 
-    <div class="features-container">
-        <div>
-            <?php printFeatures($features, 'hotel-specific', 'Coastal Experiences'); ?>
-        </div>
-        <div>
-            <?php printFeatures($features, 'games', 'Games'); ?>
-        </div>
-        <div>
-            <?php printFeatures($features, 'water', 'Water'); ?>
-        </div>
-        <div>
-            <?php printFeatures($features, 'wheels', 'Wheels'); ?>
-        </div>
-    </div>
+    <div class="features-wrapper">
+        <?php
+        $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific');
+        $waterFeatures = getFeaturesByCategory($features, 'water');
+        $wheelsFeatures = getFeaturesByCategory($features, 'wheels');
+        $gamesFeatures = getFeaturesByCategory($features, 'games');
+        ?>
 
-    <button type="submit">Make reservation</button>
+        <section class="features-container">
+            <section>
+                <p class="subheading">Coastal Experiences</p>
+                <?php foreach ($hotelSpecificFeatures as $feature) : ?>
+                    <div class="feature-choice">
+                        <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $feature['name'] ?>">
+                        <p><?= ucfirst(htmlspecialchars(trim($feature['name']))) . ", " . htmlspecialchars(trim($feature['price'])) . ":-" ?></p>
+                    </div>
+                <?php endforeach ?>
+            </section>
+            <section>
+                <p class="subheading">Water</p>
+                <?php foreach ($waterFeatures as $feature) : ?>
+                    <div class="feature-choice">
+                        <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $feature['name'] ?>">
+                        <p><?= ucfirst(htmlspecialchars(trim($feature['name']))) . ", " . htmlspecialchars(trim($feature['price'])) . ":-" ?></p>
+                    </div>
+                <?php endforeach ?>
+            </section>
+            <section>
+                <p class="subheading">Wheels</p>
+                <?php foreach ($wheelsFeatures as $feature) : ?>
+                    <div class="feature-choice">
+                        <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $feature['name'] ?>">
+                        <p><?= ucfirst(htmlspecialchars(trim($feature['name']))) . ", " . htmlspecialchars(trim($feature['price'])) . ":-" ?></p>
+                    </div>
+                <?php endforeach ?>
+            </section>
+            <section>
+                <p class="subheading">Games</p>
+                <?php foreach ($gamesFeatures as $feature) : ?>
+                    <div class="feature-choice">
+                        <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $feature['name'] ?>">
+                        <p><?= ucfirst(htmlspecialchars(trim($feature['name']))) . ", " . htmlspecialchars(trim($feature['price'])) . ":-" ?></p>
+                    </div>
+                <?php endforeach ?>
+            </section>
+        </section>
+
+        <button type="submit">Make reservation</button>
 </form>

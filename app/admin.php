@@ -21,54 +21,47 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     <section class="info-wrapper hotel-info">
         <p><strong>Island name: </strong><?= ucfirst($islandInfo['island']['islandName']) ?></p>
         <p><strong>Hotel name: </strong><?= ucfirst($islandInfo['island']['hotelName']) ?></p>
-        <p><strong> Stars: </strong><?= $islandInfo['island']['stars'] ?></p>
+        <p><strong>Stars: </strong><?= $islandInfo['island']['stars'] ?></p>
     </section>
 
     <!-- PRINT LIST OF AVAILABLE FEATURES -->
     <section class="info-wrapper features-info">
 
+        <?php
+        $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific');
+        $waterFeatures = getFeaturesByCategory($features, 'water');
+        $wheelsFeatures = getFeaturesByCategory($features, 'wheels');
+        $gamesFeatures = getFeaturesByCategory($features, 'games');
+        ?>
+
         <h4>Available features</h4>
         <section class="features-list">
             <div>
                 <p class="subheading">Coastal Experiences</p>
-                <?php foreach ($features as $feature) :
-                    if ($feature['activity'] === 'hotel-specific') : ?>
-                        <p><?= ucfirst($feature['feature']); ?></p>
-                <?php endif;
-                endforeach; ?>
+                <?php foreach ($hotelSpecificFeatures as $feature) : ?>
+                    <p><?= ucfirst($feature['name']) . ", " . $feature['price'] . ":-" ?></p>
+                <?php endforeach; ?>
             </div>
 
             <div>
                 <p class="subheading">Water</p>
-
-                <?php foreach ($features as $feature) :
-                    if ($feature['activity'] === 'water') : ?>
-                        <p><?= ucfirst($feature['feature']); ?></p>
-                <?php endif;
-                endforeach; ?>
-
+                <?php foreach ($waterFeatures as $feature) : ?>
+                    <p><?= ucfirst($feature['name']) . ", " . $feature['price'] . ":-" ?></p>
+                <?php endforeach; ?>
             </div>
 
             <div>
                 <p class="subheading">Wheels</p>
-
-                <?php foreach ($features as $feature) : ?>
-                    <?php if ($feature['activity'] === 'wheels') : ?>
-                        <p><?= ucfirst($feature['feature']); ?></p>
-                <?php endif;
-                endforeach; ?>
-
+                <?php foreach ($wheelsFeatures as $feature) : ?>
+                    <p><?= ucfirst($feature['name']) . ", " . $feature['price'] . ":-" ?></p>
+                <?php endforeach; ?>
             </div>
 
             <div>
                 <p class="subheading">Games</p>
-
-                <?php foreach ($features as $feature) : ?>
-                    <?php if ($feature['activity'] === 'games') : ?>
-                        <p><?= ucfirst($feature['feature']); ?></p>
-                <?php endif;
-                endforeach; ?>
-
+                <?php foreach ($gamesFeatures as $feature) : ?>
+                    <p><?= ucfirst($feature['name']) . ", " . $feature['price'] . ":-" ?></p>
+                <?php endforeach; ?>
             </div>
         </section>
     </section>
@@ -76,16 +69,15 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     <?php
     // --- FETCH INFO FROM DATABASE TO PRESENT IN TABLE
     $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
-    $statement = $database->prepare(
-        'SELECT bookings.id, bookings.checkin, bookings.checkout, rooms.room_category AS room_category, guests.name, bookings.is_paid, bookings.total_cost FROM bookings
+    $statement = $database->prepare('SELECT bookings.id, bookings.checkin, bookings.checkout, rooms.room_category AS room_category, guests.name, bookings.is_paid, bookings.total_cost FROM bookings
 
-INNER JOIN guests ON guests.id = bookings.guest_id
-INNER JOIN rooms ON rooms.id = bookings.room_id
-LEFT JOIN bookings_features ON bookings.id = bookings_features.feature_id
-LEFT JOIN features ON features.id = bookings_features.feature_id
+    INNER JOIN guests ON guests.id = bookings.guest_id
+    INNER JOIN rooms ON rooms.id = bookings.room_id
+    LEFT JOIN bookings_features ON bookings.id = bookings_features.feature_id
+    LEFT JOIN features ON features.id = bookings_features.feature_id
 
-GROUP BY bookings.id'
-    );
+    GROUP BY bookings.id');
+
     $statement->execute();
     $bookings = $statement->fetchAll(PDO::FETCH_ASSOC); ?>
 

@@ -291,28 +291,27 @@ function getIslandFeatures(string $key): ?array
 
 // === PRINT FEATURES === //
 
-function printFeatures(array $features, string $activity, string $title,): void
-{ ?>
-    <p class="subheading"><?= htmlspecialchars(trim($title)) ?></p>
+function getFeaturesByCategory(array $features, string $activity): array
+{
+    $filteredFeatures = [];
 
-    <div>
-        <?php foreach ($features as $feature) :
+    $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
+    $statement = $database->prepare('SELECT price FROM features WHERE id = :feature_id');
 
-            $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
-            $statement = $database->prepare('SELECT price FROM features WHERE id = :feature_id');
+    foreach ($features as $feature) {
+        if ($feature['activity'] == $activity) {
             $statement->bindValue(':feature_id', $feature['id']);
             $statement->execute();
 
-            $price = $statement->fetch(PDO::FETCH_ASSOC);
+            $priceData = $statement->fetch(PDO::FETCH_ASSOC);
 
-            $name = htmlspecialchars(trim($feature['feature']));
-
-            if ($feature['activity'] === $activity) : ?>
-                <div class="feature-choice">
-                    <input type="checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $name ?>">
-                    <label for="<?= $name ?>"><?= ucfirst($name) . ", " . $price['price'] . ":-" ?></label>
-                </div>
-        <?php endif;
-        endforeach; ?>
-    </div> <?php
+            $filteredFeatures[] = [
+                'id' => $feature['id'],
+                'name' => htmlspecialchars(trim($feature['feature'])),
+                'price' => $priceData['price'] ?? 0,
+            ];
         }
+    }
+
+    return $filteredFeatures;
+}

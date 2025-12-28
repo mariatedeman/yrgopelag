@@ -21,7 +21,7 @@ require __DIR__ . "/functions.php";
 $islandInfo = getIslandFeatures($key);
 
 $database = new PDO('sqlite:' . __DIR__ . "/database/yrgopelag.db");
-$statement = $database->query('SELECT id, api_key FROM features');
+$statement = $database->query('SELECT * FROM features');
 $dbFeatures = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 $allFeatures = $islandInfo['features'];
