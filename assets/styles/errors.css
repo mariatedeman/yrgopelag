@@ -1,0 +1,17 @@
+.error-section {
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+.error-section div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.error-section button {
+    margin-top: 2rem;
+}
