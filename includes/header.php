@@ -36,7 +36,7 @@
                     <a href="/?room=3#our-rooms">Premium Sea View Suite</a>
                 </div>
 
-                <a href="/#transfercode-section">Booking</a>
+                <a href="/#get-transfercode">Booking</a>
                 <a href="/#our-features">Our features</a>
             </nav>
             <span>
