@@ -117,9 +117,11 @@ header {
     color: var(--light);
     height: 100px;
     width: 100%;
-    padding: 10px;
+    padding: 2rem;
 
-    align-content: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     text-align: left;
     font-family: var(--heading-font);
 
@@ -129,11 +131,80 @@ header {
     z-index: 99;
 }
 
-header img {
-    max-height: 70%;
-    margin: 1rem;
+.logo {
+    max-height: 70px;
 }
 
+.menu-icon {
+    max-height: 35px;
+}
+
+.overlay {
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 101;
+    right: 0;
+    top: 0;
+
+    background-color: var(--summerskyblue);
+    overflow-x: hidden;
+    transition: 0.5s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.overlay a {
+    text-decoration: none;
+    padding: 1rem;
+    color: var(--deepoceanblue);
+    display: block;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.overlay nav {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.overlay a:hover,
+.overlay a:focus {
+    color: var(--oceanblue);
+}
+
+.menu-close {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    font-size: 2rem;
+    font-weight: 100;
+}
+
+/* NAV JUMP LINKS */
+#our-rooms {
+    scroll-margin-top: 8rem;
+}
+
+#transfercode-section {
+    scroll-margin-top: 12rem;
+}
+
+#our-features {
+    scroll-margin-top: 8rem;
+}
+
+/* === HERO BACKGROUND ===*/
 .hero-video-container {
     height: 100vh;
     background-color: black;

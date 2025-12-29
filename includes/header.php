@@ -22,5 +22,19 @@
 
 <body>
     <header id="header">
-        <a href="/"><img src="/assets/images/sjoboda-logo-text-granitegrey.svg" alt=""></a>
+        <a href="/"><img class="logo" src="/assets/images/sjoboda-logo-text-granitegrey.svg" alt="Sjöboda logo"></a>
+
+        <section id="nav" class="overlay">
+            <a href="javascript:void(0)" class="menu-close" onclick="closeNav()">&times;</a>
+            <nav>
+                <a href="/#back-to-top">Home</a>
+                <a href="/#our-rooms">Our rooms</a>
+                <a href="/#transfercode-section">Booking</a>
+                <a href="/#our-features">Our features</a>
+            </nav>
+        </section>
+
+        <div onclick="openNav()">
+            <img class="menu-icon" src="/assets/images/icon-menu.svg" alt="Icon for open menu">
+        </div>
     </header>
