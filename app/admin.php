@@ -12,6 +12,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     <div class="admin-hero-img">
         <h2>Welcome <?= $_SESSION['username'] ?></h2>
         <p>Hotel administration dashboard</p>
+        <a href="/app/posts/logout.php" class="button">Log out</a>
     </div>
 </section>
 

@@ -11,7 +11,7 @@ require __DIR__ . "/includes/header.php";
     <span class="on-video-content">
         <img src="/assets/images/sjoboda_logo_bohuslangrey.svg" alt="">
         <h1>Your authentic west coast escape</h1>
-        <a href="#transfercode-section" class="button">Book your stay</a>
+        <a href="#get-transfercode" class="button">Book your stay</a>
         <div class="offer">
             <h6>Offer</h6>
             <div>
@@ -22,7 +22,7 @@ require __DIR__ . "/includes/header.php";
                     Experience the pinnacle of coastal luxury combined with the finest
                     flavours of the sea.</p>
 
-                <a href="#transfercode-section" class="button">Book now</a>
+                <a href="#get-transfercode" class="button">Book now</a>
             </div>
         </div>
     </span>

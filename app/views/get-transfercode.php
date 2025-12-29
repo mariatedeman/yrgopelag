@@ -1,4 +1,4 @@
-<section class="get-transfercode-container" id="transfercode-section">
+<section class="get-transfercode-container" id="get-transfercode">
     <?php if (!isset($_SESSION['success'])) : ?>
         <button class="button-small" id="show-transfercode-form">Fetch transfercode</button>
     <?php endif ?>

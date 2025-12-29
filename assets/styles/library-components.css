@@ -152,8 +152,9 @@ header {
     transition: 0.5s;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .overlay-content {
@@ -168,6 +169,11 @@ nav {
     font-size: 1.5rem;
     font-weight: 700;
     justify-items: left;
+    width: 70%;
+}
+
+#nav span {
+    width: 70%;
 }
 
 .overlay a, .a {
@@ -182,6 +188,12 @@ nav {
 .overlay a:hover,
 .overlay a:focus {
     color: var(--oceanblue);
+}
+
+.a-small {
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: left;
 }
 
 .menu-close {
@@ -217,7 +229,7 @@ nav {
     scroll-margin-top: 8rem;
 }
 
-#transfercode-section {
+#get-transfercode {
     scroll-margin-top: 12rem;
 }
 
@@ -290,10 +302,20 @@ footer {
     margin-top: auto;
 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
     gap: 1rem;
+}
+
+footer nav {
+    font-size: 1rem;
+    font-weight: 400;
+    width: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 footer a {
@@ -301,7 +323,28 @@ footer a {
     text-decoration: none;
 }
 
+footer a:hover {
+    color: var(--sandygrey);
+    text-decoration: none;
+}
+
 footer img {
     max-height: 100px;
     width: fit-content;
+}
+
+footer div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer div div {
+    display: flex;
+    flex-direction: row;
+}
+
+footer div img {
+    max-height: 40px;
+    margin-top: 1rem;
 }
