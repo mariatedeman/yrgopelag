@@ -17,18 +17,18 @@
     background-color: white;
     max-width: 300px;
     box-shadow: 0 0 10px 2px grey;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     text-align: center;
 }
 
 .features-presentation img {
     max-width: 100%;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
 }
 
 .feature-presentation-text p {
-    margin: 0.5rem;
+    margin: 1rem;
 }
 
 .feature-presentation-text h4 {
