@@ -152,8 +152,9 @@ header {
     transition: 0.5s;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .overlay-content {
@@ -168,6 +169,11 @@ nav {
     font-size: 1.5rem;
     font-weight: 700;
     justify-items: left;
+    width: 70%;
+}
+
+#nav span {
+    width: 70%;
 }
 
 .overlay a, .a {
@@ -182,6 +188,12 @@ nav {
 .overlay a:hover,
 .overlay a:focus {
     color: var(--oceanblue);
+}
+
+.a-small {
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: left;
 }
 
 .menu-close {

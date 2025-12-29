@@ -39,6 +39,13 @@
                 <a href="/#transfercode-section">Booking</a>
                 <a href="/#our-features">Our features</a>
             </nav>
+            <span>
+                <?php if (!isset($_SESSION['authenticated'])) { ?>
+                    <a href="/app/users/login.php" class="a-small">Admin login</a>
+                <?php } else { ?>
+                    <a href="/app/admin.php" class="a-small">Admin dashboard</a>
+                <?php } ?>
+            </span>
         </section>
 
         <div onclick="openNav()">

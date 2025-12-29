@@ -76,6 +76,7 @@
 
 .hotel-info {
     grid-column: 1 / 5;
+    grid-row: 1 / 2;
 
     display: flex;
     justify-content: space-evenly;
@@ -84,8 +85,9 @@
 }
 
 .bookings {
-    grid-column: 1 / 3;
-    grid-row: 2 / 3;
+    grid-column: 1 / 5;
+    grid-row: 4 / 5;
+
 
     display: flex;
     justify-content: center;
@@ -93,7 +95,7 @@
 
 .features-info {
     grid-column: 3 / 5;
-    grid-row: 2 / 3;
+    grid-row: 2 / 4;
 }
 
 .features-info,
@@ -109,13 +111,20 @@
     justify-content: space-between;
 }
 
+.update-feature-price,
+.update-room-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .update-room-price {
     grid-column: 1 / 3;
-    grid-row: 3 / 4;
+    grid-row: 2 / 3;
 }
 
 .update-feature-price {
-    grid-column: 3 / 5;
+    grid-column: 1 / 3;
     grid-row: 3 / 4;
 }
 
