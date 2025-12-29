@@ -8,7 +8,7 @@ $featuresInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 $featureNames = array_column($features, 'feature'); ?>
 
-<h2>Our features</h2>
+<h2 id="our-features">Our features</h2>
 <section class="features-grid-container">
 
     <?php foreach ($featuresInfo as $featureInfo) :

@@ -14,8 +14,8 @@
     max-width: 400px;
     height: 100px;
     
-    background-color: var(--summerskyblue);
-    color: var(--deepoceanblue);
+    background-color: var(--sunsetyellow);
+    color: var(--light);
     padding: 2rem 2rem 2rem 1rem;
     box-shadow: 0 0 10px 2px #0000003d;
     overflow: hidden;
@@ -40,9 +40,9 @@
     transition: opacity 0.4s 0.1s;
 }
 
-.offer .subheading {
-    color: var(--deepoceanblue);
-}
+/* .offer .subheading {
+    color: var(--boathousered-dark);
+} */
 
 .offer p:nth-child(2) {
     margin-bottom: 2rem;
@@ -50,12 +50,14 @@
 
 .offer .button {
     padding: 0.7rem;
-    background-color: var(--westcoastblue);
+    background-color: var(--sunsetyellow);
     color: var(--light);
+    transition: all 0.5s;
 }
 
 .offer .button:hover {
-    background-color: var(--deepoceanblue);
+    background-color: var(--buttercupyellow);
+    color: var(--dark);
 }
 
 

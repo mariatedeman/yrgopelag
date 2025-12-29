@@ -7,7 +7,7 @@ require __DIR__ . "/includes/header.php";
 ?>
 
 <!-- HERO IMG -->
-<section class="hero-video-container">
+<section class="hero-video-container" id="back-to-top">
     <span class="on-video-content">
         <img src="/assets/images/sjoboda_logo_bohuslangrey.svg" alt="">
         <h1>Your authentic west coast escape</h1>

@@ -14,7 +14,7 @@ const offerFeature = document.getElementById('seafood cruise with live music');
 const showTransfercodeForm = document.getElementById('show-transfercode-form');
 const getTransfercodeForm = document.getElementById('transfercode-form');
 
-// SHOW HEADER ON SCROLL
+// === SHOW HEADER ON SCROLL ===
 scrollFunction();
 window.addEventListener ('scroll', scrollFunction);
 
@@ -43,6 +43,42 @@ function scrollFunction() {
 }
 }
 
+// === OPEN AND CLOSE MENU === //
+function openNav() {
+    document.getElementById("nav").style.width = "25%";
+}
+
+function closeNav() {
+    document.getElementById("nav").style.width = "0%";    
+}
+
+window.addEventListener('click', function(event) {
+    const nav = document.getElementById('nav');
+    const openBtn = document.querySelector('.menu-icon');
+    const navLinks = document.querySelectorAll('nav a');
+
+    // CLOSE MENU ON LINK CLICK
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeNav();
+        })
+    })
+
+    // CLOSE MENU ON CLICK OUTSIDE
+    if (nav.style.width === "25%" && !nav.contains(event.target) && event.target !== openBtn) {
+        closeNav();
+    }
+
+})
+
+// === SHOW SUB MENU === //
+function openSubMenu() {
+    const content = document.querySelector('.subnav-content');
+
+    content.classList.toggle('open');
+}
+
+// === ROOM PRESENTATION ===
 function showRoomInfo() {
     if (!select) return;
 
@@ -124,15 +160,22 @@ if (showTransfercodeForm) {
 }
 
 // === COPY TRANSFER CODE ===
-function copytext() {
-    const copyText = document.getElementById('transfercode');
+function copytext(id) {
+    const element = document.getElementById(id);
     const button = document.querySelector('.copy-text');
+    let textCopy = "";
 
-    copyText.select();
-    navigator.clipboard.writeText(copyText.value);
+    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+        element.select();
+        textCopy = element.value;
+    } else {
+        textCopy = element.textContent;
+    }
 
-    button.style.background = '#6d726b';
-    button.textContent = 'Copied!';
+    navigator.clipboard.writeText(textCopy).then(() => {
+        button.style.background = '#6d726b';
+        button.textContent = 'Copied!';
+    })
 }
 
 // === IMG SLIDESHOW === //

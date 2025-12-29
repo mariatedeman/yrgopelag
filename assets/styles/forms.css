@@ -3,10 +3,6 @@
     margin-top: 2rem;
 }
 
-#transfercode-section {
-    scroll-margin-top: 14rem;
-}
-
 .get-transfercode-container {
     width: 100vw;
 
@@ -141,10 +137,10 @@ input[type="checkbox"] {
 .features-wrapper {
     display: flex;
     flex-direction: column;
+    margin-top: 3rem;
 }
 
 .features-container {
-    margin-top: 3rem;
     margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;

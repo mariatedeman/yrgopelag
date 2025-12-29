@@ -315,5 +315,10 @@ function getFeaturesByCategory(array $features, string $activity): array
         }
     }
 
+    // SORT BY PRICE
+    usort($filteredFeatures, function ($a, $b) {
+        return $a['price'] <=> $b['price'];
+    });
+
     return $filteredFeatures;
 }

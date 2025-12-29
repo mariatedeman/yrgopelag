@@ -11,7 +11,7 @@ $currentRoom = $_GET['room'] ?? 1;
 
 ?>
 
-<section class="room-information-grid">
+<section class="room-information-grid" id="our-rooms">
     <section class="room-information-row">
         <!-- CHOOSE ROOM -->
         <section class="room-information-wrapper choose-room-wrapper">

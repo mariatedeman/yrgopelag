@@ -41,6 +41,7 @@
         $gamesFeatures = getFeaturesByCategory($features, 'games');
         ?>
 
+        <h3>In mood for something extra?</h3>
         <section class="features-container">
             <section>
                 <p class="subheading">Coastal Experiences</p>
