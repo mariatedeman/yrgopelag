@@ -71,6 +71,13 @@ window.addEventListener('click', function(event) {
 
 })
 
+// === SHOW SUB MENU === //
+function openSubMenu() {
+    const content = document.querySelector('.subnav-content');
+
+    content.classList.toggle('open');
+}
+
 // === ROOM PRESENTATION ===
 function showRoomInfo() {
     if (!select) return;

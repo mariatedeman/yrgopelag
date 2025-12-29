@@ -164,18 +164,19 @@ header {
     margin-top: 2rem;
 }
 
-.overlay a {
+nav {
+    font-size: 1.5rem;
+    font-weight: 700;
+    justify-items: left;
+}
+
+.overlay a, .a {
     text-decoration: none;
     padding: 1rem;
     color: var(--deepoceanblue);
     display: block;
     transition: 0.3s;
     white-space: nowrap;
-}
-
-.overlay nav {
-    font-size: 1.5rem;
-    font-weight: 700;
 }
 
 .overlay a:hover,
@@ -189,6 +190,26 @@ header {
     left: 2rem;
     font-size: 2rem;
     font-weight: 100;
+}
+
+.subnav-content {
+    max-height: 0px;
+    
+    font-size: 1rem;
+    font-weight: 300;
+    padding-left: 1rem;
+    justify-items: left;
+    overflow-x: hidden;
+
+    transition: max-height 1s ease;
+}
+
+.subnav-content.open {
+    max-height: 500px;
+}
+
+.subnav-content a {
+    padding: 0 0.5rem 0.5rem 0;
 }
 
 /* NAV JUMP LINKS */
