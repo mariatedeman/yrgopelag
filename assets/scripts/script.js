@@ -43,6 +43,41 @@ function scrollFunction() {
 }
 }
 
+// === OPEN AND CLOSE MENU === //
+function openNav() {
+    document.getElementById("nav").style.width = "25%";
+}
+
+function closeNav() {
+    document.getElementById("nav").style.width = "0%";    
+}
+
+window.addEventListener('click', function(event) {
+    const nav = document.getElementById('nav');
+    const openBtn = document.querySelector('.menu-icon');
+    const navLinks = document.querySelectorAll('nav a');
+
+    // CLOSE MENU ON LINK CLICK
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeNav();
+        })
+    })
+
+    // CLOSE MENU ON CLICK OUTSIDE
+    if (nav.style.width === "25%" && !nav.contains(event.target) && event.target !== openBtn) {
+        closeNav();
+    }
+
+})
+
+// === SHOW SUB MENU === //
+function openSubMenu() {
+    const content = document.querySelector('.subnav-content');
+
+    content.classList.toggle('open');
+}
+
 // === ROOM PRESENTATION ===
 function showRoomInfo() {
     if (!select) return;
