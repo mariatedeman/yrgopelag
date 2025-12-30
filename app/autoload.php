@@ -18,4 +18,4 @@ session_start();
 require __DIR__ . "/functions.php";
 
 // HOTEL DATA
-require __DIR__ . "/database/hotel-data.php";
+require __DIR__ . "/data/hotel-data.php";

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 // FETCH INFO FROM DB
-$database = new PDO('sqlite:' . dirname(__DIR__) . '/database/yrgopelag.db');
+$database = new PDO('sqlite:' . dirname(__DIR__) . '/data/yrgopelag.db');
 $statement = $database->query('SELECT * FROM rooms');
 $roomInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
 

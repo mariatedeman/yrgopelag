@@ -295,7 +295,7 @@ function getFeaturesByCategory(array $features, string $activity): array
 {
     $filteredFeatures = [];
 
-    $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
+    $database = new PDO('sqlite:' . __DIR__ . '/data/yrgopelag.db');
     $statement = $database->prepare('SELECT * FROM features WHERE id = :feature_id');
 
     foreach ($features as $feature) {

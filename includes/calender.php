@@ -3,7 +3,7 @@ $lastDayOfMonth = date('N', mktime(0, 0, 0, 1, 31, 2026));
 $daysInMonth = date('t', mktime(0, 0, 0, 1, 1, 2026));
 $dayInWeek = date('l', mktime(0, 0, 0, 1, 1, 2026));
 
-$database = new PDO('sqlite:' . dirname(__DIR__) . '/app/database/yrgopelag.db');
+$database = new PDO('sqlite:' . dirname(__DIR__) . '/app/data/yrgopelag.db');
 
 $statment = $database->prepare('SELECT checkin, checkout, room_id FROM bookings');
 $statment->execute();

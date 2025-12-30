@@ -19,7 +19,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
     $total_nights = null;
 
     // CONNECT TO DATABASE
-    $database = new PDO('sqlite:' . dirname(dirname(__DIR__)) . '/app/database/yrgopelag.db');
+    $database = new PDO('sqlite:' . dirname(dirname(__DIR__)) . '/app/data/yrgopelag.db');
     $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // SHOW ERRORS
 
     // CHECK IF GUEST EXIST, OTHERWISE ADD

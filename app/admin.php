@@ -60,7 +60,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 
     <?php
     // --- FETCH INFO FROM DATABASE TO PRESENT IN TABLE
-    $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
+    $database = new PDO('sqlite:' . __DIR__ . '/data/yrgopelag.db');
     $statement = $database->prepare('SELECT bookings.id, bookings.checkin, bookings.checkout, rooms.room_category AS room_category, guests.name, bookings.is_paid, bookings.total_cost FROM bookings
 
     INNER JOIN guests ON guests.id = bookings.guest_id

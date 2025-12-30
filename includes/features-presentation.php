@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$database = new PDO('sqlite:' . dirname(__DIR__) . '/app/database/yrgopelag.db');
+$database = new PDO('sqlite:' . dirname(__DIR__) . '/app/data/yrgopelag.db');
 $statement = $database->query('SELECT * FROM features');
 $featuresInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
 
