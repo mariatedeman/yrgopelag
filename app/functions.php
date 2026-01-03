@@ -41,35 +41,35 @@ function getTransferCode(string $guestName, string $guestApi, int $amount, strin
     ];
 
     $context = stream_context_create($options);
-    
+
     // RETRY-LOOP
     $attempts = 0;
     $maxAttempts = 3;
-    
+
     while ($attempts < $maxAttempts) {
         // SEND REQUEST AND GET RESPONSE
         $response = file_get_contents($url, false, $context);
-        
+
         if ($response !== false) {
             $transferCode = json_decode($response, true);
-            
+
             // IF ERROR, TRYING AGAIN WONT HELP
             if (isset($transferCode['error'])) {
                 $message = $transferCode['error'];
                 return $transferCode;
             }
-            
+
             // CONNECTION SUCCEEDED
             return $transferCode;
         }
-        
+
         // IF NOT SUCCESSFULL, KEEP TRYING
         $attempts++;
         if ($attempts < $maxAttempts) {
             usleep(500000); // WAIT 0.5s BEFORE NEXT TRY
         }
     }
-    
+
     // ALL ATTEMPTS FAILED
     return null;
 }
@@ -207,12 +207,12 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
 
     // SEND REQUEST AND GET RESPONSE
     $response = file_get_contents($url, false, $context);
-    
+
     if ($response === false) {
         $message = "Could not connect to central bank.";
         return false;
     }
-    
+
     $result = json_decode($response, true);
 
     if (isset($result['error'])) {
@@ -294,19 +294,19 @@ function getIslandFeatures(string $key): ?array
         ],
     ];
     $context = stream_context_create($options);
-    
+
     // RETRY-LOOP
     $attempts = 0;
     $maxAttempts = 3;
-    
+
     while ($attempts < $maxAttempts) {
         // SEND REQUEST AND GET RESPONSE
         $response = file_get_contents($url, false, $context);
-        
+
         if ($response !== false) {
             return json_decode($response, true);
         }
-        
+
         $attempts++;
         usleep(500000); // WAIT 0.5s BEFORE NEXT TRY
     }
@@ -344,8 +344,8 @@ function getFeaturesByCategory(?array $features, string $activity, PDO $database
             $statement->execute();
 
             $featureData = $statement->fetch(PDO::FETCH_ASSOC);
-            
-            if($featureData) {
+
+            if ($featureData) {
                 $filteredFeatures[] = [
                     'id' => $feature['id'],
                     'name' => htmlspecialchars(trim($feature['feature'])),
