@@ -5,13 +5,30 @@ declare(strict_types=1);
 $islandInfo = [];
 $islandName = 'Lyckholmen';
 $hotelName = 'Sjöboda B&B';
-$features = []; 
+$features = [];
 $hotelStars = 0;
+
+// === CHECK IF GUEST HAS OLD SESSION === ///
+// FETCH DB VERSION
+try {
+    $statement = $database->query("SELECT setting_value FROM settings WHERE setting_name = 'cache_version'");
+    $dbVersion = (int)$statement->fetchColumn();
+} catch (PDOException $e) {
+    $dbVersion = 1;
+}
+
+// COMPARE TO GUEST VERSION
+if (!isset($_SESSION['cache_version']) || $_SESSION['cache_version'] < $dbVersion) {
+
+    // UPDATE IF NEEDED
+    unset($_SESSION['island_data']);
+    $_SESSION['cache_version'] = $dbVersion;
+}
 
 if (!isset($_SESSION['island_data'])) {
 
     $islandInfo = getIslandFeatures($key);
-    
+
     if ($islandInfo !== null && isset($islandInfo['features'])) {
         try {
             // FETCH ID:s FROM DATABASE
@@ -29,9 +46,10 @@ if (!isset($_SESSION['island_data'])) {
                 }
             }
             unset($apiFeature);
-                
+
             $_SESSION['island_data'] = $islandInfo;
-        } catch (PDOException $e) {}
+        } catch (PDOException $e) {
+        }
     }
 }
 

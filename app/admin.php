@@ -7,8 +7,7 @@ require dirname(__DIR__) . "/includes/header.php";
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     header('Location: ' . URL_ROOT . "/app/views/login.php");
     exit;
-    
-} 
+}
 
 $islandInfo = $islandInfo ?? 'N/A';
 ?>
@@ -75,10 +74,11 @@ $islandInfo = $islandInfo ?? 'N/A';
         LEFT JOIN features ON features.id = bookings_features.feature_id
     
         GROUP BY bookings.id');
-    
+
         $statement->execute();
         $bookings = $statement->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {} ?>
+    } catch (PDOException $e) {
+    } ?>
 
     <!-- LIST OF BOOKINGS -->
     <section class="info-wrapper bookings">
@@ -126,7 +126,7 @@ $islandInfo = $islandInfo ?? 'N/A';
             </div>
             <div>
                 <label for="room-price">Type in new price</label>
-                <input type="number" name="room-price">
+                <input type="number" name="room-price" id="room-price">
             </div>
             <button type="submit">Update</button>
         </form>
@@ -146,7 +146,7 @@ $islandInfo = $islandInfo ?? 'N/A';
             </div>
             <div>
                 <label for="feature-price">Type in new price</label>
-                <input type="number" name="feature-price">
+                <input type="number" name="feature-price" id="feature-price">
             </div>
             <button type="submit">Update</button>
         </form>
