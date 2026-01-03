@@ -12,13 +12,13 @@ $dotenv->safeLoad();
 $key = $_ENV['API_KEY'];
 
 // URL ROOT
-define('URL_ROOT', 'https://made-by-met.se/yrgopelag');
+define('URL_ROOT', 'http://localhost:8000');
 
 // START SESSION
 session_start();
 
 // CONNECT TO DATABASE
-$database = new PDO ('sqlite:' . __DIR__ . '/data/yrgopelag.db');
+$database = new PDO('sqlite:' . __DIR__ . '/data/yrgopelag.db');
 $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // REQUIRE FUNCTIONS
