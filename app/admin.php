@@ -5,14 +5,19 @@ require __DIR__ . "/autoload.php";
 require dirname(__DIR__) . "/includes/header.php";
 
 if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-    header('Location: ' . __DIR__ . "/views/login.php");
-} ?>
+    header('Location: ' . URL_ROOT . "/app/views/login.php");
+    exit;
+    
+} 
+
+$islandInfo = $islandInfo ?? 'N/A';
+?>
 
 <section>
     <div class="admin-hero-img">
         <h2>Welcome <?= $_SESSION['username'] ?></h2>
         <p>Hotel administration dashboard</p>
-        <a href="/app/posts/logout.php" class="button">Log out</a>
+        <a href="./posts/logout.php" class="button">Log out</a>
     </div>
 </section>
 
@@ -21,17 +26,17 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     <section class="info-wrapper hotel-info">
         <p><strong>Island name: </strong><?= $islandName ?></p>
         <p><strong>Hotel name: </strong><?= $hotelName ?></p>
-        <p><strong>Stars: </strong><?= $islandInfo['island']['stars'] ?></p>
+        <p><strong>Stars: </strong><?= $islandInfo['island']['stars'] ?? 'N/A' ?></p>
     </section>
 
     <!-- PRINT LIST OF AVAILABLE FEATURES -->
     <section class="info-wrapper features-info">
 
         <?php
-        $filteredFeatures[] = $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific');
-        $filteredFeatures[] = $waterFeatures = getFeaturesByCategory($features, 'water');
-        $filteredFeatures[] = $wheelsFeatures = getFeaturesByCategory($features, 'wheels');
-        $filteredFeatures[] = $gamesFeatures = getFeaturesByCategory($features, 'games');
+        $filteredFeatures[] = $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific', $database);
+        $filteredFeatures[] = $waterFeatures = getFeaturesByCategory($features, 'water', $database);
+        $filteredFeatures[] = $wheelsFeatures = getFeaturesByCategory($features, 'wheels', $database);
+        $filteredFeatures[] = $gamesFeatures = getFeaturesByCategory($features, 'games', $database);
         ?>
 
         <h4>Available features</h4>
@@ -59,19 +64,21 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 
 
     <?php
+    $bookings = [];
     // --- FETCH INFO FROM DATABASE TO PRESENT IN TABLE
-    $database = new PDO('sqlite:' . __DIR__ . '/data/yrgopelag.db');
-    $statement = $database->prepare('SELECT bookings.id, bookings.checkin, bookings.checkout, rooms.room_category AS room_category, guests.name, bookings.is_paid, bookings.total_cost FROM bookings
+    try {
+        $statement = $database->prepare('SELECT bookings.id, bookings.checkin, bookings.checkout, rooms.room_category AS room_category, guests.name, bookings.is_paid, bookings.total_cost FROM bookings
 
-    INNER JOIN guests ON guests.id = bookings.guest_id
-    INNER JOIN rooms ON rooms.id = bookings.room_id
-    LEFT JOIN bookings_features ON bookings.id = bookings_features.feature_id
-    LEFT JOIN features ON features.id = bookings_features.feature_id
-
-    GROUP BY bookings.id');
-
-    $statement->execute();
-    $bookings = $statement->fetchAll(PDO::FETCH_ASSOC); ?>
+        INNER JOIN guests ON guests.id = bookings.guest_id
+        INNER JOIN rooms ON rooms.id = bookings.room_id
+        LEFT JOIN bookings_features ON bookings.id = bookings_features.feature_id
+        LEFT JOIN features ON features.id = bookings_features.feature_id
+    
+        GROUP BY bookings.id');
+    
+        $statement->execute();
+        $bookings = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {} ?>
 
     <!-- LIST OF BOOKINGS -->
     <section class="info-wrapper bookings">
@@ -108,7 +115,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     <!-- PRICE UPDATE FOR ROOMS AND FEATURES -->
     <section class="info-wrapper update-room-price">
         <h4>Update room price</h4>
-        <form action="/app/posts/update-price.php" method="POST">
+        <form action="./posts/update-price.php" method="POST">
             <div>
                 <label for="select-room">Select room</label>
                 <select name="select-room" id="select-room">
@@ -127,7 +134,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 
     <section class="info-wrapper update-feature-price">
         <h4>Update feature price</h4>
-        <form action="/app/posts/update-price.php" method="POST">
+        <form action="./posts/update-price.php" method="POST">
             <div>
                 <label for="select-feature">Select feature category</label>
                 <select name="select-feature" id="select-feature">

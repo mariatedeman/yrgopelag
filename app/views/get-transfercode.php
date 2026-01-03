@@ -3,7 +3,7 @@
         <button class="button-small" id="show-transfercode-form">Fetch transfercode</button>
     <?php endif ?>
     <section class="form-container" id="transfercode-form">
-        <form action="/app/posts/get-transfer-code.php" method="post">
+        <form action="./app/posts/get-transfer-code.php" method="post">
             <input type="hidden" name="current-room-id" id="hidden-room-id" value="<?= $currentRoom ?>">
 
             <label for="name"></label>

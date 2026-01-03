@@ -140,6 +140,11 @@ input[type="checkbox"] {
     margin-top: 3rem;
 }
 
+.features-wrapper .error {
+    font-weight: 600;
+    text-align: center;
+}
+
 .features-container {
     margin-bottom: 3rem;
     display: flex;

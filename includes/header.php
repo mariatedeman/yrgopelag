@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sjoboda B&B</title>
 
-    <link rel="stylesheet" href="/assets/styles/library-components.css">
-    <link rel="stylesheet" href="/assets/styles/forms.css">
-    <link rel="stylesheet" href="/assets/styles/room-presentation.css">
-    <link rel="stylesheet" href="/assets/styles/features-presentation.css">
-    <link rel="stylesheet" href="/assets/styles/calender.css">
-    <link rel="stylesheet" href="/assets/styles/offers.css">
-    <link rel="stylesheet" href="/assets/styles/login-admin.css">
-    <link rel="stylesheet" href="/assets/styles/messages.css">
+    <link rel="stylesheet" href="<?= URL_ROOT; ?>/assets/styles/library-components.css">
+    <link rel="stylesheet" href="<?= URL_ROOT; ?>/assets/styles/forms.css">
+    <link rel="stylesheet" href="<?= URL_ROOT; ?>/assets/styles/room-presentation.css">
+    <link rel="stylesheet" href="<?= URL_ROOT; ?>/assets/styles/features-presentation.css">
+    <link rel="stylesheet" href="<?= URL_ROOT; ?>/assets/styles/calender.css">
+    <link rel="stylesheet" href="<?= URL_ROOT; ?>/assets/styles/offers.css">
+    <link rel="stylesheet" href="<?= URL_ROOT; ?>/assets/styles/login-admin.css">
+    <link rel="stylesheet" href="<?= URL_ROOT; ?>/assets/styles/messages.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,33 +22,33 @@
 
 <body>
     <header id="header">
-        <a href="/"><img class="logo" src="/assets/images/sjoboda-logo-text-granitegrey.svg" alt="Sjöboda logo"></a>
+        <a href="<?= URL_ROOT ?>"><img class="logo" src="<?= URL_ROOT; ?>/assets/images/sjoboda-logo-text-granitegrey.svg" alt="Sjöboda logo"></a>
 
         <section id="nav" class="overlay">
             <a href="javascript:void(0)" class="menu-close" onclick="closeNav()">&times;</a>
 
             <nav>
-                <a href="/#back-to-top">Home</a>
+                <a href="./#back-to-top">Home</a>
                 <p class="a subnavbtn" onclick="openSubMenu()">Our rooms</a>
                 <div class="subnav-content">
-                    <a href="/?room=1#our-rooms">Unique Waterfront Retreat</a>
-                    <a href="/?room=2#our-rooms">Classic Sea Cabin</a>
-                    <a href="/?room=3#our-rooms">Premium Sea View Suite</a>
+                    <a href="./?room=1#our-rooms">Unique Waterfront Retreat</a>
+                    <a href="./?room=2#our-rooms">Classic Sea Cabin</a>
+                    <a href="./?room=3#our-rooms">Premium Sea View Suite</a>
                 </div>
 
-                <a href="/#get-transfercode">Booking</a>
-                <a href="/#our-features">Our features</a>
+                <a href="./#get-transfercode">Booking</a>
+                <a href="./#our-features">Our features</a>
             </nav>
             <span>
                 <?php if (!isset($_SESSION['authenticated'])) { ?>
-                    <a href="/app/users/login.php" class="a-small">Admin login</a>
+                    <a href="<?= URL_ROOT; ?>/app/users/login.php" class="a-small">Admin login</a>
                 <?php } else { ?>
-                    <a href="/app/admin.php" class="a-small">Admin dashboard</a>
+                    <a href="<?= URL_ROOT; ?>/app/admin.php" class="a-small">Admin dashboard</a>
                 <?php } ?>
             </span>
         </section>
 
         <div onclick="openNav()">
-            <img class="menu-icon" src="/assets/images/icon-menu.svg" alt="Icon for open menu">
+            <img class="menu-icon" src="<?= URL_ROOT; ?>/assets/images/icon-menu.svg" alt="Icon for open menu">
         </div>
     </header>

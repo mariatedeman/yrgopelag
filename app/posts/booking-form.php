@@ -19,7 +19,6 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
     $total_nights = null;
 
     // CONNECT TO DATABASE
-    $database = new PDO('sqlite:' . dirname(dirname(__DIR__)) . '/app/data/yrgopelag.db');
     $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // SHOW ERRORS
 
     // CHECK IF GUEST EXIST, OTHERWISE ADD
@@ -86,7 +85,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                     $selectedFeatures = $_POST['features'] ?? [];
                     if (!is_array($selectedFeatures)) {
                         $selectedFeatures = [];
-                    }
+                    } 
 
                     $featuresCost = 0;
                     $featuresForReceipt = []; // FEATURE NAMES FOR RECEIPT
@@ -125,7 +124,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                         }
 
                         // POST RECEIPT
-                        $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost, $hotelStars, $featuresForReceipt);
+                        $receipt = postReceipt($key, $guestName, $checkIn->format('Y-m-d'), $checkOut->format('Y-m-d'), $totalCost, $hotelStars, $featuresForReceipt, $bankError);
 
                         if ($receipt && isset($receipt['status']) && $receipt['status'] === 'success') {
 
@@ -190,7 +189,9 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                                 $errors[] = "Deposit failed: $bankError";
                             }
                         } else {
-                            $errors[] = "Receipt not available: " . $receipt['error'];
+                            $errorMessage = !empty($bankError) ? $bankError : ($receipt['error'] ?? 'Unknown error');
+    
+                            $errors[] = "Receipt not available: " . $errorMessage;
                         }
                     } else {
                         $errors[] = "Transfer code not valid: $bankError";

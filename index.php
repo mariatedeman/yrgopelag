@@ -5,11 +5,10 @@ declare(strict_types=1);
 require __DIR__ . "/app/autoload.php";
 require __DIR__ . "/includes/header.php";
 ?>
-
 <!-- HERO IMG -->
 <section class="hero-video-container" id="back-to-top">
     <span class="on-video-content">
-        <img src="/assets/images/sjoboda_logo_bohuslangrey.svg" alt="">
+        <img src="./assets/images/sjoboda_logo_bohuslangrey.svg" alt="">
         <h1>Your authentic west coast escape</h1>
         <a href="#get-transfercode" class="button">Book your stay</a>
         <div class="offer">
@@ -28,7 +27,7 @@ require __DIR__ . "/includes/header.php";
     </span>
 
     <video autoplay muted loop id="background-video">
-        <source src="/assets/images/hero-video.mp4" type="video/mp4">
+        <source src="./assets/images/hero-video.mp4" type="video/mp4">
     </video>
 </section>
 
@@ -61,9 +60,11 @@ require __DIR__ . "/includes/header.php";
     require __DIR__ . "/app/views/booking-form.php"; ?>
 </section>
 
+<?php if(!empty($features)) :?>
 <section class="features-presentation">
     <?php require __DIR__ . "/includes/features-presentation.php"; ?>
 </section>
+<?php endif ?>
 
 <!-- FOOTER -->
 <section class="footer-container">

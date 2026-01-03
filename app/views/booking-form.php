@@ -1,4 +1,4 @@
-<form action="/app/posts/booking-form.php" method="post" id="booking-form">
+<form action="<?= URL_ROOT ?>/app/posts/booking-form.php" method="post" id="booking-form">
     <div class="offer-container">
         <p class="subheading">January offer</p>
         <p>Free seafood cruise with livemusic when you book our Premium Sea View Suite!</p>
@@ -35,11 +35,14 @@
 
     <div class="features-wrapper">
         <?php
-        $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific');
-        $waterFeatures = getFeaturesByCategory($features, 'water');
-        $wheelsFeatures = getFeaturesByCategory($features, 'wheels');
-        $gamesFeatures = getFeaturesByCategory($features, 'games');
-        ?>
+        $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific', $database);
+        $waterFeatures = getFeaturesByCategory($features, 'water', $database);
+        $wheelsFeatures = getFeaturesByCategory($features, 'wheels', $database);
+        $gamesFeatures = getFeaturesByCategory($features, 'games', $database);
+        
+        if (empty($hotelSpecificFeatures) && empty($waterFeatures) && empty($wheelsFeatures) && empty($gamesFeatures)) { ?>
+            <p class="error">Could not load features. Refresh the page and try again.</p>
+        <?php } else { ?>
 
         <h3>In mood for something extra?</h3>
         <section class="features-container">
@@ -80,6 +83,8 @@
                 <?php endforeach ?>
             </section>
         </section>
+        <?php } ?>
 
         <button type="submit">Make reservation</button>
+    </div>
 </form>

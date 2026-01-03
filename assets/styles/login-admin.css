@@ -39,7 +39,7 @@
 /* ADMIN PAGE */
 .admin-hero-img {
     height: 70vh;
-    background-image: linear-gradient(to bottom, #000000a1, #000000c9), url("/assets/images/Gemini_Generated_Image_7wj0c27wj0c27wj0.jpg");
+    background-image: linear-gradient(to bottom, #000000a1, #000000c9), url("../images/Gemini_Generated_Image_7wj0c27wj0c27wj0.jpg");
     background-size: cover;
     background-position: center;
     color: var(--light);
@@ -72,6 +72,10 @@
     background-color: var(--vanilla);
     border-radius: 5px;
     box-shadow: 0 0 5px 1px #c6c6c6;
+}
+
+.info-wrapper h4 {
+    margin: 1rem;
 }
 
 .hotel-info {

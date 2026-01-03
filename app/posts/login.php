@@ -14,7 +14,8 @@ if (isset($_POST['username'], $_POST['api_key'])) {
     } else {
         $_SESSION['authenticated'] = true;
         $_SESSION['username'] = $username;
-        header('Location: /app/admin.php');
+        header('Location: ../admin.php');
+        exit;
     }
 }
 

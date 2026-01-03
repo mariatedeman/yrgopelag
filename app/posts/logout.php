@@ -6,5 +6,5 @@ require dirname(__DIR__) . "/autoload.php";
 session_unset();
 session_destroy();
 
-header('Location: /');
+header('Location: ' . URL_ROOT);
 exit;
