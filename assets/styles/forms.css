@@ -158,3 +158,19 @@ input[type="checkbox"] {
     align-items: center;
     gap: 1rem;
 }
+
+/* TOTAL COST DISPLAY */
+.total-cost {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.total-cost div {
+    display: flex;
+    justify-content: center;
+}
+
+.total-cost h3:first-child {
+    margin-bottom: 0;
+}
