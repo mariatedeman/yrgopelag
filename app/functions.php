@@ -210,7 +210,7 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
 
     if ($response === false) {
         $message = "Could not connect to central bank.";
-        return false;
+        return null;
     }
 
     $result = json_decode($response, true);
@@ -311,19 +311,7 @@ function getIslandFeatures(string $key): ?array
         usleep(500000); // WAIT 0.5s BEFORE NEXT TRY
     }
 
-    // HANDLE RESPONSE
-    if ($response === false) {
-        return null;
-    }
-
-    // CONVERT RESPONSE TO ASSOC ARRAY
-    $features = json_decode($response, true);
-
-    if ($features === null) {
-        return null;
-    }
-
-    return $features;
+    return null;
 }
 
 
