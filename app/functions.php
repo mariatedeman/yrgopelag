@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 //////////////////////////////////////
 
-// === GET TRASFER CODE === //
+// === GET TRANSFER CODE === //
 
 function getTransferCode(string $guestName, string $guestApi, int $amount, string &$message = ""): ?array
 {
@@ -32,6 +32,7 @@ function getTransferCode(string $guestName, string $guestApi, int $amount, strin
             'header' => 'Content-Type: application/json',
             'content' => json_encode($data),
             'ignore_errors' => true,
+            'timeout' => 2, // GIVE UP AFTER TWO SECONDS OF LOADING
         ],
         'ssl' => [
             'verify_peer' => false,
@@ -40,23 +41,37 @@ function getTransferCode(string $guestName, string $guestApi, int $amount, strin
     ];
 
     $context = stream_context_create($options);
-
-    // SEND REQUEST AND GET RESPONSE
-    $response = file_get_contents($url, false, $context);
-
-    // HANDLE RESPONSE
-    if ($response === false) {
-        return null;
+    
+    // RETRY-LOOP
+    $attempts = 0;
+    $maxAttempts = 3;
+    
+    while ($attempts < $maxAttempts) {
+        // SEND REQUEST AND GET RESPONSE
+        $response = file_get_contents($url, false, $context);
+        
+        if ($response !== false) {
+            $transferCode = json_decode($response, true);
+            
+            // IF ERROR, TRYING AGAIN WONT HELP
+            if (isset($transferCode['error'])) {
+                $message = $transferCode['error'];
+                return $transferCode;
+            }
+            
+            // CONNECTION SUCCEEDED
+            return $transferCode;
+        }
+        
+        // IF NOT SUCCESSFULL, KEEP TRYING
+        $attempts++;
+        if ($attempts < $maxAttempts) {
+            usleep(500000); // WAIT 0.5s BEFORE NEXT TRY
+        }
     }
-
-    // CONVERT RESPONSE TO ASSOC ARRAY
-    $transferCode = json_decode($response, true);
-
-    if (isset($transferCode['error'])) {
-        $message = $transferCode['error'];
-    }
-
-    return $transferCode;
+    
+    // ALL ATTEMPTS FAILED
+    return null;
 }
 
 
@@ -99,7 +114,7 @@ function isValidTransferCode(string $transferCode, int $totalCost, string &$mess
     // CONVERT RESPONSE TO ASSOC ARRAY
     $result = json_decode($response, true);
 
-    if (isset($result['error']) || !isset($result['transferCode'])) {
+    if (!isset($result['status']) || $result['status'] !== 'success') {
         $message = $result['error'] ?? "Transfer code not valid.";
         return false;
     }
@@ -158,7 +173,7 @@ function makeDeposit(string $transferCode, string &$message = ''): bool
 //////////////////////////////////////////////////
 // === POST RECEIPT === //
 
-function postReceipt(string $key, string $guestName, string $checkIn, string $checkOut, int $totalCost, int $hotelStars, array $features): ?array
+function postReceipt(string $key, string $guestName, string $checkIn, string $checkOut, int $totalCost, int $hotelStars, array $features, string &$message = ''): ?array
 {
 
     $url = 'https://www.yrgopelag.se/centralbank/receipt';
@@ -192,8 +207,20 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
 
     // SEND REQUEST AND GET RESPONSE
     $response = file_get_contents($url, false, $context);
+    
+    if ($response === false) {
+        $message = "Could not connect to central bank.";
+        return false;
+    }
+    
+    $result = json_decode($response, true);
 
-    return $response ? json_decode($response, true) : null;
+    if (isset($result['error'])) {
+        $message = $result['error'];
+        return null;
+    }
+
+    return $result;
 }
 
 
@@ -246,7 +273,6 @@ function getAccountInfo(string $user, string $apiKey): ?array
 
 function getIslandFeatures(string $key): ?array
 {
-
     $url = 'https://www.yrgopelag.se/centralbank/islandFeatures';
 
     // PREPARE DATA TO SEND
@@ -260,6 +286,7 @@ function getIslandFeatures(string $key): ?array
             'header' => 'Content-Type: application/json',
             'content' => json_encode($data),
             'ignore_errors' => true,
+            'timeout' => 2, // GIVE UP AFTER TWO SECONDS OF LOADING
         ],
         'ssl' => [
             'verify_peer' => false,
@@ -267,9 +294,22 @@ function getIslandFeatures(string $key): ?array
         ],
     ];
     $context = stream_context_create($options);
-
-    // SEND REQUEST AND GET RESPONSE
-    $response = file_get_contents($url, false, $context);
+    
+    // RETRY-LOOP
+    $attempts = 0;
+    $maxAttempts = 3;
+    
+    while ($attempts < $maxAttempts) {
+        // SEND REQUEST AND GET RESPONSE
+        $response = file_get_contents($url, false, $context);
+        
+        if ($response !== false) {
+            return json_decode($response, true);
+        }
+        
+        $attempts++;
+        usleep(500000); // WAIT 0.5s BEFORE NEXT TRY
+    }
 
     // HANDLE RESPONSE
     if ($response === false) {
@@ -291,11 +331,11 @@ function getIslandFeatures(string $key): ?array
 
 // === PRINT FEATURES === //
 
-function getFeaturesByCategory(array $features, string $activity): array
+function getFeaturesByCategory(?array $features, string $activity, PDO $database): array
 {
+    $features = $features ?? [];
     $filteredFeatures = [];
 
-    $database = new PDO('sqlite:' . __DIR__ . '/database/yrgopelag.db');
     $statement = $database->prepare('SELECT * FROM features WHERE id = :feature_id');
 
     foreach ($features as $feature) {
@@ -304,16 +344,23 @@ function getFeaturesByCategory(array $features, string $activity): array
             $statement->execute();
 
             $featureData = $statement->fetch(PDO::FETCH_ASSOC);
-
-            $filteredFeatures[] = [
-                'id' => $feature['id'],
-                'name' => htmlspecialchars(trim($feature['feature'])),
-                'activity_category' => $featureData['activity_category'],
-                'price' => $featureData['price'] ?? 0,
-                'price_category' => $featureData['price_category'],
-            ];
+            
+            if($featureData) {
+                $filteredFeatures[] = [
+                    'id' => $feature['id'],
+                    'name' => htmlspecialchars(trim($feature['feature'])),
+                    'activity_category' => $featureData['activity_category'],
+                    'price' => $featureData['price'] ?? 0,
+                    'price_category' => $featureData['price_category'],
+                ];
+            }
         }
     }
+
+    // SORT BY PRICE
+    usort($filteredFeatures, function ($a, $b) {
+        return $a['price'] <=> $b['price'];
+    });
 
     return $filteredFeatures;
 }

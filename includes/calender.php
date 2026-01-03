@@ -1,14 +1,19 @@
-<?php $firstDayOfMonth = date('N', mktime(0, 0, 0, 1, 1, 2026));
+<?php 
+$firstDayOfMonth = date('N', mktime(0, 0, 0, 1, 1, 2026));
 $lastDayOfMonth = date('N', mktime(0, 0, 0, 1, 31, 2026));
 $daysInMonth = date('t', mktime(0, 0, 0, 1, 1, 2026));
 $dayInWeek = date('l', mktime(0, 0, 0, 1, 1, 2026));
 
-$database = new PDO('sqlite:' . dirname(__DIR__) . '/app/database/yrgopelag.db');
+$dates = [];
 
-$statment = $database->prepare('SELECT checkin, checkout, room_id FROM bookings');
-$statment->execute();
-
-$dates = $statment->fetchAll(PDO::FETCH_ASSOC);
+try {
+    $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $statement = $database->prepare('SELECT checkin, checkout, room_id FROM bookings');
+    $statement->execute();
+    $dates = $statement->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $dates = [];
+}
 
 // ARRAYS FOR BOOKED ROOMS
 $bookedDatesRoomOne = [];

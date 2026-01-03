@@ -11,11 +11,18 @@ $dotenv->safeLoad();
 // DEFINE API KEY VARIABLE
 $key = $_ENV['API_KEY'];
 
+// URL ROOT
+define('URL_ROOT', 'http://localhost:8000');
+
 // START SESSION
 session_start();
+
+// CONNECT TO DATABASE
+$database = new PDO('sqlite:' . __DIR__ . '/data/yrgopelag.db');
+$database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // REQUIRE FUNCTIONS
 require __DIR__ . "/functions.php";
 
 // HOTEL DATA
-require __DIR__ . "/database/hotel-data.php";
+require __DIR__ . "/data/hotel-data.php";

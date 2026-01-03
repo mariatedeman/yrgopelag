@@ -3,7 +3,6 @@
 declare(strict_types=1);
 require dirname(__DIR__) . "/autoload.php";
 
-
 if (isset($_POST['name'], $_POST['guest_api'], $_POST['amount'])) {
     $guestName = htmlspecialchars(trim($_POST['name']));
     $guestApi = htmlspecialchars(trim($_POST['guest_api']));
@@ -13,21 +12,22 @@ if (isset($_POST['name'], $_POST['guest_api'], $_POST['amount'])) {
     $error = "";
     $transferCode = getTransferCode($guestName, $guestApi, (int)$amount, $error);
 
+
     if ($error !== "") {
         $_SESSION['error'] = $error;
-        header("Location: /?room=$currentRoom#transfercode-section");
+        header("Location: " . URL_ROOT . "?room=$currentRoom#get-transfercode");
         exit;
     }
 
     if ($transferCode) {
         $_SESSION['success'] = $transferCode['transferCode'];
-        header("Location: /?room=$currentRoom#transfercode-section");
+        header("Location: " . URL_ROOT . "?room=$currentRoom#get-transfercode");
         exit;
     }
 
     if ($transferCode === null) {
         $_SESSION['error'] = "Could not connect to central bank. Please try again later.";
-        header("Location: /?room=$currentRoom#transfercode-section");
+        header("Location: " . URL_ROOT . "?room=$currentRoom#get-transfercode");
         exit;
     }
 }

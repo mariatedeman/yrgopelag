@@ -1,13 +1,14 @@
 <?php
 
 declare(strict_types=1);
-require_once dirname(__DIR__) . "/autoload.php"; ?>
+require dirname(__DIR__) . "/autoload.php"; 
+?>
 
 <?php require dirname(dirname(__DIR__)) . "/includes/header.php"; ?>
 
 <section class="login-section">
     <h2>Admin login</h2>
-    <form action="/app/posts/login.php" method="POST">
+    <form action="../posts/login.php" method="POST">
         <div>
             <span>
                 <label for="username">Username</label>

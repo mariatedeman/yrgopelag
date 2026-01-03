@@ -54,8 +54,8 @@ h2 {
 
 h3 {
     text-align: center;
-    font-weight: 300;
-    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
 }
 
 h4 {
@@ -117,9 +117,11 @@ header {
     color: var(--light);
     height: 100px;
     width: 100%;
-    padding: 10px;
+    padding: 2rem;
 
-    align-content: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     text-align: left;
     font-family: var(--heading-font);
 
@@ -129,11 +131,113 @@ header {
     z-index: 99;
 }
 
-header img {
-    max-height: 70%;
-    margin: 1rem;
+.logo {
+    max-height: 70px;
 }
 
+.menu-icon {
+    max-height: 35px;
+}
+
+.overlay {
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 101;
+    right: 0;
+    top: 0;
+
+    background-color: var(--summerskyblue);
+    overflow-x: hidden;
+    transition: 0.5s;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+nav {
+    font-size: 1.5rem;
+    font-weight: 700;
+    justify-items: left;
+    width: 70%;
+}
+
+#nav span {
+    width: 70%;
+}
+
+.overlay a, .a {
+    text-decoration: none;
+    padding: 1rem;
+    color: var(--deepoceanblue);
+    display: block;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.overlay a:hover,
+.overlay a:focus {
+    color: var(--oceanblue);
+}
+
+.a-small {
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: left;
+}
+
+.menu-close {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    font-size: 2rem;
+    font-weight: 100;
+}
+
+.subnav-content {
+    max-height: 0px;
+    
+    font-size: 1rem;
+    font-weight: 300;
+    padding-left: 1rem;
+    justify-items: left;
+    overflow-x: hidden;
+
+    transition: max-height 1s ease;
+}
+
+.subnav-content.open {
+    max-height: 500px;
+}
+
+.subnav-content a {
+    padding: 0 0.5rem 0.5rem 0;
+}
+
+/* NAV JUMP LINKS */
+#our-rooms {
+    scroll-margin-top: 8rem;
+}
+
+#get-transfercode {
+    scroll-margin-top: 12rem;
+}
+
+#our-features {
+    scroll-margin-top: 8rem;
+}
+
+/* === HERO BACKGROUND ===*/
 .hero-video-container {
     height: 100vh;
     background-color: black;
@@ -198,10 +302,20 @@ footer {
     margin-top: auto;
 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
     gap: 1rem;
+}
+
+footer nav {
+    font-size: 1rem;
+    font-weight: 400;
+    width: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 footer a {
@@ -209,7 +323,28 @@ footer a {
     text-decoration: none;
 }
 
+footer a:hover {
+    color: var(--sandygrey);
+    text-decoration: none;
+}
+
 footer img {
     max-height: 100px;
     width: fit-content;
+}
+
+footer div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer div div {
+    display: flex;
+    flex-direction: row;
+}
+
+footer div img {
+    max-height: 40px;
+    margin-top: 1rem;
 }

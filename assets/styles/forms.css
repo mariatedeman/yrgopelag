@@ -3,10 +3,6 @@
     margin-top: 2rem;
 }
 
-#transfercode-section {
-    scroll-margin-top: 14rem;
-}
-
 .get-transfercode-container {
     width: 100vw;
 
@@ -141,10 +137,15 @@ input[type="checkbox"] {
 .features-wrapper {
     display: flex;
     flex-direction: column;
+    margin-top: 3rem;
+}
+
+.features-wrapper .error {
+    font-weight: 600;
+    text-align: center;
 }
 
 .features-container {
-    margin-top: 3rem;
     margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
@@ -156,4 +157,20 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+/* TOTAL COST DISPLAY */
+.total-cost {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.total-cost div {
+    display: flex;
+    justify-content: center;
+}
+
+.total-cost h3:first-child {
+    margin-bottom: 0;
 }

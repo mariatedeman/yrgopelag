@@ -1,0 +1,36 @@
+/* === ERRORS === */
+.error-section {
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+.error-section div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.error-section button {
+    margin-top: 2rem;
+}
+
+/* === BOOKING CONFIRMATION === */
+.booking-confirmation {
+    margin: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 4rem;
+}
+
+.booking-confirmation div {
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-confirmation button {
+    margin-top: 3rem;
+}
