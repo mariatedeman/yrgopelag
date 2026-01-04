@@ -27,6 +27,10 @@
     background-color: var(--granitegrey);
 }
 
+.choose-room-wrapper .subheading {
+    margin-top: 1rem;
+}
+
 .choose-room-wrapper select {
     margin-top: 2rem;
 }

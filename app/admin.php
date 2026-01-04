@@ -70,7 +70,7 @@ $islandInfo = $islandInfo ?? 'N/A';
 
         INNER JOIN guests ON guests.id = bookings.guest_id
         INNER JOIN rooms ON rooms.id = bookings.room_id
-        LEFT JOIN bookings_features ON bookings.id = bookings_features.feature_id
+        LEFT JOIN bookings_features ON bookings.id = bookings_features.booking_id
         LEFT JOIN features ON features.id = bookings_features.feature_id
     
         GROUP BY bookings.id');
