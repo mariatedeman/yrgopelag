@@ -192,7 +192,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                             }
                         } else {
                             $errorMessage = !empty($bankError) ? $bankError : ($receipt['error'] ?? 'Unknown error');
-    
+
                             $errors[] = "Receipt not available: " . $errorMessage;
                         }
                     } else {

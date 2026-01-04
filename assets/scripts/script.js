@@ -9,7 +9,7 @@ const hiddenRoomInput = document.getElementById('hidden-room-id');
 // INCLUDED IN OFFER
 const offer = document.getElementById('offer');
 const offerRoom = document.getElementById('room_type');
-const offerFeature = document.getElementById('seafood cruise with live music');
+const offerFeature = document.getElementById('feature-4');
 
 // TRANSFER CODE FORM
 const showTransfercodeForm = document.getElementById('show-transfercode-form');
