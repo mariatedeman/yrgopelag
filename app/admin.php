@@ -133,5 +133,6 @@ $islandInfo = $islandInfo ?? 'N/A';
                 <button type="submit">Update</button>
             </form>
         </section>
-    <?php endforeach;
-    require dirname(__DIR__) . "/includes/footer.php";
+    <?php endforeach; ?>
+</section>
+<?php require dirname(__DIR__) . "/includes/footer.php";
