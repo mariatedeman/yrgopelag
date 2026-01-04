@@ -106,13 +106,13 @@ function addData(PDO $database): void
         $database->exec(
             <<<SQL
         INSERT INTO rooms (room_category, room_name, description, price)
-        VALUES ('budget', 'Unique Waterfront Retreat',
+        VALUES ('Budget', 'Unique Waterfront Retreat',
                 'Experience the most genuine West Coast immersion. Your charming, authentic traditional wooden boat (snipa) is uniquely moored on the dramatic, windy side of Lyckholmen island, offering an unparalleled connection to nature. Retreat to the cozy, rustic cabin and let the gentle lapping of the waves lull you to sleep. Note on Amenities: To preserve its vintage character, the onboard head (toilet) is not available for use. Guests are asked to make alternative arrangements.', 5),
             
-                ('standard', 'Classic Sea Cabin Standard Room',
+                ('Standard', 'Classic Sea Cabin Standard Room',
                 'Experience the authentic coastal character combined with the convenience of modern living! Our Standard Room is situated within a row of iconic, classic sea cabins (sjöbodar). These charming unit have been thoughtfully and modestly refurbished, incorporating essential modern comforts such as a private WC and shower, ensuring a comfortable and atmospheric stay right by the water.', 7),
             
-                ('luxury', 'Premium Sea View Suite',
+                ('Luxury', 'Premium Sea View Suite',
                 'Indulge in our most exclusive offering. Our Premium Sea View Suites are perfectly positioned on the island’s tranquil side guaranteeing serene conditions and spectacular views with the perfect ammount of sea breeze. This suite provide unrivalled waterfront luxury, featuring a private jetty and an invigorating outdoor jacuzzi. Enjoy the ultimate relaxation with direct access to the sea for private bathing, all just steps from your door. This is the pinnacle of coastal retreat.', 10);
 SQL
         );

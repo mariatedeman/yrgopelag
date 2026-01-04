@@ -69,3 +69,19 @@ $featureCategories = [
     'Wheels' => 'wheels',
     'Games' => 'games',
 ];
+
+// === PRODUCT CATEGORIES === //
+
+$productCategories = [
+    'room' => [
+        'Budget',
+        'Standard',
+        'Luxury',
+    ],
+    'feature' => [
+        'Economy',
+        'Basic',
+        'Premium',
+        'Superior',
+    ],
+];

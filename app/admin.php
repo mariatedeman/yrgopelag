@@ -113,44 +113,25 @@ $islandInfo = $islandInfo ?? 'N/A';
     </section>
 
     <!-- PRICE UPDATE FOR ROOMS AND FEATURES -->
-    <section class="info-wrapper update-room-price">
-        <h4>Update room price</h4>
-        <form action="./posts/update-price.php" method="POST">
-            <div>
-                <label for="select-room">Select room</label>
-                <select name="select-room" id="select-room">
-                    <option value="1">Budget</option>
-                    <option value="2">Standard</option>
-                    <option value="3">Luxury</option>
-                </select>
-            </div>
-            <div>
-                <label for="room-price">Type in new price</label>
-                <input type="number" name="room-price" id="room-price">
-            </div>
-            <button type="submit">Update</button>
-        </form>
-    </section>
+    <?php foreach ($productCategories as $product => $category) : ?>
+        <section class="info-wrapper update-<?= $product ?>-price">
+            <h4>Update <?= $product ?> price</h4>
+            <form action="./posts/update-price.php" method="POST">
+                <div>
+                    <label for="select-<?= $product ?>">Select <?= $product ?> category</label>
+                    <select name="select-<?= $product ?>" id="select-<?= $product ?>">
 
-    <section class="info-wrapper update-feature-price">
-        <h4>Update feature price</h4>
-        <form action="./posts/update-price.php" method="POST">
-            <div>
-                <label for="select-feature">Select feature category</label>
-                <select name="select-feature" id="select-feature">
-                    <option value="Economy">Economy</option>
-                    <option value="Basic">Basic</option>
-                    <option value="Premium">Premium</option>
-                    <option value="Superior">Superior</option>
-                </select>
-            </div>
-            <div>
-                <label for="feature-price">Type in new price</label>
-                <input type="number" name="feature-price" id="feature-price">
-            </div>
-            <button type="submit">Update</button>
-        </form>
-    </section>
-</section>
-
-<?php require dirname(__DIR__) . "/includes/footer.php";
+                        <?php for ($i = 0; $i < count($category); $i++) : ?>
+                            <option value="<?= $category[$i] ?>"><?= ucfirst($category[$i]) ?></option>
+                        <?php endfor ?>
+                    </select>
+                </div>
+                <div>
+                    <label for="<?= $product ?>-price">Type in new price</label>
+                    <input type="number" name="<?= $product ?>-price" id="<?= $product ?>-price">
+                </div>
+                <button type="submit">Update</button>
+            </form>
+        </section>
+    <?php endforeach;
+    require dirname(__DIR__) . "/includes/footer.php";
