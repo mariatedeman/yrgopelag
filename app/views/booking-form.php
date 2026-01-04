@@ -1,6 +1,24 @@
 <?php
 
-declare(strict_types=1); ?>
+declare(strict_types=1);
+
+// 1. Definiera dina kategorier (Rubrik => Kategori-nyckel)
+$featureCategories = [
+    'Coastal Experiences' => 'hotel-specific',
+    'Water' => 'water',
+    'Wheels' => 'wheels',
+    'Games' => 'games'
+];
+
+// 2. Förbered datan: Hämta alla features och spara dem i en ny array
+$allAvailableFeatures = [];
+foreach ($featureCategories as $title => $category) {
+    $foundFeatures = getFeaturesByCategory($features, $category, $database);
+    if (!empty($foundFeatures)) {
+        $allAvailableFeatures[$title] = $foundFeatures;
+    }
+}
+?>
 
 <form action="<?= URL_ROOT ?>/app/posts/booking-form.php" method="post" id="booking-form">
     <div class="offer-container">
@@ -9,8 +27,8 @@ declare(strict_types=1); ?>
         <label for="offer" class="subheading">Book offer</label>
         <input type="checkbox" name="offer" id="offer">
     </div>
-    <span>
 
+    <span>
         <div>
             <label for="name">Your name</label>
             <input type="text" name="name" id="name" placeholder="Type your name">
@@ -26,7 +44,6 @@ declare(strict_types=1); ?>
             <input type="date" name="checkOut" id="checkOut" min="2026-01-01" max="2026-01-31">
         </div>
         <div>
-
             <label for="room_type">Room type</label>
             <select name="room_type" id="room_type" required>
                 <option value="">Choose room</option>
@@ -38,104 +55,39 @@ declare(strict_types=1); ?>
     </span>
 
     <div class="features-wrapper">
-        <?php
-        $hotelSpecificFeatures = getFeaturesByCategory($features, 'hotel-specific', $database);
-        $waterFeatures = getFeaturesByCategory($features, 'water', $database);
-        $wheelsFeatures = getFeaturesByCategory($features, 'wheels', $database);
-        $gamesFeatures = getFeaturesByCategory($features, 'games', $database);
-
-        if (empty($hotelSpecificFeatures) && empty($waterFeatures) && empty($wheelsFeatures) && empty($gamesFeatures)) { ?>
+        <?php if (empty($allAvailableFeatures)) : ?>
             <p class="error">Could not load features. Refresh the page and try again.</p>
-        <?php } else { ?>
+        <?php else : ?>
 
             <h3>In mood for something extra?</h3>
             <section class="features-container">
 
-                <section>
-                    <p class="subheading">Coastal Experiences</p>
-                    <?php foreach ($hotelSpecificFeatures as $feature) :
-                        $featureId = (int)$feature['id'];
-                        $featureName = htmlspecialchars(trim($feature['name']), ENT_QUOTES, 'UTF-8');
-                        $featurePrice = (int)$feature['price'];
-                    ?>
-                        <div class="feature-choice">
+                <?php foreach ($allAvailableFeatures as $title => $items) : ?>
+                    <section>
+                        <p class="subheading"><?= htmlspecialchars($title) ?></p>
+                        <?php foreach ($items as $feature) :
+                            $featureId = (int)$feature['id'];
+                            $featureName = htmlspecialchars(trim($feature['name']), ENT_QUOTES, 'UTF-8');
+                            $featurePrice = (int)$feature['price'];
+                        ?>
+                            <div class="feature-choice">
+                                <input type="checkbox"
+                                    class="feature-checkbox"
+                                    name="features[]"
+                                    value="<?= $featureId ?>"
+                                    id="feature-<?= $featureId ?>"
+                                    data-price="<?= $featurePrice ?>">
 
-                            <input type="checkbox"
-                                class="feature-checkbox"
-                                name="features[]"
-                                value="<?= $featureId ?>"
-                                id="feature-<?= $featureId ?>"
-                                data-price="<?= $featurePrice ?>">
+                                <label for="feature-<?= $featureId ?>">
+                                    <?= ucfirst($featureName) . ", " . $featurePrice . ":-" ?>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
+                    </section>
+                <?php endforeach; ?>
 
-                            <label for="feature-<?= $featureId ?>"><?= $featureName . ", " . $featurePrice . ":-" ?></label>
-                        </div>
-                    <?php endforeach ?>
-                </section>
-
-                <section>
-                    <p class="subheading">Water</p>
-                    <?php foreach ($waterFeatures as $feature) :
-                        $featureId = (int)$feature['id'];
-                        $featureName = htmlspecialchars(trim($feature['name']), ENT_QUOTES, 'UTF-8');
-                        $featurePrice = (int)$feature['price'];
-                    ?>
-                        <div class="feature-choice">
-
-                            <input type="checkbox"
-                                class="feature-checkbox"
-                                name="features[]"
-                                value="<?= $featureId ?>"
-                                id="feature-<?= $featureId ?>"
-                                data-price="<?= $featurePrice ?>">
-
-                            <label for="feature-<?= $featureId ?>"><?= $featureName . ", " . $featurePrice . ":-" ?></label>
-                        </div>
-                    <?php endforeach ?>
-                </section>
-
-                <section>
-                    <p class="subheading">Wheels</p>
-                    <?php foreach ($wheelsFeatures as $feature) :
-                        $featureId = (int)$feature['id'];
-                        $featureName = htmlspecialchars(trim($feature['name']), ENT_QUOTES, 'UTF-8');
-                        $featurePrice = (int)$feature['price'];
-                    ?>
-                        <div class="feature-choice">
-
-                            <input type="checkbox"
-                                class="feature-checkbox"
-                                name="features[]"
-                                value="<?= $featureId ?>"
-                                id="feature-<?= $featureId ?>"
-                                data-price="<?= $featurePrice ?>">
-
-                            <label for="feature-<?= $featureId ?>"><?= $featureName . ", " . $featurePrice . ":-" ?></label>
-                        </div>
-                    <?php endforeach ?>
-                </section>
-
-                <section>
-                    <p class="subheading">Games</p>
-                    <?php foreach ($gamesFeatures as $feature) :
-                        $featureId = (int)$feature['id'];
-                        $featureName = htmlspecialchars(trim($feature['name']), ENT_QUOTES, 'UTF-8');
-                        $featurePrice = (int)$feature['price'];
-                    ?>
-                        <div class="feature-choice">
-
-                            <input type="checkbox"
-                                class="feature-checkbox"
-                                name="features[]"
-                                value="<?= $featureId ?>"
-                                id="feature-<?= $featureId ?>"
-                                data-price="<?= $featurePrice ?>">
-
-                            <label for="feature-<?= $featureId ?>"><?= $featureName . ", " . $featurePrice . ":-" ?></label>
-                        </div>
-                    <?php endforeach ?>
-                </section>
             </section>
-        <?php } ?>
+        <?php endif; ?>
 
         <div class="total-cost">
             <h3>Total cost:</h3>

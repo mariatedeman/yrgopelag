@@ -60,3 +60,12 @@ if (isset($_SESSION['island_data'])) {
 } else {
     $errors[] = 'Could not connect to the island server. Some information might be missing.';
 }
+
+
+// === FEATURE CATECORIES === //
+$featureCategories = [
+    'Coastal Experiences' => 'hotel-specific',
+    'Water' => 'water',
+    'Wheels' => 'wheels',
+    'Games' => 'games',
+];
