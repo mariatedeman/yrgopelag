@@ -13,7 +13,7 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
     $transferCode = htmlspecialchars(trim($_POST['transfer_code']));
     $checkIn = $_POST['checkIn'];
     $checkOut = $_POST['checkOut'];
-    $roomType = $_POST['room_type'];
+    $roomType = (int)$_POST['room_type'];
 
     $guestId = null;
     $total_nights = null;
@@ -85,7 +85,9 @@ if (isset($_POST['name'], $_POST['transfer_code'], $_POST['checkIn'], $_POST['ch
                     $selectedFeatures = $_POST['features'] ?? [];
                     if (!is_array($selectedFeatures)) {
                         $selectedFeatures = [];
-                    } 
+                    }
+                    // Normalize feature ids to integers
+                    $selectedFeatures = array_map('intval', $selectedFeatures);
 
                     $featuresCost = 0;
                     $featuresForReceipt = []; // FEATURE NAMES FOR RECEIPT

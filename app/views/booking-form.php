@@ -1,3 +1,7 @@
+<?php
+
+declare(strict_types=1); ?>
+
 <form action="<?= URL_ROOT ?>/app/posts/booking-form.php" method="post" id="booking-form">
     <div class="offer-container">
         <p class="subheading">January offer</p>
@@ -26,9 +30,9 @@
             <label for="room_type">Room type</label>
             <select name="room_type" id="room_type" required>
                 <option value="">Choose room</option>
-                <option data-price="<?= $roomInfo[0]['price'] ?>" value="1">Budget</option>
-                <option data-price="<?= $roomInfo[1]['price'] ?>" value="2">Standard</option>
-                <option data-price="<?= $roomInfo[2]['price'] ?>" value="3">Luxury</option>
+                <option data-price="<?= htmlspecialchars((string)(int)$roomInfo[0]['price'], ENT_QUOTES, 'UTF-8') ?>" value="1">Budget</option>
+                <option data-price="<?= htmlspecialchars((string)(int)$roomInfo[1]['price'], ENT_QUOTES, 'UTF-8') ?>" value="2">Standard</option>
+                <option data-price="<?= htmlspecialchars((string)(int)$roomInfo[2]['price'], ENT_QUOTES, 'UTF-8') ?>" value="3">Luxury</option>
             </select>
         </div>
     </span>
@@ -48,37 +52,53 @@
             <section class="features-container">
                 <section>
                     <p class="subheading">Coastal Experiences</p>
-                    <?php foreach ($hotelSpecificFeatures as $feature) : ?>
+                    <?php foreach ($hotelSpecificFeatures as $feature) :
+                        $featureId = (int)$feature['id'];
+                        $featureName = htmlspecialchars(trim($feature['name']), ENT_QUOTES, 'UTF-8');
+                        $featurePrice = htmlspecialchars((string)(int)$feature['price'], ENT_QUOTES, 'UTF-8');
+                    ?>
                         <div class="feature-choice">
-                            <input type="checkbox" class="feature-checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $feature['name'] ?>" data-price="<?= htmlspecialchars(trim(filter_var($feature['price'], FILTER_VALIDATE_INT))) ?>">
-                            <label for="<?= $feature['name'] ?>"><?= ucfirst(htmlspecialchars(trim($feature['name']))) . ", " . htmlspecialchars(trim($feature['price'])) . ":-" ?></label>
+                            <input type="checkbox" class="feature-checkbox" name="features[]" value="<?= $featureId ?>" id="feature-<?= $featureId ?>" data-price="<?= $featurePrice ?>">
+                            <label for="feature-<?= $featureId ?>"><?= ucfirst($featureName) . ", " . $featurePrice . ":-" ?></label>
                         </div>
                     <?php endforeach ?>
                 </section>
                 <section>
                     <p class="subheading">Water</p>
-                    <?php foreach ($waterFeatures as $feature) : ?>
+                    <?php foreach ($waterFeatures as $feature) :
+                        $featureId = (int)$feature['id'];
+                        $featureName = htmlspecialchars(trim($feature['name']), ENT_QUOTES, 'UTF-8');
+                        $featurePrice = htmlspecialchars((string)(int)$feature['price'], ENT_QUOTES, 'UTF-8');
+                    ?>
                         <div class="feature-choice">
-                            <input type="checkbox" class="feature-checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $feature['name'] ?>" data-price="<?= htmlspecialchars(trim(filter_var($feature['price'], FILTER_VALIDATE_INT))) ?>">
-                            <label for="<?= $feature['name'] ?>"><?= ucfirst(htmlspecialchars(trim($feature['name']))) . ", " . htmlspecialchars(trim($feature['price'])) . ":-" ?></label>
+                            <input type="checkbox" class="feature-checkbox" name="features[]" value="<?= $featureId ?>" id="feature-<?= $featureId ?>" data-price="<?= $featurePrice ?>">
+                            <label for="feature-<?= $featureId ?>"><?= ucfirst($featureName) . ", " . $featurePrice . ":-" ?></label>
                         </div>
                     <?php endforeach ?>
                 </section>
                 <section>
                     <p class="subheading">Wheels</p>
-                    <?php foreach ($wheelsFeatures as $feature) : ?>
+                    <?php foreach ($wheelsFeatures as $feature) :
+                        $featureId = (int)$feature['id'];
+                        $featureName = htmlspecialchars(trim($feature['name']), ENT_QUOTES, 'UTF-8');
+                        $featurePrice = htmlspecialchars((string)(int)$feature['price'], ENT_QUOTES, 'UTF-8');
+                    ?>
                         <div class="feature-choice">
-                            <input type="checkbox" class="feature-checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $feature['name'] ?>" data-price="<?= htmlspecialchars(trim(filter_var($feature['price'], FILTER_VALIDATE_INT))) ?>">
-                            <label for="<?= $feature['name'] ?>"><?= ucfirst(htmlspecialchars(trim($feature['name']))) . ", " . htmlspecialchars(trim($feature['price'])) . ":-" ?></label>
+                            <input type="checkbox" class="feature-checkbox" name="features[]" value="<?= $featureId ?>" id="feature-<?= $featureId ?>" data-price="<?= $featurePrice ?>">
+                            <label for="feature-<?= $featureId ?>"><?= ucfirst($featureName) . ", " . $featurePrice . ":-" ?></label>
                         </div>
                     <?php endforeach ?>
                 </section>
                 <section>
                     <p class="subheading">Games</p>
-                    <?php foreach ($gamesFeatures as $feature) : ?>
+                    <?php foreach ($gamesFeatures as $feature) :
+                        $featureId = (int)$feature['id'];
+                        $featureName = htmlspecialchars(trim($feature['name']), ENT_QUOTES, 'UTF-8');
+                        $featurePrice = htmlspecialchars((string)(int)$feature['price'], ENT_QUOTES, 'UTF-8');
+                    ?>
                         <div class="feature-choice">
-                            <input type="checkbox" class="feature-checkbox" name="features[]" value="<?= $feature['id'] ?>" id="<?= $feature['name'] ?>" data-price="<?= htmlspecialchars(trim(filter_var($feature['price'], FILTER_VALIDATE_INT))) ?>">
-                            <label for="<?= $feature['name'] ?>"><?= ucfirst(htmlspecialchars(trim($feature['name']))) . ", " . htmlspecialchars(trim($feature['price'])) . ":-" ?></label>
+                            <input type="checkbox" class="feature-checkbox" name="features[]" value="<?= $featureId ?>" id="feature-<?= $featureId ?>" data-price="<?= $featurePrice ?>">
+                            <label for="feature-<?= $featureId ?>"><?= ucfirst($featureName) . ", " . $featurePrice . ":-" ?></label>
                         </div>
                     <?php endforeach ?>
                 </section>

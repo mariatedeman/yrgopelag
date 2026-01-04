@@ -216,6 +216,7 @@ function copytext(id) {
 }
 
 
+
 // === BEGINNING OF YEAR OFFER CHECKBOX ===
 if (offer) {
     offer.addEventListener ('change', function (event) {

@@ -14,7 +14,7 @@ $islandInfo = $islandInfo ?? 'N/A';
 
 <section>
     <div class="admin-hero-img">
-        <h2>Welcome <?= $_SESSION['username'] ?></h2>
+        <h2>Welcome <?= htmlspecialchars($_SESSION['username'], ENT_QUOTES, 'UTF-8') ?></h2>
         <p>Hotel administration dashboard</p>
         <a href="./posts/logout.php" class="button">Log out</a>
     </div>
@@ -23,9 +23,9 @@ $islandInfo = $islandInfo ?? 'N/A';
 <section class="admin-info-container">
     <!--- PRINT LIST OF HOTEL INFO -->
     <section class="info-wrapper hotel-info">
-        <p><strong>Island name: </strong><?= $islandName ?></p>
-        <p><strong>Hotel name: </strong><?= $hotelName ?></p>
-        <p><strong>Stars: </strong><?= $islandInfo['island']['stars'] ?? 'N/A' ?></p>
+        <p><strong>Island name: </strong><?= htmlspecialchars($islandName, ENT_QUOTES, 'UTF-8') ?></p>
+        <p><strong>Hotel name: </strong><?= htmlspecialchars($hotelName, ENT_QUOTES, 'UTF-8') ?></p>
+        <p><strong>Stars: </strong><?= htmlspecialchars((string)($islandInfo['island']['stars'] ?? 'N/A'), ENT_QUOTES, 'UTF-8') ?></p>
     </section>
 
     <!-- PRINT LIST OF AVAILABLE FEATURES -->
@@ -50,10 +50,10 @@ $islandInfo = $islandInfo ?? 'N/A';
                 <?php foreach ($filteredFeatures as $feature) :
                     foreach ($feature as $feature_info) : ?>
                         <tr>
-                            <td><?= ucfirst($feature_info['name']) ?></td>
-                            <td><?= ucfirst($feature_info['activity_category']) ?></td>
-                            <td><?= $feature_info['price'] ?></td>
-                            <td><?= ucfirst($feature_info['price_category']) ?></td>
+                            <td><?= htmlspecialchars(ucfirst($feature_info['name']), ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars(ucfirst($feature_info['activity_category']), ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars((string)(int)$feature_info['price'], ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars(ucfirst($feature_info['price_category']), ENT_QUOTES, 'UTF-8') ?></td>
                         </tr>
                 <?php endforeach;
                 endforeach ?>
@@ -94,12 +94,12 @@ $islandInfo = $islandInfo ?? 'N/A';
             </tr>
             <?php foreach ($bookings as $booking) : ?>
                 <tr>
-                    <td><?= $booking['checkin'] ?></td>
-                    <td><?= $booking['checkout'] ?></td>
-                    <td><?= ucfirst($booking['room_category']) ?>
+                    <td><?= htmlspecialchars($booking['checkin'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars($booking['checkout'], ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars(ucfirst($booking['room_category']), ENT_QUOTES, 'UTF-8') ?>
                     </td>
-                    <td><?= ucfirst($booking['name']) ?></td>
-                    <td><?= $booking['total_cost'] ?></td>
+                    <td><?= htmlspecialchars(ucfirst($booking['name']), ENT_QUOTES, 'UTF-8') ?></td>
+                    <td><?= htmlspecialchars((string)(int)$booking['total_cost'], ENT_QUOTES, 'UTF-8') ?></td>
                     <td>
                         <?php if ($booking['is_paid']) {
                             echo "True";

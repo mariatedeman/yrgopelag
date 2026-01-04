@@ -54,23 +54,23 @@ try {
             <section class="room-information-wrapper room-description-wrapper">
                 <!-- SHOW SELECTED ROOM INFO -->
                 <div class="room-description budget">
-                    <h2><?= $roomInfo[0]['room_name'] ?></h2>
-                    <p><?= $roomInfo[0]['description'] ?></p>
-                    <p class="subheading"><?= $roomInfo[0]['price'] ?>:-/night</p>
+                    <h2><?= htmlspecialchars(trim($roomInfo[0]['room_name'])) ?></h2>
+                    <p><?= htmlspecialchars(trim($roomInfo[0]['description'])) ?></p>
+                    <p class="subheading"><?= (int)$roomInfo[0]['price'] ?>:-/night</p>
 
                 </div>
 
                 <div class="room-description standard">
-                    <h2><?= $roomInfo[1]['room_name'] ?></h2>
-                    <p><?= $roomInfo[1]['description'] ?></p>
-                    <p class="subheading"><?= $roomInfo[1]['price'] ?>:-/night</p>
+                    <h2><?= htmlspecialchars(trim($roomInfo[1]['room_name'])) ?></h2>
+                    <p><?= htmlspecialchars(trim($roomInfo[1]['description'])) ?></p>
+                    <p class="subheading"><?= (int)$roomInfo[1]['price'] ?>:-/night</p>
 
                 </div>
 
                 <div class="room-description luxury">
-                    <h2><?= $roomInfo[2]['room_name'] ?></h2>
-                    <p><?= $roomInfo[2]['description'] ?></p>
-                    <p class="subheading"><?= $roomInfo[2]['price'] ?>:-/night</p>
+                    <h2><?= htmlspecialchars(trim($roomInfo[2]['room_name'])) ?></h2>
+                    <p><?= htmlspecialchars(trim($roomInfo[2]['description'])) ?></p>
+                    <p class="subheading"><?= (int)$roomInfo[2]['price'] ?>:-/night</p>
 
                 </div>
             </section>
