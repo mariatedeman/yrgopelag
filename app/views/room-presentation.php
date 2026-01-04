@@ -36,7 +36,7 @@ try {
                         <div>
                             <span class="icon-container"><img src="/assets/images/icon-exit.png" alt="Line icon check out"></span>
                             <p class="subheading">Check&#8209out: </p>
-                            <p>15.00</p>
+                            <p>11.00</p>
                         </div>
                     </section>
 
