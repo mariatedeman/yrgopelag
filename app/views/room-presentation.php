@@ -22,7 +22,24 @@ try {
                 <span>
                     <h2>Our room types</h2>
                     <p>Whether you seek rustic charm or refined luxury, we offer an experience for every soul. We offer rooms in every price range, all right at the water’s edge. Surrounded by the majestic beauty of the archipelago, our retreat invites you to reconnect with nature’s elements. Discover your perfect waterfront escape and let the rhythm of the waves define your stay.</p>
-                    <p class="subheading">All our rooms has checkin time 15.00 and checkout 11.00.</p>
+
+                    <section class="icon-wrapper">
+                        <div>
+                            <div class="icon-container">
+                                <img src="/assets/images/icon-check-in.png" alt="">
+                            </div>
+                            <div class="info-container">
+                                <p class="subheading">Check&#8209in: </p>
+                                <p>15.00</p>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="icon-container"><img src="/assets/images/icon-exit.png" alt=""></span>
+                            <p class="subheading">Check&#8209out: </p>
+                            <p>15.00</p>
+                        </div>
+                    </section>
+
                     <form action="./" class="show-room-info">
                         <select name="room" id="show-room-info">
                             <option value="1" <?= $currentRoom == 1 ? 'selected' : '' ?>>Budget</option>
