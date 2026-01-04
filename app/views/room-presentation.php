@@ -26,7 +26,7 @@ try {
                     <section class="icon-wrapper">
                         <div>
                             <div class="icon-container">
-                                <img src="/assets/images/icon-check-in.png" alt="">
+                                <img src="/assets/images/icon-check-in.png" alt="Line icon check in">
                             </div>
                             <div class="info-container">
                                 <p class="subheading">Check&#8209in: </p>
@@ -34,7 +34,7 @@ try {
                             </div>
                         </div>
                         <div>
-                            <span class="icon-container"><img src="/assets/images/icon-exit.png" alt=""></span>
+                            <span class="icon-container"><img src="/assets/images/icon-exit.png" alt="Line icon check out"></span>
                             <p class="subheading">Check&#8209out: </p>
                             <p>15.00</p>
                         </div>
