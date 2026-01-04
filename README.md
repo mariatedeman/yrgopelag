@@ -2,6 +2,7 @@
 
 Booking experience for a fictional Bohuslän B&B built for the Yrgopelag challenge. The app lets guests fetch a transfer code from the Central Bank API, pick rooms and paid extras, and complete a booking with a receipt posted back to the bank. Admins can review bookings and update pricing. Stack: PHP 8, SQLite, vanilla JS/CSS, Dotenv, strict types.
 
+## URL
 - Live demo: https://made-by-met.se/yrgopelag
 - Local root URL when running via PHP built-in server: `http://localhost:8000`
 
