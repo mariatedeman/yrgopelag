@@ -1,5 +1,6 @@
 // SHOW ROOM INFO
 const select = document.getElementById('show-room-info');
+const selectRoomBooking = document.getElementById('room_type');
 const budgetElements = document.querySelectorAll('.budget')
 const standardElements = document.querySelectorAll('.standard')
 const luxuryElements = document.querySelectorAll('.luxury')
@@ -84,8 +85,13 @@ function openSubMenu() {
 
 
 // === ROOM PRESENTATION ===
-function showRoomInfo() {
-    if (!select) return;
+function showRoomInfo(event) {
+    if (!select || !selectRoomBooking) return;
+    
+    // UPDATE ROOM PRESENTATION WHEN CHOOSING ROOM IN BOOKING
+    if (event && event.target === selectRoomBooking) {
+        select.value = selectRoomBooking.value;
+    }
 
     const selectValue = select.value;
 
@@ -140,13 +146,17 @@ function showRoomInfo() {
 // === SHOW IMGS AND CALENDAR FOR CHOSEN ROOM === 
 if (select) {
     select.addEventListener ('change', showRoomInfo);
-    showRoomInfo();
 }
 
+if (selectRoomBooking) {
+    selectRoomBooking.addEventListener ('change', showRoomInfo);
+}
+
+showRoomInfo();
 
 // === IMG SLIDESHOW === //
 let slideIndex = 1;
-    showSlides(slideIndex);
+showSlides(slideIndex);
 
     // NEXT / PREV
     function plusSlides(n) {
@@ -175,22 +185,8 @@ let slideIndex = 1;
 
         slides[slideIndex - 1].style.display = "block";
     }
-
-
-// === BEGINNING OF YEAR OFFER CHECKBOX ===
-if (offer) {
-    offer.addEventListener ('change', function (event) {
-        if (offer.checked) {
-            offerFeature.checked = true;
-            offerRoom.value = 3;
-        } else if (!offer.checked) {
-            offerFeature.checked = false;
-            offerRoom.value = '';
-        }
-    })
-}
-
-
+    
+    
 // === SHOW FORM TO FETCH TRANSFER CODE ===
 if (showTransfercodeForm) {
     showTransfercodeForm.addEventListener ('click', function (event) {
@@ -200,7 +196,7 @@ if (showTransfercodeForm) {
 }
 
 
-// === COPY TRANSFER CODE ===
+// === COPY TEXT ===
 function copytext(id) {
     const element = document.getElementById(id);
     const button = document.querySelector('.copy-text');
@@ -220,8 +216,21 @@ function copytext(id) {
 }
 
 
-// === DISPLAY TOTAL COST === //
+// === BEGINNING OF YEAR OFFER CHECKBOX ===
+if (offer) {
+    offer.addEventListener ('change', function (event) {
+        if (offer.checked) {
+            offerFeature.checked = true;
+            offerRoom.value = 3;
+        } else if (!offer.checked) {
+            offerFeature.checked = false;
+            offerRoom.value = '';
+        }
+    })
+}
 
+
+// === DISPLAY TOTAL COST === //
 const bookingForm = document.getElementById('booking-form');
 const totalCostDisplay = document.getElementById('total_cost');
 
