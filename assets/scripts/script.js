@@ -223,6 +223,8 @@ if (offer) {
         if (offer.checked) {
             offerFeature.checked = true;
             offerRoom.value = 3;
+
+            showRoomInfo({ target: selectRoomBooking });
         } else if (!offer.checked) {
             offerFeature.checked = false;
             offerRoom.value = '';
