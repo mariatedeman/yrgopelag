@@ -34,10 +34,6 @@ function getTransferCode(string $guestName, string $guestApi, int $amount, strin
             'ignore_errors' => true,
             'timeout' => 2, // GIVE UP AFTER TWO SECONDS OF LOADING
         ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-        ],
     ];
 
     $context = stream_context_create($options);
@@ -95,10 +91,6 @@ function isValidTransferCode(string $transferCode, int $totalCost, string &$mess
             'content' => json_encode($data),
             'ignore_errors' => true
         ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-        ],
     ];
     $context = stream_context_create($options);
 
@@ -142,10 +134,6 @@ function makeDeposit(string $transferCode, string &$message = ''): bool
             'header' => 'Content-Type: application/json',
             'content' => json_encode($paymentInfo),
             'ignore_errors' => true
-        ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
         ],
     ];
     $context = stream_context_create($options);
@@ -198,10 +186,6 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
             'content' => json_encode($receiptInfo),
             'ignore_errors' => true
         ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-        ],
     ];
     $context = stream_context_create($options);
 
@@ -241,10 +225,6 @@ function getAccountInfo(string $user, string $apiKey): ?array
             'method' => 'POST',
             'header' => 'Content-Type: application/json',
             'content' => json_encode($userInfo),
-        ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
         ],
     ];
     $context = stream_context_create($options);
@@ -287,10 +267,6 @@ function getIslandFeatures(string $key): ?array
             'content' => json_encode($data),
             'ignore_errors' => true,
             'timeout' => 2, // GIVE UP AFTER TWO SECONDS OF LOADING
-        ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
         ],
     ];
     $context = stream_context_create($options);
