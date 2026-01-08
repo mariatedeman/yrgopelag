@@ -20,7 +20,7 @@ require dirname(dirname(__DIR__)) . "/includes/header.php"; ?>
     <div>
         <h3>Your receipt</h3>
         <div class="json-container" id="receipt">
-            <pre><?= json_encode($receipt, JSON_PRETTY_PRINT); ?></pre>
+            <pre><?= htmlspecialchars(json_encode($receipt, JSON_PRETTY_PRINT)); ?></pre>
         </div>
         <button onclick="copytext('receipt')" class="copy-text">Copy</button>
 

@@ -17,12 +17,16 @@ define('URL_ROOT', 'http://localhost:8000');
 // START SESSION
 session_start();
 
-// CONNECT TO DATABASE
+// REQUIRE FUNCTIONS
+require __DIR__ . "/functions.php";
+
+// DATABASE
+require __DIR__ . "/data/setup.php";
+
 $database = new PDO('sqlite:' . __DIR__ . '/data/yrgopelag.db');
 $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// REQUIRE FUNCTIONS
-require __DIR__ . "/functions.php";
+setupDatabase($database);
 
 // HOTEL DATA
 require __DIR__ . "/data/hotel-data.php";

@@ -8,11 +8,10 @@ $featureNames = [];
 try {
     $statement = $database->query('SELECT * FROM features');
     $featuresInfo = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
+
     $safeFeatures = $features ?? [];
-    $featureNames = array_column($safeFeatures, 'feature'); 
+    $featureNames = array_column($safeFeatures, 'feature');
 } catch (PDOException $e) {
-    
 } ?>
 
 <h2 id="our-features">Our features</h2>
@@ -22,7 +21,7 @@ try {
         if (in_array($featureInfo['feature_name'], $featureNames)) : ?>
             <div>
                 <span class="feature-img-container">
-                    <img src="./assets/images/features/<?= htmlspecialchars(trim(strtolower($featureInfo['activity_category']))) . "-" . htmlspecialchars(trim(strtolower($featureInfo['price_category']))) ?>.jpg" alt="">
+                    <img src="./assets/images/features/<?= htmlspecialchars(trim(strtolower($featureInfo['activity_category']))) . "-" . htmlspecialchars(trim(strtolower($featureInfo['price_category']))) ?>.jpg" alt=">Image showing the feature">
                 </span>
                 <span class="feature-presentation-text">
                     <h4><?= htmlspecialchars(trim(ucfirst($featureInfo['feature_name']))) ?></h4>

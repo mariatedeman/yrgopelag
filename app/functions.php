@@ -34,42 +34,38 @@ function getTransferCode(string $guestName, string $guestApi, int $amount, strin
             'ignore_errors' => true,
             'timeout' => 2, // GIVE UP AFTER TWO SECONDS OF LOADING
         ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-        ],
     ];
 
     $context = stream_context_create($options);
-    
+
     // RETRY-LOOP
     $attempts = 0;
     $maxAttempts = 3;
-    
+
     while ($attempts < $maxAttempts) {
         // SEND REQUEST AND GET RESPONSE
         $response = file_get_contents($url, false, $context);
-        
+
         if ($response !== false) {
             $transferCode = json_decode($response, true);
-            
+
             // IF ERROR, TRYING AGAIN WONT HELP
             if (isset($transferCode['error'])) {
                 $message = $transferCode['error'];
                 return $transferCode;
             }
-            
+
             // CONNECTION SUCCEEDED
             return $transferCode;
         }
-        
+
         // IF NOT SUCCESSFULL, KEEP TRYING
         $attempts++;
         if ($attempts < $maxAttempts) {
             usleep(500000); // WAIT 0.5s BEFORE NEXT TRY
         }
     }
-    
+
     // ALL ATTEMPTS FAILED
     return null;
 }
@@ -94,10 +90,6 @@ function isValidTransferCode(string $transferCode, int $totalCost, string &$mess
             'header' => 'Content-Type: application/json',
             'content' => json_encode($data),
             'ignore_errors' => true
-        ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
         ],
     ];
     $context = stream_context_create($options);
@@ -142,10 +134,6 @@ function makeDeposit(string $transferCode, string &$message = ''): bool
             'header' => 'Content-Type: application/json',
             'content' => json_encode($paymentInfo),
             'ignore_errors' => true
-        ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
         ],
     ];
     $context = stream_context_create($options);
@@ -198,21 +186,17 @@ function postReceipt(string $key, string $guestName, string $checkIn, string $ch
             'content' => json_encode($receiptInfo),
             'ignore_errors' => true
         ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-        ],
     ];
     $context = stream_context_create($options);
 
     // SEND REQUEST AND GET RESPONSE
     $response = file_get_contents($url, false, $context);
-    
+
     if ($response === false) {
         $message = "Could not connect to central bank.";
-        return false;
+        return null;
     }
-    
+
     $result = json_decode($response, true);
 
     if (isset($result['error'])) {
@@ -241,10 +225,6 @@ function getAccountInfo(string $user, string $apiKey): ?array
             'method' => 'POST',
             'header' => 'Content-Type: application/json',
             'content' => json_encode($userInfo),
-        ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
         ],
     ];
     $context = stream_context_create($options);
@@ -288,42 +268,26 @@ function getIslandFeatures(string $key): ?array
             'ignore_errors' => true,
             'timeout' => 2, // GIVE UP AFTER TWO SECONDS OF LOADING
         ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-        ],
     ];
     $context = stream_context_create($options);
-    
+
     // RETRY-LOOP
     $attempts = 0;
     $maxAttempts = 3;
-    
+
     while ($attempts < $maxAttempts) {
         // SEND REQUEST AND GET RESPONSE
         $response = file_get_contents($url, false, $context);
-        
+
         if ($response !== false) {
             return json_decode($response, true);
         }
-        
+
         $attempts++;
         usleep(500000); // WAIT 0.5s BEFORE NEXT TRY
     }
 
-    // HANDLE RESPONSE
-    if ($response === false) {
-        return null;
-    }
-
-    // CONVERT RESPONSE TO ASSOC ARRAY
-    $features = json_decode($response, true);
-
-    if ($features === null) {
-        return null;
-    }
-
-    return $features;
+    return null;
 }
 
 
@@ -344,8 +308,8 @@ function getFeaturesByCategory(?array $features, string $activity, PDO $database
             $statement->execute();
 
             $featureData = $statement->fetch(PDO::FETCH_ASSOC);
-            
-            if($featureData) {
+
+            if ($featureData) {
                 $filteredFeatures[] = [
                     'id' => $feature['id'],
                     'name' => htmlspecialchars(trim($feature['feature'])),

@@ -8,7 +8,7 @@ require __DIR__ . "/includes/header.php";
 <!-- HERO IMG -->
 <section class="hero-video-container" id="back-to-top">
     <span class="on-video-content">
-        <img src="./assets/images/sjoboda_logo_bohuslangrey.svg" alt="">
+        <img src="./assets/images/sjoboda_logo_bohuslangrey.svg" alt="Sjöboda B&B logo">
         <h1>Your authentic west coast escape</h1>
         <a href="#get-transfercode" class="button">Book your stay</a>
         <div class="offer">
@@ -39,6 +39,7 @@ require __DIR__ . "/includes/header.php";
 
 <section class="intro">
     <span>
+        <img src="/assets/images/icon-seagull.png" alt="Line icon of a seagul">
         <h2>Experience Bohuslän at Sjöboda B&B</h2>
         <p>Discover the serene beauty of Lyckholmen.
             From cozy traditional wooden boats to premium
@@ -60,10 +61,10 @@ require __DIR__ . "/includes/header.php";
     require __DIR__ . "/app/views/booking-form.php"; ?>
 </section>
 
-<?php if(!empty($features)) :?>
-<section class="features-presentation">
-    <?php require __DIR__ . "/includes/features-presentation.php"; ?>
-</section>
+<?php if (!empty($features)) : ?>
+    <section class="features-presentation">
+        <?php require __DIR__ . "/includes/features-presentation.php"; ?>
+    </section>
 <?php endif ?>
 
 <!-- FOOTER -->

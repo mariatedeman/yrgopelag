@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sjoboda B&B</title>
+    <title>Sjöboda B&B</title>
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.svg">
 
     <link rel="stylesheet" href="<?= URL_ROOT; ?>/assets/styles/library-components.css">

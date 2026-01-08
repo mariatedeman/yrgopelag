@@ -292,6 +292,35 @@ nav {
     margin: 3rem;
 }
 
+.intro img {
+    max-height: 50px;
+}
+
+/* === ICONS === */
+.icon-wrapper {
+    display: flex;
+    gap: 5rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.icon-wrapper p {
+    display: inline;
+}
+
+.icon-wrapper div {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.icon-wrapper div .subheading {
+    margin-top: 0;
+}
+
+.icon-container img {
+    max-height: 20px;
+}
+
 /* === FOOTER === */
 
 footer {

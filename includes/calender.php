@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+declare(strict_types=1);
+
 $firstDayOfMonth = date('N', mktime(0, 0, 0, 1, 1, 2026));
 $lastDayOfMonth = date('N', mktime(0, 0, 0, 1, 31, 2026));
 $daysInMonth = date('t', mktime(0, 0, 0, 1, 1, 2026));
@@ -22,8 +25,8 @@ $bookedDatesRoomThree = [];
 
 // LOOP THROUGH TO FIND THE OCCUPIED DATES
 foreach ($dates as $date) {
-    $checkin = date('j', strtotime($date['checkin']));
-    $checkout = date('j', strtotime($date['checkout']));
+    $checkin = date('j', strtotime(htmlspecialchars(trim($date['checkin']))));
+    $checkout = date('j', strtotime(htmlspecialchars(trim($date['checkout']))));
 
     for ($booked = $checkin; $booked < $checkout; $booked++) {
         // ADD TO CORRECT ARRAY
