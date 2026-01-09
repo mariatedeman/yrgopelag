@@ -55,3 +55,20 @@ No automated test suite yet; exercise flows manually:
 
 ## License
 MIT
+
+##
+Review from Wilma
+
+Remember not to upload the database to github, write it in your .gitignore for better security.
+
+Try using guzzle next time for easier coding, could be used in this project to 'talk' to the central bank when validating transfercode and deposit. Guzzle is a way to interact with an API.
+
+Good clear js with good comments, you can split the js to make it even clearer by split them into more files.
+
+Try to use one unit in css instead of many, for example try to keep it constant with rem or px or whatever you prefer. Otherwise it's fine css with good comments and splitting.
+
+You have your script tag for js at the top of footer.php. Put it at the bottom of the code just above </body> so that all html can be loaded first for a faster page. 
+
+Out-commented code in library-components.css can be removed for cleaner code.
+
+“declare(strict_types=1);” You don't need to have this at the beginning of the files where you have require "/autoload.php" because you already have it in autoload. I see you have it in almost all of your files. 
